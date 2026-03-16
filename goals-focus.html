@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pcom South — Goals & Focus</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0E14; --surface: #131720; --surface-2: #1A1F2B; --surface-3: #222838;
+    --border: rgba(255,255,255,0.06); --text: #E8ECF4; --text-dim: #7A8299; --text-muted: #4A5168;
+    --accent: #4ADE80; --accent-glow: rgba(74,222,128,0.15);
+    --red: #F87171; --red-glow: rgba(248,113,113,0.12);
+    --blue: #60A5FA; --blue-glow: rgba(96,165,250,0.12);
+    --amber: #FBBF24; --amber-glow: rgba(251,191,36,0.12);
+    --purple: #A78BFA; --purple-glow: rgba(167,139,250,0.12);
+    --cyan: #22D3EE; --cyan-glow: rgba(34,211,238,0.12);
+    --pink: #F472B6; --orange: #FB923C;
+    --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:var(--font); min-height:100vh; }
+  body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
+  .dashboard { position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:32px 40px 60px; }
+
+  .header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:44px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .logo { font-family:var(--mono); font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .header h1 { font-size:34px; font-weight:800; letter-spacing:-0.5px; line-height:1.1; }
+  .header h1 span { color:var(--text-dim); font-weight:400; font-size:26px; }
+
+  /* Month tabs */
+  .month-tabs { display:flex; gap:0; margin-bottom:44px; }
+  .month-tab { flex:1; padding:18px 24px; text-align:center; border:1px solid var(--border); cursor:pointer; transition:all 0.3s; position:relative; }
+  .month-tab:first-child { border-radius:12px 0 0 12px; }
+  .month-tab:last-child { border-radius:0 12px 12px 0; }
+  .month-tab .tab-month { font-size:20px; font-weight:700; margin-bottom:4px; }
+  .month-tab .tab-sub { font-size:12px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; }
+  .month-tab.feb { background:var(--surface); border-color:var(--accent); }
+  .month-tab.feb .tab-month { color:var(--accent); }
+  .month-tab.feb::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--accent); border-radius:12px 0 0 0; }
+  .month-tab.mar { background:var(--surface); border-color:var(--cyan); }
+  .month-tab.mar .tab-month { color:var(--cyan); }
+  .month-tab.mar::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--cyan); border-radius:0 12px 0 0; }
+
+  /* Section */
+  .section-title { font-size:20px; font-weight:700; margin-bottom:22px; display:flex; align-items:center; gap:12px; }
+  .section-title .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .section-title .line { flex:1; height:1px; background:var(--border); }
+  .section-title .tag { font-size:11px; font-family:var(--mono); padding:4px 12px; border-radius:20px; font-weight:600; letter-spacing:0.5px; }
+  .tag-review { background:var(--accent-glow); color:var(--accent); }
+  .tag-plan { background:var(--cyan-glow); color:var(--cyan); }
+
+  /* Goal cards */
+  .goals-grid { display:flex; flex-direction:column; gap:16px; margin-bottom:48px; }
+  .goal-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; animation:fadeUp 0.4s ease both; }
+  .goal-card:nth-child(2){animation-delay:.05s} .goal-card:nth-child(3){animation-delay:.1s}
+  .goal-card:nth-child(4){animation-delay:.15s} .goal-card:nth-child(5){animation-delay:.2s}
+  .goal-card:nth-child(6){animation-delay:.25s} .goal-card:nth-child(7){animation-delay:.3s}
+  .goal-card:nth-child(8){animation-delay:.35s}
+
+  .goal-top { display:flex; align-items:stretch; }
+  .goal-type-bar { width:5px; flex-shrink:0; }
+  .goal-type-bar.goal { background:var(--amber); }
+  .goal-type-bar.focus { background:var(--accent); }
+  .goal-main { flex:1; padding:20px 24px; }
+  .goal-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; font-weight:600; margin-bottom:8px; }
+  .goal-label.goal { color:var(--amber); }
+  .goal-label.focus { color:var(--accent); }
+  .goal-text { font-size:15px; font-weight:600; line-height:1.4; margin-bottom:6px; }
+  .goal-detail { font-size:13px; color:var(--text-dim); line-height:1.5; }
+
+  .goal-status { width:260px; flex-shrink:0; padding:20px 24px; border-left:1px solid var(--border); display:flex; flex-direction:column; justify-content:center; }
+  .status-label { font-size:10px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); margin-bottom:8px; font-weight:600; }
+  .status-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:8px; font-size:13px; font-weight:700; }
+  .status-done { background:var(--accent-glow); color:var(--accent); }
+  .status-achieved { background:var(--accent-glow); color:var(--accent); }
+  .status-partial { background:var(--amber-glow); color:var(--amber); }
+  .status-missed { background:var(--red-glow); color:var(--red); }
+  .status-pending { background:rgba(255,255,255,0.05); color:var(--text-muted); }
+  .status-note { font-size:12px; color:var(--text-dim); margin-top:6px; line-height:1.4; }
+
+  /* Progress bar for profit goal */
+  .profit-breakdown { margin-top:12px; }
+  .progress-outer { width:100%; height:28px; background:var(--surface-3); border-radius:8px; overflow:hidden; display:flex; margin-bottom:8px; }
+  .progress-seg { height:100%; display:flex; align-items:center; justify-content:center; font-size:10px; font-family:var(--mono); font-weight:700; color:rgba(0,0,0,0.7); white-space:nowrap; overflow:hidden; }
+  .seg-inn { background:#60A5FA; }
+  .seg-spirion { background:#A78BFA; }
+  .seg-spread { background:#FBBF24; }
+  .seg-gala { background:#22D3EE; }
+  .seg-awin { background:#FB923C; }
+  .progress-labels { display:flex; gap:16px; flex-wrap:wrap; }
+  .progress-label { font-size:11px; color:var(--text-dim); display:flex; align-items:center; gap:5px; }
+  .progress-label .swatch { width:10px; height:10px; border-radius:3px; }
+
+  /* March target bar */
+  .target-bar-wrap { margin-top:12px; }
+  .target-outer { width:100%; height:28px; background:var(--surface-3); border-radius:8px; overflow:hidden; display:flex; margin-bottom:8px; }
+
+  /* Divider */
+  .month-divider { margin:56px 0 44px; display:flex; align-items:center; gap:16px; }
+  .month-divider .divider-line { flex:1; height:2px; background:linear-gradient(90deg, var(--cyan), transparent); }
+  .month-divider .divider-line:last-child { background:linear-gradient(270deg, var(--cyan), transparent); }
+  .month-divider .divider-text { font-family:var(--mono); font-size:14px; color:var(--cyan); letter-spacing:2px; text-transform:uppercase; padding:8px 20px; background:var(--surface-2); border:1px solid rgba(34,211,238,0.2); border-radius:8px; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @media(max-width:900px){ .goal-top{flex-direction:column} .goal-status{width:100%;border-left:none;border-top:1px solid var(--border)} }
+  @media(max-width:600px){ .header{flex-direction:column;align-items:flex-start;gap:16px} .month-tabs{flex-direction:column} .month-tab:first-child{border-radius:12px 12px 0 0} .month-tab:last-child{border-radius:0 0 12px 12px} }
+  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:3px}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="logo">Pcom South</div>
+      <h1>Goals & Focus <span>Feb Review + March Plan</span></h1>
+    </div>
+  </div>
+
+  <!-- MONTH TABS -->
+  <div class="month-tabs">
+    <div class="month-tab feb"><div class="tab-month">February 2026</div><div class="tab-sub">Review — What we achieved</div></div>
+    <div class="month-tab mar"><div class="tab-month">March 2026</div><div class="tab-sub">Plan — What's ahead</div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FEBRUARY 2026 REVIEW                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="dot" style="background:var(--accent)"></span>
+    February 2026 — Goals Review
+    <span class="tag tag-review">REVIEW</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="goals-grid">
+
+    <!-- Goal 1: Profit -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">Profit — $300K</div>
+          <div class="profit-breakdown">
+            <div class="progress-outer">
+              <div class="progress-seg seg-inn" style="width:36.6%">Inn $98K</div>
+              <div class="progress-seg seg-spirion" style="width:37.5%">Spirion $111K</div>
+              <div class="progress-seg seg-spread" style="width:19.6%">Spread $58K</div>
+              <div class="progress-seg seg-gala" style="width:5.6%">Gala</div>
+              <div class="progress-seg seg-awin" style="width:0.7%"></div>
+            </div>
+            <div class="progress-labels">
+              <div class="progress-label"><span class="swatch" style="background:#60A5FA"></span> Innovate — $98K (target 108K)</div>
+              <div class="progress-label"><span class="swatch" style="background:#A78BFA"></span> Spirion — $111K (target 98K)</div>
+              <div class="progress-label"><span class="swatch" style="background:#FBBF24"></span> Spread — $58K (target 48K)</div>
+              <div class="progress-label"><span class="swatch" style="background:#22D3EE"></span> Galatea — $28K (target 16K)</div>
+              <div class="progress-label"><span class="swatch" style="background:#FB923C"></span> Awin — $4K (target 1.8K)</div>
+            </div>
+          </div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-partial">⚠ Earned $272K</div>
+          <div class="status-note">Missed $300K target by $28K. Spirion, Spread, Galatea & Awin exceeded targets. Innovate fell short.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 2: CR -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">CR Goal — 0.055%</div>
+          <div class="goal-detail">Target overall conversion rate across all campaigns.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-achieved">✓ Made 0.06%</div>
+          <div class="status-note">Exceeded target. CR came in at 0.06% vs 0.055% goal.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 3: Sub networks -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">Expand portfolio of sub networks and networks that convert — 2 at least</div>
+          <div class="goal-detail">Add new converting sub networks to diversify revenue streams.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-missed">✗ Nope</div>
+          <div class="status-note">Did not add any new converting networks this month.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 4: TS -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">Explore for more TS — 2 at least</div>
+          <div class="goal-detail">Test and discover new traffic sources to diversify acquisition.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-achieved">✓ In Progress</div>
+          <div class="status-note">Testing some new ones in Innovate.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Focus 1: Yenoti blogs -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar focus"></div>
+        <div class="goal-main">
+          <div class="goal-label focus">The Focus</div>
+          <div class="goal-text">Growth new blogs with Yenoti</div>
+          <div class="goal-detail">Scale up Yenoti blog portfolio for increased traffic and revenue.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-done">✓ Done</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Focus 2: Awin -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar focus"></div>
+        <div class="goal-main">
+          <div class="goal-label focus">The Focus</div>
+          <div class="goal-text">Continue scale and make a safe growth with Awin account</div>
+          <div class="goal-detail">Grow Awin revenue while maintaining account health and compliance.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-partial">⚠ Stuck</div>
+          <div class="status-note">Stuck because of small niche + site upgrade in progress.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Focus 3: Approval rate -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar focus"></div>
+        <div class="goal-main">
+          <div class="goal-label focus">The Focus</div>
+          <div class="goal-text">Check approval rate more often when you see high converting brands PBI + Request</div>
+          <div class="goal-detail">Monitor and optimize brand approval rates for better conversion.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-done">✓ Done</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- DIVIDER                                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="month-divider">
+    <div class="divider-line"></div>
+    <div class="divider-text">→ March 2026 Plan</div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MARCH 2026 PLAN                             -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-title">
+    <span class="dot" style="background:var(--cyan)"></span>
+    March 2026 — Goals & Focus
+    <span class="tag tag-plan">PLAN</span>
+    <span class="line"></span>
+  </div>
+
+  <div class="goals-grid">
+
+    <!-- Goal 1: Profit 360K -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">Profit — $360K</div>
+          <div class="goal-detail">+32% increase from Feb actual ($272K). Aggressive but achievable.</div>
+          <div class="target-bar-wrap">
+            <div class="target-outer">
+              <div class="progress-seg seg-inn" style="width:36.1%">Inn $130K</div>
+              <div class="progress-seg seg-spirion" style="width:37.2%">Spirion $134K</div>
+              <div class="progress-seg seg-spread" style="width:18.6%">Spread $67K</div>
+              <div class="progress-seg seg-gala" style="width:7.5%">Gala $27K</div>
+              <div class="progress-seg seg-awin" style="width:0.6%"></div>
+            </div>
+            <div class="progress-labels">
+              <div class="progress-label"><span class="swatch" style="background:#60A5FA"></span> Innovate — $130K</div>
+              <div class="progress-label"><span class="swatch" style="background:#A78BFA"></span> Spirion — $134K</div>
+              <div class="progress-label"><span class="swatch" style="background:#FBBF24"></span> Spread — $67K</div>
+              <div class="progress-label"><span class="swatch" style="background:#22D3EE"></span> Galatea — $27K</div>
+              <div class="progress-label"><span class="swatch" style="background:#FB923C"></span> Awin — $2K</div>
+            </div>
+          </div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 2: CR Yenoti -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">CR Yenoti (without eflorist brand) — 0.4%</div>
+          <div class="goal-detail">Ambitious CR target specifically for Yenoti excluding eflorist brand.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 3: Sub networks -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">Expand portfolio of sub networks and networks that convert — 2 at least</div>
+          <div class="goal-detail">Carried over from Feb. Must execute this month.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Goal 4: TS -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar goal"></div>
+        <div class="goal-main">
+          <div class="goal-label goal">The Goal</div>
+          <div class="goal-text">Explore for more TS — 2 at least</div>
+          <div class="goal-detail">Continue testing new traffic sources. Build on Innovate experiments.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Focus 1 -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar focus"></div>
+        <div class="goal-main">
+          <div class="goal-label focus">The Focus</div>
+          <div class="goal-text">Growth new blogs with Yenoti</div>
+          <div class="goal-detail">Continue scaling the Yenoti blog portfolio that was started in Feb.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Focus 2 -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar focus"></div>
+        <div class="goal-main">
+          <div class="goal-label focus">The Focus</div>
+          <div class="goal-text">Continue scale and make a safe growth with Awin account</div>
+          <div class="goal-detail">Resolve the niche + site upgrade blockers from Feb.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Focus 3 -->
+    <div class="goal-card">
+      <div class="goal-top">
+        <div class="goal-type-bar focus"></div>
+        <div class="goal-main">
+          <div class="goal-label focus">The Focus</div>
+          <div class="goal-text">Check approval rate more often when you see high converting brands PBI + Request</div>
+          <div class="goal-detail">Keep monitoring and optimizing brand approval rates.</div>
+        </div>
+        <div class="goal-status">
+          <div class="status-label">Status</div>
+          <div class="status-badge status-pending">◌ Pending</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; padding:24px 0; border-top:1px solid var(--border); color:var(--text-muted); font-size:12px; font-family:var(--mono); letter-spacing:1px;">
+    PCOM SOUTH · GOALS & FOCUS · FEBRUARY REVIEW + MARCH 2026 PLAN
+  </div>
+
+</div>
+</body>
+</html>

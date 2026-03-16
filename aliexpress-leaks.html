@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aliexpress Leaks — Feb 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0E14; --surface: #131720; --surface-2: #1A1F2B; --surface-3: #222838;
+    --border: rgba(255,255,255,0.06); --text: #E8ECF4; --text-dim: #7A8299; --text-muted: #4A5168;
+    --accent: #4ADE80; --accent-glow: rgba(74,222,128,0.15);
+    --red: #F87171; --red-glow: rgba(248,113,113,0.15);
+    --blue: #60A5FA; --blue-glow: rgba(96,165,250,0.12);
+    --amber: #FBBF24; --amber-glow: rgba(251,191,36,0.12);
+    --purple: #A78BFA; --purple-glow: rgba(167,139,250,0.12);
+    --cyan: #22D3EE; --cyan-glow: rgba(34,211,238,0.12);
+    --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; overflow-x: hidden; }
+  body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
+  .dashboard { position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:32px 40px 60px; }
+  .header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .logo { font-family:var(--mono); font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+  .header h1 { font-size:32px; font-weight:700; letter-spacing:-0.5px; line-height:1.1; }
+  .header h1 span { color:var(--text-dim); font-weight:400; }
+  .period-badge { display:inline-block; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:10px 18px; font-family:var(--mono); font-size:14px; color:var(--text-dim); }
+  .period-badge strong { color:var(--text); }
+
+  .kpi-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:44px; }
+  .kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px 26px; position:relative; overflow:hidden; transition:transform 0.2s; animation:fadeUp 0.45s ease both; }
+  .kpi-card:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.1); }
+  .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+  .kpi-card.red::before { background:var(--red); }
+  .kpi-card.amber::before { background:var(--amber); }
+  .kpi-card.purple::before { background:var(--purple); }
+  .kpi-card:nth-child(2){animation-delay:.06s} .kpi-card:nth-child(3){animation-delay:.12s}
+  .kpi-label { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-dim); margin-bottom:10px; font-weight:500; }
+  .kpi-value { font-family:var(--mono); font-size:32px; font-weight:700; line-height:1; margin-bottom:5px; }
+  .kpi-card.red .kpi-value { color:var(--red); }
+  .kpi-card.amber .kpi-value { color:var(--amber); }
+  .kpi-card.purple .kpi-value { color:var(--purple); }
+  .kpi-sub { font-size:12px; color:var(--text-muted); }
+
+  .section-title { font-size:20px; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+  .section-title .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .section-title .line { flex:1; height:1px; background:var(--border); }
+
+  .insights-bar { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin-bottom:44px; }
+  .insight { background:linear-gradient(135deg,rgba(248,113,113,0.04),rgba(248,113,113,0.01)); border:1px solid rgba(248,113,113,0.1); border-radius:10px; padding:14px 18px; font-size:13px; line-height:1.5; color:var(--text-dim); display:flex; gap:10px; align-items:flex-start; }
+  .insight .icon-i { flex-shrink:0; width:22px; height:22px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; background:var(--red-glow); color:var(--red); }
+  .insight strong { color:var(--text); }
+  .insight .num { font-family:var(--mono); font-weight:700; color:var(--text); }
+
+  .table-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:32px; animation:fadeUp 0.5s ease both; }
+  .table-header { padding:18px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .table-header h3 { font-size:15px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .table-header .icon { width:20px; height:20px; border-radius:5px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
+  .table-header .badge { font-size:11px; font-family:var(--mono); background:var(--surface-3); padding:4px 10px; border-radius:20px; color:var(--text-dim); }
+  table { width:100%; border-collapse:collapse; }
+  thead th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-muted); padding:14px 24px; border-bottom:1px solid var(--border); font-weight:500; }
+  thead th:not(:first-child) { text-align:right; }
+  tbody td { padding:14px 24px; border-bottom:1px solid var(--border); font-size:14px; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody td:first-child { font-weight:500; font-size:13px; color:var(--text-dim); line-height:1.4; }
+  tbody td:not(:first-child) { text-align:right; font-family:var(--mono); font-size:14px; font-weight:700; }
+  tbody tr:hover { background:rgba(255,255,255,0.02); }
+  .total-row td { background:var(--surface-2) !important; font-weight:700 !important; border-top:2px solid var(--border); }
+  .total-row td:first-child { color:var(--text) !important; font-weight:700 !important; font-size:14px !important; }
+  .positive{color:var(--accent)} .negative{color:var(--red)} .neutral{color:var(--text-dim)}
+
+  /* Campaign tags */
+  .tag { display:inline-block; padding:3px 8px; border-radius:5px; font-size:10px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase; margin-left:8px; vertical-align:middle; }
+  .tag-mgmx { background:var(--blue-glow); color:var(--blue); }
+  .tag-yenoti { background:var(--purple-glow); color:var(--purple); }
+  .tag-spread { background:var(--amber-glow); color:var(--amber); }
+  .tag-imp { background:var(--red-glow); color:var(--red); }
+
+  /* Cost bar */
+  .cost-bar-wrap { display:flex; align-items:center; justify-content:flex-end; gap:10px; }
+  .cost-bar { width:80px; height:6px; background:var(--surface-3); border-radius:3px; overflow:hidden; }
+  .cost-bar-fill { height:100%; border-radius:3px; background:var(--red); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @media(max-width:1024px){ .dashboard{padding:24px 20px} .kpi-strip{grid-template-columns:1fr} }
+  @media(max-width:600px){ .header{flex-direction:column;align-items:flex-start;gap:16px} .kpi-value{font-size:26px} }
+  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:3px}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">⚠ Aliexpress Leaks</div>
+      <h1>Cost Leakage <span>Report</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="period-badge">Period: <strong>February 2026</strong> · M2</div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-card red"><div class="kpi-label">Total Cost Leaked</div><div class="kpi-value">−$188.70</div><div class="kpi-sub">Wasted spend across 4 campaigns</div></div>
+    <div class="kpi-card amber"><div class="kpi-label">Total Visits</div><div class="kpi-value">760,196</div><div class="kpi-sub">Traffic generated with zero return</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Campaigns Leaking</div><div class="kpi-value">4</div><div class="kpi-sub">Active campaigns with cost leak</div></div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section-title"><span class="dot" style="background:var(--red)"></span> Key Insights <span class="line"></span></div>
+  <div class="insights-bar">
+    <div class="insight"><div class="icon-i">⚠</div><div><strong>IMP campaign is the biggest leak</strong> — <span class="num">$141.69</span> cost on <span class="num">670,616</span> visits. 75% of total leaked spend. Dealingoo + Spread.</div></div>
+    <div class="insight"><div class="icon-i">⚠</div><div><strong>Yenoti IMPULS leaking $40.11</strong> — <span class="num">14,575</span> visits via impulsprom.uk. Only Yenoti campaign in the leak list.</div></div>
+    <div class="insight"><div class="icon-i">⚠</div><div><strong>760K visits, zero revenue</strong> — Massive traffic volume but all cost with no profit return. Pure waste that needs immediate action.</div></div>
+    <div class="insight"><div class="icon-i">◆</div><div><strong>Dealingoo appears in 2 campaigns</strong> — Both MGMX Spread campaigns route through dealingoo.com. Combined <span class="num">$147.99</span> leaked.</div></div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="section-title"><span class="dot" style="background:var(--red)"></span> Campaign Breakdown <span class="line"></span></div>
+  <div class="table-card">
+    <div class="table-header"><h3><span class="icon" style="background:var(--red-glow);color:var(--red)">⚠</span> Aliexpress Leak Campaigns</h3><span class="badge">4 campaigns</span></div>
+    <table>
+      <thead><tr><th>Campaign Name</th><th>Visits</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>mgmx - Global - blogref - dealingoo.com - [SPR] - IMP <span class="tag tag-mgmx">MGMX</span> <span class="tag tag-spread">SPREAD</span></td>
+          <td>670,616</td>
+          <td><div class="cost-bar-wrap"><span class="negative">−$141.69</span><div class="cost-bar"><div class="cost-bar-fill" style="width:100%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td>yenoti - Global - blogref - impulsprom.uk - [IMP] - mgmx - IMPULS <span class="tag tag-yenoti">YENOTI</span> <span class="tag tag-imp">IMP</span></td>
+          <td>14,575</td>
+          <td><div class="cost-bar-wrap"><span class="negative">−$40.11</span><div class="cost-bar"><div class="cost-bar-fill" style="width:28%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td>mgmx - Global - blogref - dealingoo.com - [SPR] - SPREAD <span class="tag tag-mgmx">MGMX</span> <span class="tag tag-spread">SPREAD</span></td>
+          <td>63,724</td>
+          <td><div class="cost-bar-wrap"><span class="negative">−$6.31</span><div class="cost-bar"><div class="cost-bar-fill" style="width:4%"></div></div></div></td>
+        </tr>
+        <tr>
+          <td>mgmx - Global - blogref - dealstormzone.com - [DSZ] - SPREAD <span class="tag tag-mgmx">MGMX</span> <span class="tag tag-spread">SPREAD</span></td>
+          <td>11,281</td>
+          <td><div class="cost-bar-wrap"><span class="negative">−$0.59</span><div class="cost-bar"><div class="cost-bar-fill" style="width:1%"></div></div></div></td>
+        </tr>
+        <tr class="total-row">
+          <td>TOTAL</td>
+          <td style="color:var(--amber)">760,196</td>
+          <td><span class="negative" style="font-size:16px">−$188.70</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; padding:24px 0; border-top:1px solid var(--border); color:var(--text-muted); font-size:12px; font-family:var(--mono); letter-spacing:1px;">
+    ALIEXPRESS LEAKS · FEBRUARY 2026 · COST LEAKAGE REPORT
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGMX — Feb 2026 Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0E14;
+    --surface: #131720;
+    --surface-2: #1A1F2B;
+    --surface-3: #222838;
+    --border: rgba(255,255,255,0.06);
+    --text: #E8ECF4;
+    --text-dim: #7A8299;
+    --text-muted: #4A5168;
+    --accent: #4ADE80;
+    --accent-glow: rgba(74, 222, 128, 0.15);
+    --red: #F87171;
+    --red-glow: rgba(248, 113, 113, 0.15);
+    --blue: #60A5FA;
+    --blue-glow: rgba(96, 165, 250, 0.12);
+    --amber: #FBBF24;
+    --amber-glow: rgba(251, 191, 36, 0.12);
+    --purple: #A78BFA;
+    --purple-glow: rgba(167, 139, 250, 0.12);
+    --cyan: #22D3EE;
+    --cyan-glow: rgba(34, 211, 238, 0.12);
+    --font: 'Outfit', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .dashboard { position: relative; z-index: 1; max-width: 1440px; margin: 0 auto; padding: 32px 40px 60px; }
+  .header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: var(--mono); font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .header h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.1; }
+  .header h1 span { color: var(--text-dim); font-weight: 400; }
+  .period-badge {
+    display: inline-block; background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 18px; font-family: var(--mono); font-size: 14px; color: var(--text-dim);
+  }
+  .period-badge strong { color: var(--text); }
+  .kpi-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 44px; }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px 26px; position: relative; overflow: hidden; transition: transform 0.2s, border-color 0.2s;
+  }
+  .kpi-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.1); }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .kpi-card.green::before { background: var(--accent); }
+  .kpi-card.blue::before { background: var(--blue); }
+  .kpi-card.amber::before { background: var(--amber); }
+  .kpi-card.purple::before { background: var(--purple); }
+  .kpi-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 10px; font-weight: 500; }
+  .kpi-value { font-family: var(--mono); font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 6px; }
+  .kpi-card.green .kpi-value { color: var(--accent); }
+  .kpi-card.blue .kpi-value { color: var(--blue); }
+  .kpi-card.amber .kpi-value { color: var(--amber); }
+  .kpi-card.purple .kpi-value { color: var(--purple); }
+  .kpi-sub { font-size: 13px; color: var(--text-muted); }
+  .section-title { font-size: 20px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .section-title .line { flex: 1; height: 1px; background: var(--border); }
+  .tables-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 48px; }
+  .table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .table-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .table-header h3 { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .table-header .icon { width: 20px; height: 20px; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; }
+  .table-header .badge { font-size: 11px; font-family: var(--mono); background: var(--surface-3); padding: 4px 10px; border-radius: 20px; color: var(--text-dim); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-muted); padding: 12px 24px; border-bottom: 1px solid var(--border); font-weight: 500; }
+  thead th:not(:first-child) { text-align: right; }
+  tbody td { padding: 11px 24px; border-bottom: 1px solid var(--border); font-size: 14px; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:first-child { font-weight: 600; text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; }
+  tbody td:not(:first-child) { text-align: right; font-family: var(--mono); font-size: 14px; font-weight: 700; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  .total-row td { background: var(--surface-2) !important; font-weight: 700 !important; border-top: 2px solid var(--border); }
+  .positive { color: var(--accent); }
+  .negative { color: var(--red); }
+  .neutral { color: var(--text-dim); }
+  .roi-cell { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+  .roi-bar { width: 50px; height: 5px; background: var(--surface-3); border-radius: 3px; overflow: hidden; }
+  .roi-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+  .roi-bar-fill.neg { background: var(--red); }
+  .company-section { margin-bottom: 56px; animation: fadeUp 0.5s ease both; }
+  .company-header { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; }
+  .company-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; font-family: var(--mono); }
+  .company-header h2 { font-size: 22px; font-weight: 700; flex: 1; }
+  .company-kpis { display: flex; gap: 24px; }
+  .company-kpi { text-align: right; }
+  .company-kpi .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .company-kpi .val { font-family: var(--mono); font-size: 18px; font-weight: 700; }
+  .insights-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .insight { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; font-size: 13px; line-height: 1.5; color: var(--text-dim); display: flex; gap: 10px; align-items: flex-start; }
+  .insight .icon-i { flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 1px; }
+  .insight strong { color: var(--text); }
+  .insight .num { font-family: var(--mono); font-weight: 700; color: var(--text); }
+  .c-innovate .company-icon { background: var(--blue-glow); color: var(--blue); }
+  .c-spread .company-icon { background: var(--amber-glow); color: var(--amber); }
+  .c-spirion .company-icon { background: var(--purple-glow); color: var(--purple); }
+  .c-galatea .company-icon { background: var(--cyan-glow); color: var(--cyan); }
+  .c-innovate .company-kpi .val { color: var(--blue); }
+  .c-spread .company-kpi .val { color: var(--amber); }
+  .c-spirion .company-kpi .val { color: var(--purple); }
+  .c-galatea .company-kpi .val { color: var(--cyan); }
+  .c-innovate .insight .icon-i { background: var(--blue-glow); color: var(--blue); }
+  .c-spread .insight .icon-i { background: var(--amber-glow); color: var(--amber); }
+  .c-spirion .insight .icon-i { background: var(--purple-glow); color: var(--purple); }
+  .c-galatea .insight .icon-i { background: var(--cyan-glow); color: var(--cyan); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .kpi-card { animation: fadeUp 0.45s ease both; }
+  .kpi-card:nth-child(2) { animation-delay: 0.06s; }
+  .kpi-card:nth-child(3) { animation-delay: 0.12s; }
+  .kpi-card:nth-child(4) { animation-delay: 0.18s; }
+  .table-card { animation: fadeUp 0.5s ease both; }
+  .overall-insights { margin-bottom: 48px; }
+  .overall-insights .insight { background: linear-gradient(135deg, rgba(74,222,128,0.04), rgba(74,222,128,0.01)); border-color: rgba(74,222,128,0.1); }
+  .overall-insights .insight .icon-i { background: var(--accent-glow); color: var(--accent); }
+  @media (max-width: 1024px) { .dashboard { padding: 24px 20px; } .kpi-strip { grid-template-columns: repeat(2, 1fr); } .tables-row { grid-template-columns: 1fr; } .company-header { flex-wrap: wrap; } }
+  @media (max-width: 600px) { .kpi-strip { grid-template-columns: 1fr; } .kpi-value { font-size: 26px; } .header { flex-direction: column; align-items: flex-start; gap: 16px; } }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">MGMX Dashboard</div>
+      <h1>Geo + ANs <span>Performance</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="period-badge">Period: <strong>February 2026</strong> · M2</div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-card green"><div class="kpi-label">Total Profit</div><div class="kpi-value">$225,305</div><div class="kpi-sub">Across all companies & geos</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Total Cost</div><div class="kpi-value">$14,869</div><div class="kpi-sub">Total media spend in Feb</div></div>
+    <div class="kpi-card amber"><div class="kpi-label">Overall ROI</div><div class="kpi-value">1,515%</div><div class="kpi-sub">Return on investment</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Active Geos</div><div class="kpi-value">22</div><div class="kpi-sub">Countries with live traffic</div></div>
+  </div>
+
+  <!-- OVERALL INSIGHTS -->
+  <div class="overall-insights">
+    <div class="section-title"><span class="dot" style="background:var(--accent)"></span> Overall MGMX Insights <span class="line"></span></div>
+    <div class="insights-bar">
+      <div class="insight"><div class="icon-i">▲</div><div><strong>US dominates Geo profit</strong> — <span class="num">$45,237</span> profit at <span class="num">3,138%</span> ROI on just <span class="num">$1,442</span> spend. Highest-value market.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>noc is the #1 network</strong> — generating <span class="num">$83,639</span> profit (37% of total) with a <span class="num">1,906%</span> ROI.</div></div>
+      <div class="insight"><div class="icon-i">▲</div><div><strong>Top 3 geos = 46% of profit</strong> — US (<span class="num">$45K</span>), UK (<span class="num">$33K</span>), DE (<span class="num">$26K</span>) deliver <span class="num">$104K</span> combined.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>ba network is an outlier star</strong> — <span class="num">$11,605</span> profit on <span class="num">$81</span> spend = <span class="num">14,323%</span> ROI. Massive efficiency.</div></div>
+      <div class="insight"><div class="icon-i">⚠</div><div><strong>4 networks in the red</strong> — imp (<span class="num">−$111</span>), rak (<span class="num">−$75</span>), kwa (<span class="num">−$10</span>), blu (<span class="num">−$4</span>). Consider pausing.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>Spirion leads ROI efficiency</strong> — <span class="num">3,294%</span> ROI. Lowest cost (<span class="num">$2,878</span>) with <span class="num">$94,778</span> profit.</div></div>
+    </div>
+  </div>
+
+  <!-- OVERALL TABLES -->
+  <div class="section-title"><span class="dot" style="background:var(--accent)"></span> Overall MGMX — Geo & ANs <span class="line"></span></div>
+  <div class="tables-row">
+    <div class="table-card">
+      <div class="table-header"><h3><span class="icon" style="background:var(--accent-glow);color:var(--accent)">G</span> Geo Breakdown</h3><span class="badge">22 geos</span></div>
+      <table>
+        <thead><tr><th>Geo</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead>
+        <tbody>
+          <tr><td>US</td><td>$1,442</td><td class="positive">$45,237</td><td><div class="roi-cell"><span class="positive">3,138%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:48%"></div></div></div></td></tr>
+          <tr><td>UK</td><td>$3,330</td><td class="positive">$32,627</td><td><div class="roi-cell"><span class="positive">980%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:15%"></div></div></div></td></tr>
+          <tr><td>DE</td><td>$2,399</td><td class="positive">$26,209</td><td><div class="roi-cell"><span class="positive">1,093%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:17%"></div></div></div></td></tr>
+          <tr><td>ES</td><td>$1,066</td><td class="positive">$22,959</td><td><div class="roi-cell"><span class="positive">2,155%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:33%"></div></div></div></td></tr>
+          <tr><td>NL</td><td>$1,458</td><td class="positive">$18,721</td><td><div class="roi-cell"><span class="positive">1,284%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:20%"></div></div></div></td></tr>
+          <tr><td>PL</td><td>$1,560</td><td class="positive">$16,750</td><td><div class="roi-cell"><span class="positive">1,074%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:16%"></div></div></div></td></tr>
+          <tr><td>MX</td><td>$427</td><td class="positive">$9,296</td><td><div class="roi-cell"><span class="positive">2,178%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:33%"></div></div></div></td></tr>
+          <tr><td>DK</td><td>$349</td><td class="positive">$7,344</td><td><div class="roi-cell"><span class="positive">2,103%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:32%"></div></div></div></td></tr>
+          <tr><td>AT</td><td>$380</td><td class="positive">$7,217</td><td><div class="roi-cell"><span class="positive">1,899%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:29%"></div></div></div></td></tr>
+          <tr><td>FR</td><td>$495</td><td class="positive">$7,173</td><td><div class="roi-cell"><span class="positive">1,450%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:22%"></div></div></div></td></tr>
+          <tr><td>FI</td><td>$361</td><td class="positive">$6,782</td><td><div class="roi-cell"><span class="positive">1,877%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:29%"></div></div></div></td></tr>
+          <tr><td>IT</td><td>$305</td><td class="positive">$6,376</td><td><div class="roi-cell"><span class="positive">2,093%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:32%"></div></div></div></td></tr>
+          <tr><td>AU</td><td>$363</td><td class="positive">$4,601</td><td><div class="roi-cell"><span class="positive">1,268%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:19%"></div></div></div></td></tr>
+          <tr><td>HU</td><td>$56</td><td class="positive">$3,687</td><td><div class="roi-cell"><span class="positive">6,589%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:100%"></div></div></div></td></tr>
+          <tr><td>NZ</td><td>$311</td><td class="positive">$3,149</td><td><div class="roi-cell"><span class="positive">1,013%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:15%"></div></div></div></td></tr>
+          <tr><td>PT</td><td>$134</td><td class="positive">$2,758</td><td><div class="roi-cell"><span class="positive">2,055%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:31%"></div></div></div></td></tr>
+          <tr><td>CH</td><td>$278</td><td class="positive">$2,345</td><td><div class="roi-cell"><span class="positive">844%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:13%"></div></div></div></td></tr>
+          <tr><td>NO</td><td>$106</td><td class="positive">$881</td><td><div class="roi-cell"><span class="positive">831%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:13%"></div></div></div></td></tr>
+          <tr><td>RO</td><td>$0</td><td class="positive">$477</td><td><div class="roi-cell"><span class="positive">∞</span></div></td></tr>
+          <tr><td>IE</td><td>$42</td><td class="positive">$474</td><td><div class="roi-cell"><span class="positive">1,122%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:17%"></div></div></div></td></tr>
+          <tr><td>SE</td><td>$7</td><td class="positive">$240</td><td><div class="roi-cell"><span class="positive">3,363%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:51%"></div></div></div></td></tr>
+          <tr><td>CA</td><td>$1</td><td class="positive">$3</td><td><div class="roi-cell"><span class="neutral">257%</span></div></td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$14,869</td><td class="positive">$225,305</td><td><div class="roi-cell"><span class="positive">1,515%</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-card">
+      <div class="table-header"><h3><span class="icon" style="background:var(--accent-glow);color:var(--accent)">N</span> ANs Breakdown</h3><span class="badge">18 networks</span></div>
+      <table>
+        <thead><tr><th>Network</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead>
+        <tbody>
+          <tr><td>noc</td><td>$4,387</td><td class="positive">$83,639</td><td><div class="roi-cell"><span class="positive">1,906%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:13%"></div></div></div></td></tr>
+          <tr><td>rwd</td><td>$3,432</td><td class="positive">$42,465</td><td><div class="roi-cell"><span class="positive">1,237%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:9%"></div></div></div></td></tr>
+          <tr><td>lbx</td><td>$3,651</td><td class="positive">$38,679</td><td><div class="roi-cell"><span class="positive">1,059%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:7%"></div></div></div></td></tr>
+          <tr><td>br</td><td>$545</td><td class="positive">$12,056</td><td><div class="roi-cell"><span class="positive">2,213%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:15%"></div></div></div></td></tr>
+          <tr><td>lh</td><td>$1,264</td><td class="positive">$11,610</td><td><div class="roi-cell"><span class="positive">918%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:6%"></div></div></div></td></tr>
+          <tr><td>ba</td><td>$81</td><td class="positive">$11,605</td><td><div class="roi-cell"><span class="positive">14,323%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:100%"></div></div></div></td></tr>
+          <tr><td>wep</td><td>$272</td><td class="positive">$9,630</td><td><div class="roi-cell"><span class="positive">3,535%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:25%"></div></div></div></td></tr>
+          <tr><td>ecl</td><td>$373</td><td class="positive">$6,682</td><td><div class="roi-cell"><span class="positive">1,792%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:13%"></div></div></div></td></tr>
+          <tr><td>YK</td><td>$168</td><td class="positive">$5,753</td><td><div class="roi-cell"><span class="positive">3,426%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:24%"></div></div></div></td></tr>
+          <tr><td>cue</td><td>$366</td><td class="positive">$2,895</td><td><div class="roi-cell"><span class="positive">791%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:6%"></div></div></div></td></tr>
+          <tr><td>flx</td><td>$7</td><td class="positive">$358</td><td><div class="roi-cell"><span class="positive">5,185%</span><div class="roi-bar"><div class="roi-bar-fill" style="width:36%"></div></div></div></td></tr>
+          <tr><td>pm</td><td>$50</td><td class="positive">$127</td><td><div class="roi-cell"><span class="neutral">254%</span></div></td></tr>
+          <tr><td>ta</td><td>$0</td><td class="positive">$5</td><td><div class="roi-cell"><span class="neutral">5,994%</span></div></td></tr>
+          <tr><td>vcm</td><td>$0</td><td class="neutral">$0</td><td><div class="roi-cell"><span class="negative">-100%</span></div></td></tr>
+          <tr><td>blu</td><td>$46</td><td class="negative">−$4</td><td><div class="roi-cell"><span class="negative">-8%</span><div class="roi-bar"><div class="roi-bar-fill neg" style="width:5%"></div></div></div></td></tr>
+          <tr><td>kwa</td><td>$10</td><td class="negative">−$10</td><td><div class="roi-cell"><span class="negative">-100%</span><div class="roi-bar"><div class="roi-bar-fill neg" style="width:10%"></div></div></div></td></tr>
+          <tr><td>rak</td><td>$75</td><td class="negative">−$75</td><td><div class="roi-cell"><span class="negative">-100%</span><div class="roi-bar"><div class="roi-bar-fill neg" style="width:10%"></div></div></div></td></tr>
+          <tr><td>imp</td><td>$142</td><td class="negative">−$111</td><td><div class="roi-cell"><span class="negative">-78%</span><div class="roi-bar"><div class="roi-bar-fill neg" style="width:15%"></div></div></div></td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$14,869</td><td class="positive">$225,305</td><td><div class="roi-cell"><span class="positive">1,515%</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════ INNOVATE ══════════════ -->
+  <div class="company-section c-innovate">
+    <div class="company-header">
+      <div class="company-icon">IN</div>
+      <h2>Innovate</h2>
+      <div class="company-kpis">
+        <div class="company-kpi"><div class="label">Profit</div><div class="val">$84,760</div></div>
+        <div class="company-kpi"><div class="label">Cost</div><div class="val">$6,268</div></div>
+        <div class="company-kpi"><div class="label">ROI</div><div class="val">1,352%</div></div>
+      </div>
+    </div>
+    <div class="insights-bar">
+      <div class="insight"><div class="icon-i">▲</div><div><strong>US is the profit engine</strong> — <span class="num">$28,853</span> profit (34% of total) at <span class="num">2,506%</span> ROI.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>noc + rwd = 77% of AN profit</strong> — noc <span class="num">$40,680</span> + rwd <span class="num">$24,765</span> dominate.</div></div>
+      <div class="insight"><div class="icon-i">▲</div><div><strong>MX hidden gem</strong> — <span class="num">$2,908</span> on <span class="num">$56</span> spend = <span class="num">5,187%</span> ROI. Scale opportunity.</div></div>
+      <div class="insight"><div class="icon-i">⚠</div><div><strong>PL underperforms</strong> — <span class="num">$664</span> cost → <span class="num">$3,000</span> profit (<span class="num">452%</span> ROI), well below avg.</div></div>
+    </div>
+    <div class="tables-row">
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--blue-glow);color:var(--blue)">G</span> Innovate — Geo</h3><span class="badge">18 geos</span></div>
+        <table><thead><tr><th>Geo</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>US</td><td>$1,151</td><td class="positive">$28,853</td><td class="positive">2,506%</td></tr>
+          <tr><td>UK</td><td>$2,160</td><td class="positive">$15,732</td><td class="positive">728%</td></tr>
+          <tr><td>DE</td><td>$659</td><td class="positive">$10,127</td><td class="positive">1,537%</td></tr>
+          <tr><td>ES</td><td>$528</td><td class="positive">$9,533</td><td class="positive">1,805%</td></tr>
+          <tr><td>NL</td><td>$630</td><td class="positive">$7,117</td><td class="positive">1,130%</td></tr>
+          <tr><td>DK</td><td>$199</td><td class="positive">$3,604</td><td class="positive">1,810%</td></tr>
+          <tr><td>AT</td><td>$220</td><td class="positive">$3,382</td><td class="positive">1,539%</td></tr>
+          <tr><td>PL</td><td>$664</td><td class="positive">$3,000</td><td class="neutral">452%</td></tr>
+          <tr><td>MX</td><td>$56</td><td class="positive">$2,908</td><td class="positive">5,187%</td></tr>
+          <tr><td>IT</td><td>$0</td><td class="positive">$184</td><td class="positive">∞</td></tr>
+          <tr><td>AU</td><td>$0</td><td class="positive">$129</td><td class="positive">∞</td></tr>
+          <tr><td>FR</td><td>$0</td><td class="positive">$70</td><td class="positive">∞</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$6,268</td><td class="positive">$84,760</td><td class="positive">1,352%</td></tr>
+        </tbody></table>
+      </div>
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--blue-glow);color:var(--blue)">N</span> Innovate — ANs</h3><span class="badge">15 networks</span></div>
+        <table><thead><tr><th>Network</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>noc</td><td>$2,313</td><td class="positive">$40,680</td><td class="positive">1,759%</td></tr>
+          <tr><td>rwd</td><td>$2,056</td><td class="positive">$24,765</td><td class="positive">1,204%</td></tr>
+          <tr><td>lbx</td><td>$1,066</td><td class="positive">$9,022</td><td class="positive">846%</td></tr>
+          <tr><td>ba</td><td>$23</td><td class="positive">$2,414</td><td class="positive">10,410%</td></tr>
+          <tr><td>cue</td><td>$329</td><td class="positive">$2,341</td><td class="positive">711%</td></tr>
+          <tr><td>ecl</td><td>$83</td><td class="positive">$2,194</td><td class="positive">2,642%</td></tr>
+          <tr><td>wep</td><td>$60</td><td class="positive">$1,532</td><td class="positive">2,567%</td></tr>
+          <tr><td>lh</td><td>$147</td><td class="positive">$1,435</td><td class="positive">979%</td></tr>
+          <tr><td>flx</td><td>$7</td><td class="positive">$358</td><td class="positive">5,185%</td></tr>
+          <tr><td>pm</td><td>$14</td><td class="positive">$67</td><td class="positive">491%</td></tr>
+          <tr><td>blu</td><td>$12</td><td class="positive">$28</td><td class="positive">236%</td></tr>
+          <tr><td>br</td><td>$74</td><td class="positive">$9</td><td class="neutral">12%</td></tr>
+          <tr><td>kwa</td><td>$10</td><td class="negative">−$10</td><td class="negative">-100%</td></tr>
+          <tr><td>rak</td><td>$75</td><td class="negative">−$75</td><td class="negative">-100%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$6,268</td><td class="positive">$84,760</td><td class="positive">1,352%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SPREAD ══════════════ -->
+  <div class="company-section c-spread">
+    <div class="company-header">
+      <div class="company-icon">SP</div>
+      <h2>Spread</h2>
+      <div class="company-kpis">
+        <div class="company-kpi"><div class="label">Profit</div><div class="val">$36,783</div></div>
+        <div class="company-kpi"><div class="label">Cost</div><div class="val">$3,948</div></div>
+        <div class="company-kpi"><div class="label">ROI</div><div class="val">932%</div></div>
+      </div>
+    </div>
+    <div class="insights-bar">
+      <div class="insight"><div class="icon-i">▲</div><div><strong>PL is Spread's top geo</strong> — <span class="num">$7,871</span> profit at <span class="num">1,106%</span> ROI. Strong performer here unlike Innovate.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>br network is #1 earner</strong> — <span class="num">$8,194</span> profit at <span class="num">2,195%</span> ROI. Unique strength for Spread.</div></div>
+      <div class="insight"><div class="icon-i">▲</div><div><strong>FI punches above weight</strong> — <span class="num">$4,366</span> on <span class="num">$342</span> spend (<span class="num">1,276%</span> ROI). Top 5 geo.</div></div>
+      <div class="insight"><div class="icon-i">⚠</div><div><strong>imp is a heavy loss</strong> — <span class="num">−$111</span> on <span class="num">$142</span> spend. Only runs on Spread. Recommend pausing.</div></div>
+    </div>
+    <div class="tables-row">
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--amber-glow);color:var(--amber)">G</span> Spread — Geo</h3><span class="badge">21 geos</span></div>
+        <table><thead><tr><th>Geo</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>PL</td><td>$712</td><td class="positive">$7,871</td><td class="positive">1,106%</td></tr>
+          <tr><td>ES</td><td>$298</td><td class="positive">$5,244</td><td class="positive">1,761%</td></tr>
+          <tr><td>DE</td><td>$795</td><td class="positive">$4,700</td><td class="positive">591%</td></tr>
+          <tr><td>FI</td><td>$342</td><td class="positive">$4,366</td><td class="positive">1,276%</td></tr>
+          <tr><td>NL</td><td>$497</td><td class="positive">$3,457</td><td class="positive">695%</td></tr>
+          <tr><td>IT</td><td>$227</td><td class="positive">$2,658</td><td class="positive">1,172%</td></tr>
+          <tr><td>US</td><td>$113</td><td class="positive">$2,605</td><td class="positive">2,315%</td></tr>
+          <tr><td>MX</td><td>$288</td><td class="positive">$2,480</td><td class="positive">861%</td></tr>
+          <tr><td>UK</td><td>$195</td><td class="positive">$1,382</td><td class="positive">710%</td></tr>
+          <tr><td>FR</td><td>$199</td><td class="positive">$667</td><td class="neutral">336%</td></tr>
+          <tr><td>DK</td><td>$64</td><td class="positive">$524</td><td class="positive">818%</td></tr>
+          <tr><td>AU</td><td>$52</td><td class="positive">$354</td><td class="positive">679%</td></tr>
+          <tr><td>AT</td><td>$22</td><td class="positive">$240</td><td class="positive">1,096%</td></tr>
+          <tr><td>RO</td><td>$0</td><td class="positive">$171</td><td class="positive">∞</td></tr>
+          <tr><td>NO</td><td>$24</td><td class="positive">$68</td><td class="neutral">285%</td></tr>
+          <tr><td>PT</td><td>$9</td><td class="negative">−$3</td><td class="negative">-29%</td></tr>
+          <tr><td>NZ</td><td>$111</td><td class="negative">−$6</td><td class="negative">-6%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$3,948</td><td class="positive">$36,783</td><td class="positive">932%</td></tr>
+        </tbody></table>
+      </div>
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--amber-glow);color:var(--amber)">N</span> Spread — ANs</h3><span class="badge">13 networks</span></div>
+        <table><thead><tr><th>Network</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>br</td><td>$373</td><td class="positive">$8,194</td><td class="positive">2,195%</td></tr>
+          <tr><td>noc</td><td>$684</td><td class="positive">$7,276</td><td class="positive">1,063%</td></tr>
+          <tr><td>lh</td><td>$534</td><td class="positive">$5,499</td><td class="positive">1,030%</td></tr>
+          <tr><td>wep</td><td>$159</td><td class="positive">$4,734</td><td class="positive">2,976%</td></tr>
+          <tr><td>lbx</td><td>$1,278</td><td class="positive">$4,046</td><td class="neutral">317%</td></tr>
+          <tr><td>rwd</td><td>$564</td><td class="positive">$3,843</td><td class="positive">681%</td></tr>
+          <tr><td>ba</td><td>$31</td><td class="positive">$2,225</td><td class="positive">7,151%</td></tr>
+          <tr><td>ecl</td><td>$105</td><td class="positive">$1,047</td><td class="positive">1,001%</td></tr>
+          <tr><td>cue</td><td>$22</td><td class="positive">$60</td><td class="neutral">272%</td></tr>
+          <tr><td>blu</td><td>$34</td><td class="negative">−$31</td><td class="negative">-92%</td></tr>
+          <tr><td>imp</td><td>$142</td><td class="negative">−$111</td><td class="negative">-78%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$3,948</td><td class="positive">$36,783</td><td class="positive">932%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SPIRION ══════════════ -->
+  <div class="company-section c-spirion">
+    <div class="company-header">
+      <div class="company-icon">SR</div>
+      <h2>Spirion</h2>
+      <div class="company-kpis">
+        <div class="company-kpi"><div class="label">Profit</div><div class="val">$94,778</div></div>
+        <div class="company-kpi"><div class="label">Cost</div><div class="val">$2,878</div></div>
+        <div class="company-kpi"><div class="label">ROI</div><div class="val">3,294%</div></div>
+      </div>
+    </div>
+    <div class="insights-bar">
+      <div class="insight"><div class="icon-i">▲</div><div><strong>Highest ROI company</strong> — <span class="num">3,294%</span>. Delivers <span class="num">42%</span> of MGMX profit on just <span class="num">19%</span> of spend.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>ba = 29,588% ROI</strong> — <span class="num">$6,932</span> profit on <span class="num">$23</span> spend. Absolute outlier performance.</div></div>
+      <div class="insight"><div class="icon-i">▲</div><div><strong>UK leads geo at $15,057</strong> — US follows at <span class="num">$12,558</span> with stunning <span class="num">11,866%</span> ROI.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>21 geos, nearly all profitable</strong> — Only CA at <span class="num">−$1</span>. Remarkably consistent performance.</div></div>
+    </div>
+    <div class="tables-row">
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--purple-glow);color:var(--purple)">G</span> Spirion — Geo</h3><span class="badge">22 geos</span></div>
+        <table><thead><tr><th>Geo</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>UK</td><td>$602</td><td class="positive">$15,057</td><td class="positive">2,499%</td></tr>
+          <tr><td>US</td><td>$106</td><td class="positive">$12,558</td><td class="positive">11,866%</td></tr>
+          <tr><td>DE</td><td>$500</td><td class="positive">$10,175</td><td class="positive">2,037%</td></tr>
+          <tr><td>ES</td><td>$113</td><td class="positive">$7,154</td><td class="positive">6,354%</td></tr>
+          <tr><td>NL</td><td>$153</td><td class="positive">$6,080</td><td class="positive">3,964%</td></tr>
+          <tr><td>FR</td><td>$167</td><td class="positive">$5,889</td><td class="positive">3,537%</td></tr>
+          <tr><td>PL</td><td>$68</td><td class="positive">$4,710</td><td class="positive">6,922%</td></tr>
+          <tr><td>MX</td><td>$83</td><td class="positive">$3,908</td><td class="positive">4,732%</td></tr>
+          <tr><td>HU</td><td>$56</td><td class="positive">$3,687</td><td class="positive">6,590%</td></tr>
+          <tr><td>AT</td><td>$138</td><td class="positive">$3,562</td><td class="positive">2,576%</td></tr>
+          <tr><td>IT</td><td>$78</td><td class="positive">$3,534</td><td class="positive">4,540%</td></tr>
+          <tr><td>DK</td><td>$86</td><td class="positive">$3,216</td><td class="positive">3,739%</td></tr>
+          <tr><td>NZ</td><td>$148</td><td class="positive">$3,130</td><td class="positive">2,110%</td></tr>
+          <tr><td>AU</td><td>$97</td><td class="positive">$2,947</td><td class="positive">3,029%</td></tr>
+          <tr><td>PT</td><td>$126</td><td class="positive">$2,694</td><td class="positive">2,146%</td></tr>
+          <tr><td>FI</td><td>$19</td><td class="positive">$2,415</td><td class="positive">12,661%</td></tr>
+          <tr><td>CH</td><td>$206</td><td class="positive">$2,258</td><td class="positive">1,098%</td></tr>
+          <tr><td>NO</td><td>$82</td><td class="positive">$813</td><td class="positive">989%</td></tr>
+          <tr><td>IE</td><td>$42</td><td class="positive">$474</td><td class="positive">1,122%</td></tr>
+          <tr><td>RO</td><td>$0</td><td class="positive">$278</td><td class="positive">∞</td></tr>
+          <tr><td>SE</td><td>$7</td><td class="positive">$241</td><td class="positive">3,434%</td></tr>
+          <tr><td>CA</td><td>$1</td><td class="negative">−$1</td><td class="negative">-100%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$2,878</td><td class="positive">$94,778</td><td class="positive">3,294%</td></tr>
+        </tbody></table>
+      </div>
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--purple-glow);color:var(--purple)">N</span> Spirion — ANs</h3><span class="badge">13 networks</span></div>
+        <table><thead><tr><th>Network</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>noc</td><td>$735</td><td class="positive">$30,866</td><td class="positive">4,200%</td></tr>
+          <tr><td>lbx</td><td>$983</td><td class="positive">$24,094</td><td class="positive">2,450%</td></tr>
+          <tr><td>rwd</td><td>$547</td><td class="positive">$13,474</td><td class="positive">2,465%</td></tr>
+          <tr><td>ba</td><td>$23</td><td class="positive">$6,932</td><td class="positive">29,588%</td></tr>
+          <tr><td>YK</td><td>$168</td><td class="positive">$5,753</td><td class="positive">3,426%</td></tr>
+          <tr><td>lh</td><td>$212</td><td class="positive">$3,942</td><td class="positive">1,861%</td></tr>
+          <tr><td>br</td><td>$97</td><td class="positive">$3,853</td><td class="positive">3,963%</td></tr>
+          <tr><td>ecl</td><td>$79</td><td class="positive">$2,841</td><td class="positive">3,599%</td></tr>
+          <tr><td>wep</td><td>$25</td><td class="positive">$2,626</td><td class="positive">10,320%</td></tr>
+          <tr><td>cue</td><td>$8</td><td class="positive">$317</td><td class="positive">4,155%</td></tr>
+          <tr><td>pm</td><td>$0</td><td class="positive">$75</td><td class="positive">∞</td></tr>
+          <tr><td>ta</td><td>$0</td><td class="positive">$5</td><td class="positive">∞</td></tr>
+          <tr><td>vcm</td><td>$0</td><td class="neutral">$0</td><td class="negative">-100%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$2,878</td><td class="positive">$94,778</td><td class="positive">3,294%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ GALATEA ══════════════ -->
+  <div class="company-section c-galatea">
+    <div class="company-header">
+      <div class="company-icon">GA</div>
+      <h2>Galatea</h2>
+      <div class="company-kpis">
+        <div class="company-kpi"><div class="label">Profit</div><div class="val">$8,983</div></div>
+        <div class="company-kpi"><div class="label">Cost</div><div class="val">$1,776</div></div>
+        <div class="company-kpi"><div class="label">ROI</div><div class="val">506%</div></div>
+      </div>
+    </div>
+    <div class="insights-bar">
+      <div class="insight"><div class="icon-i">▲</div><div><strong>Smallest company, lowest ROI</strong> — <span class="num">506%</span> vs MGMX avg <span class="num">1,515%</span>. Room for optimization.</div></div>
+      <div class="insight"><div class="icon-i">◆</div><div><strong>NL leads geo at $2,067</strong> — Top 3 (NL, US, DE) = <span class="num">50%</span> of total profit.</div></div>
+      <div class="insight"><div class="icon-i">▲</div><div><strong>noc carries the network</strong> — <span class="num">$4,816</span> (54% of total). Heavy single-network dependency.</div></div>
+      <div class="insight"><div class="icon-i">⚠</div><div><strong>UK has poor efficiency</strong> — <span class="num">$373</span> cost → <span class="num">$456</span> profit = only <span class="num">122%</span> ROI.</div></div>
+    </div>
+    <div class="tables-row">
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--cyan-glow);color:var(--cyan)">G</span> Galatea — Geo</h3><span class="badge">12 geos</span></div>
+        <table><thead><tr><th>Geo</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>NL</td><td>$178</td><td class="positive">$2,067</td><td class="positive">1,162%</td></tr>
+          <tr><td>US</td><td>$72</td><td class="positive">$1,221</td><td class="positive">1,696%</td></tr>
+          <tr><td>DE</td><td>$445</td><td class="positive">$1,207</td><td class="neutral">271%</td></tr>
+          <tr><td>AU</td><td>$213</td><td class="positive">$1,170</td><td class="positive">549%</td></tr>
+          <tr><td>PL</td><td>$116</td><td class="positive">$1,169</td><td class="positive">1,011%</td></tr>
+          <tr><td>ES</td><td>$127</td><td class="positive">$1,030</td><td class="positive">809%</td></tr>
+          <tr><td>FR</td><td>$130</td><td class="positive">$547</td><td class="neutral">422%</td></tr>
+          <tr><td>UK</td><td>$373</td><td class="positive">$456</td><td class="neutral">122%</td></tr>
+          <tr><td>CH</td><td>$72</td><td class="positive">$58</td><td class="neutral">82%</td></tr>
+          <tr><td>AT</td><td>$0</td><td class="positive">$33</td><td class="positive">∞</td></tr>
+          <tr><td>NZ</td><td>$52</td><td class="positive">$26</td><td class="neutral">50%</td></tr>
+          <tr><td>FI</td><td>$0</td><td class="neutral">$0</td><td class="negative">-100%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$1,776</td><td class="positive">$8,983</td><td class="positive">506%</td></tr>
+        </tbody></table>
+      </div>
+      <div class="table-card">
+        <div class="table-header"><h3><span class="icon" style="background:var(--cyan-glow);color:var(--cyan)">N</span> Galatea — ANs</h3><span class="badge">9 networks</span></div>
+        <table><thead><tr><th>Network</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead><tbody>
+          <tr><td>noc</td><td>$655</td><td class="positive">$4,816</td><td class="positive">735%</td></tr>
+          <tr><td>lbx</td><td>$324</td><td class="positive">$1,517</td><td class="positive">469%</td></tr>
+          <tr><td>wep</td><td>$28</td><td class="positive">$737</td><td class="positive">2,614%</td></tr>
+          <tr><td>lh</td><td>$372</td><td class="positive">$734</td><td class="neutral">197%</td></tr>
+          <tr><td>ecl</td><td>$106</td><td class="positive">$600</td><td class="positive">564%</td></tr>
+          <tr><td>rwd</td><td>$265</td><td class="positive">$383</td><td class="neutral">144%</td></tr>
+          <tr><td>cue</td><td>$7</td><td class="positive">$178</td><td class="positive">2,435%</td></tr>
+          <tr><td>ba</td><td>$3</td><td class="positive">$34</td><td class="positive">1,045%</td></tr>
+          <tr><td>pm</td><td>$15</td><td class="negative">−$15</td><td class="negative">-100%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td>$1,776</td><td class="positive">$8,983</td><td class="positive">506%</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; padding: 24px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 12px; font-family: var(--mono); letter-spacing: 1px;">
+    MGMX MONTHLY REPORT · FEBRUARY 2026 · GEO + ANs PERFORMANCE
+  </div>
+
+</div>
+</body>
+</html>

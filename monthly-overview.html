@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Overview — Jan vs Feb 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0B0E14; --surface: #131720; --border: rgba(255,255,255,0.06);
+    --text: #E8ECF4; --text-dim: #7A8299; --text-muted: #4A5168;
+    --accent: #4ADE80; --surface-2: #1A1F2B; --surface-3: #222838;
+    --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:var(--font); min-height:100vh; }
+  body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
+  .dashboard { position:relative; z-index:1; max-width:1600px; margin:0 auto; padding:32px 40px 60px; }
+  .header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:48px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .logo { font-family:var(--mono); font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .header h1 { font-size:36px; font-weight:800; letter-spacing:-1px; line-height:1.1; }
+  .header h1 span { color:var(--text-dim); font-weight:400; font-size:28px; }
+  .period-badge { display:inline-block; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:10px 18px; font-family:var(--mono); font-size:14px; color:var(--text-dim); }
+  .period-badge strong { color:var(--text); }
+  .chart-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:36px 48px; margin-bottom:28px; animation:fadeUp 0.5s ease both; }
+  .chart-card h3 { font-size:18px; font-weight:700; margin-bottom:28px; display:flex; align-items:center; gap:10px; }
+  .chart-card .icon { width:24px; height:24px; border-radius:7px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
+  .chart-card canvas { width:100% !important; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @media(max-width:600px){ .header{flex-direction:column;align-items:flex-start;gap:16px} .chart-card{padding:18px} }
+  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:3px}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">Monthly Overview</div>
+      <h1>Jan vs Feb 2026 <span>Performance</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="period-badge">Comparing: <strong>Jan 2026</strong> → <strong>Feb 2026</strong></div>
+    </div>
+  </div>
+
+  <div class="chart-card">
+    <h3><span class="icon" style="background:rgba(74,222,128,0.15);color:#4ADE80">◈</span> All Metrics — Jan vs Feb 2026</h3>
+    <canvas id="chartMain" height="300"></canvas>
+  </div>
+
+  <div style="text-align:center; padding:24px 0; border-top:1px solid var(--border); color:var(--text-muted); font-size:12px; font-family:var(--mono); letter-spacing:1px;">
+    MONTHLY OVERVIEW · JAN vs FEB 2026 · ALL METRICS COMPARISON
+  </div>
+</div>
+
+<script>
+Chart.defaults.color='#7A8299';
+Chart.defaults.borderColor='rgba(255,255,255,0.06)';
+Chart.defaults.font.family="'Outfit',sans-serif";
+
+const labels = ['', '', 'Jan 2026', '', '', '', '', 'Feb 2026', '', ''];
+
+const pad = (a,b) => [null, null, a, null, null, null, null, b, null, null];
+
+const revenue   = pad(408761, 292981);
+const profit    = pad(378575, 272842);
+const collected = pad(200290, 246467);
+const cost      = pad(30187, 20138);
+const roi       = pad(1254, 1354);
+const cr        = pad(0.04, 0.06);
+
+new Chart(document.getElementById('chartMain'), {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: 'Revenue',
+        data: revenue,
+        borderColor: 'rgba(248,113,113,0.7)',
+        borderWidth: 2,
+        pointBackgroundColor: '#F87171',
+        pointBorderColor: '#131720',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+        tension: 0.4,
+        fill: false,
+        yAxisID: 'y',
+        spanGaps: true,
+      },
+      {
+        label: 'Profit',
+        data: profit,
+        borderColor: 'rgba(74,222,128,0.7)',
+        borderWidth: 2,
+        pointBackgroundColor: '#4ADE80',
+        pointBorderColor: '#131720',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+        tension: 0.4,
+        fill: false,
+        yAxisID: 'y',
+        spanGaps: true,
+      },
+      {
+        label: 'Collected (USD)',
+        data: collected,
+        borderColor: 'rgba(251,146,60,0.7)',
+        borderWidth: 2,
+        pointBackgroundColor: '#FB923C',
+        pointBorderColor: '#131720',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+        tension: 0.4,
+        fill: false,
+        yAxisID: 'y',
+        spanGaps: true,
+      },
+      {
+        label: 'Cost',
+        data: cost,
+        borderColor: 'rgba(251,191,36,0.6)',
+        backgroundColor: 'rgba(251,191,36,0.04)',
+        borderWidth: 1.5,
+        pointBackgroundColor: '#FBBF24',
+        pointBorderColor: '#131720',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        tension: 0.4,
+        fill: true,
+        yAxisID: 'y',
+        spanGaps: true,
+      },
+      {
+        label: 'ROI %',
+        data: roi,
+        borderColor: 'rgba(34,211,238,0.6)',
+        borderWidth: 1.5,
+        borderDash: [6, 4],
+        pointBackgroundColor: '#22D3EE',
+        pointBorderColor: '#131720',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        tension: 0.4,
+        fill: false,
+        yAxisID: 'y1',
+        spanGaps: true,
+      },
+      {
+        label: 'CR %',
+        data: cr,
+        borderColor: 'rgba(167,139,250,0.6)',
+        borderWidth: 1.5,
+        borderDash: [4, 3],
+        pointBackgroundColor: '#A78BFA',
+        pointBorderColor: '#131720',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        tension: 0.4,
+        fill: false,
+        yAxisID: 'y2',
+        spanGaps: true,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    aspectRatio: 3.2,
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
+    plugins: {
+      legend: {
+        position: 'top',
+        labels: {
+          usePointStyle: true,
+          pointStyle: 'circle',
+          padding: 24,
+          font: { size: 13, weight: 600 }
+        }
+      },
+      tooltip: {
+        backgroundColor: '#1A1F2B',
+        titleColor: '#E8ECF4',
+        bodyColor: '#A0A8C0',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        padding: 16,
+        cornerRadius: 10,
+        titleFont: { size: 15, weight: 700 },
+        bodyFont: { size: 14, family: "'JetBrains Mono', monospace" },
+        bodySpacing: 8,
+        filter: function(item) { return item.raw !== null; },
+        callbacks: {
+          label: function(ctx) {
+            if (ctx.raw === null) return '';
+            const v = ctx.raw;
+            if (ctx.dataset.label === 'ROI %') return '  ROI: ' + v.toLocaleString() + '%';
+            if (ctx.dataset.label === 'CR %') return '  CR: ' + v + '%';
+            return '  ' + ctx.dataset.label + ': $' + v.toLocaleString();
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        grid: { display: false },
+        ticks: { font: { size: 15, weight: 700 }, padding: 12 }
+      },
+      y: {
+        position: 'left',
+        title: { display: true, text: 'USD ($)', font: { size: 12, weight: 600 }, color: '#4A5168' },
+        ticks: {
+          callback: function(v) {
+            if (v >= 1000) return '$' + (v/1000) + 'K';
+            return '$' + v;
+          },
+          font: { size: 11 }
+        },
+        grid: { color: 'rgba(255,255,255,0.03)' }
+      },
+      y1: {
+        position: 'right',
+        title: { display: true, text: 'ROI %', font: { size: 12, weight: 600 }, color: 'rgba(34,211,238,0.6)' },
+        ticks: {
+          callback: v => v.toLocaleString() + '%',
+          font: { size: 11 },
+          color: 'rgba(34,211,238,0.45)'
+        },
+        grid: { display: false }
+      },
+      y2: { display: false }
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MGMX → TS (Geos) — Feb 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0B0E14; --surface: #131720; --surface-2: #1A1F2B; --surface-3: #222838;
+    --border: rgba(255,255,255,0.06); --text: #E8ECF4; --text-dim: #7A8299; --text-muted: #4A5168;
+    --accent: #4ADE80; --accent-glow: rgba(74,222,128,0.15);
+    --red: #F87171; --blue: #60A5FA; --blue-glow: rgba(96,165,250,0.12);
+    --amber: #FBBF24; --amber-glow: rgba(251,191,36,0.12);
+    --purple: #A78BFA; --purple-glow: rgba(167,139,250,0.12);
+    --cyan: #22D3EE; --cyan-glow: rgba(34,211,238,0.12);
+    --pink: #F472B6; --pink-glow: rgba(244,114,182,0.12);
+    --orange: #FB923C; --lime: #A3E635;
+    --font: 'Outfit', sans-serif; --mono: 'JetBrains Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; overflow-x: hidden; }
+  body::before { content:''; position:fixed; inset:0; background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px); background-size:60px 60px; pointer-events:none; z-index:0; }
+  .dashboard { position:relative; z-index:1; max-width:1440px; margin:0 auto; padding:32px 40px 60px; }
+  .header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+  .logo { font-family:var(--mono); font-size:13px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+  .header h1 { font-size:32px; font-weight:700; letter-spacing:-0.5px; line-height:1.1; }
+  .header h1 span { color:var(--text-dim); font-weight:400; }
+  .period-badge { display:inline-block; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:10px 18px; font-family:var(--mono); font-size:14px; color:var(--text-dim); }
+  .period-badge strong { color:var(--text); }
+  .kpi-strip { display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:44px; }
+  .kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px 24px; position:relative; overflow:hidden; transition:transform 0.2s; animation:fadeUp 0.45s ease both; }
+  .kpi-card:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.1); }
+  .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+  .kpi-card.green::before { background:var(--accent); } .kpi-card.blue::before { background:var(--blue); }
+  .kpi-card.amber::before { background:var(--amber); } .kpi-card.purple::before { background:var(--purple); }
+  .kpi-card.cyan::before { background:var(--cyan); }
+  .kpi-card:nth-child(2){animation-delay:.06s} .kpi-card:nth-child(3){animation-delay:.12s} .kpi-card:nth-child(4){animation-delay:.18s} .kpi-card:nth-child(5){animation-delay:.24s}
+  .kpi-label { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-dim); margin-bottom:10px; font-weight:500; }
+  .kpi-value { font-family:var(--mono); font-size:28px; font-weight:700; line-height:1; margin-bottom:5px; }
+  .kpi-card.green .kpi-value{color:var(--accent)} .kpi-card.blue .kpi-value{color:var(--blue)}
+  .kpi-card.amber .kpi-value{color:var(--amber)} .kpi-card.purple .kpi-value{color:var(--purple)}
+  .kpi-card.cyan .kpi-value{color:var(--cyan)}
+  .kpi-sub { font-size:12px; color:var(--text-muted); }
+  .section-title { font-size:20px; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:12px; }
+  .section-title .dot { width:8px; height:8px; border-radius:50%; display:inline-block; }
+  .section-title .line { flex:1; height:1px; background:var(--border); }
+  .insights-bar { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin-bottom:44px; }
+  .insight { background:linear-gradient(135deg,rgba(74,222,128,0.04),rgba(74,222,128,0.01)); border:1px solid rgba(74,222,128,0.1); border-radius:10px; padding:14px 18px; font-size:13px; line-height:1.5; color:var(--text-dim); display:flex; gap:10px; align-items:flex-start; }
+  .insight .icon-i { flex-shrink:0; width:22px; height:22px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; background:var(--accent-glow); color:var(--accent); }
+  .insight strong { color:var(--text); }
+  .insight .num { font-family:var(--mono); font-weight:700; color:var(--text); }
+  .table-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin-bottom:32px; animation:fadeUp 0.5s ease both; }
+  .table-header { padding:18px 24px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+  .table-header h3 { font-size:15px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .table-header .icon { width:20px; height:20px; border-radius:5px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
+  .table-header .badge { font-size:11px; font-family:var(--mono); background:var(--surface-3); padding:4px 10px; border-radius:20px; color:var(--text-dim); }
+  table { width:100%; border-collapse:collapse; }
+  thead th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:1.2px; color:var(--text-muted); padding:12px 20px; border-bottom:1px solid var(--border); font-weight:500; }
+  thead th:not(:first-child):not(:nth-child(2)) { text-align:right; }
+  tbody td { padding:10px 20px; border-bottom:1px solid var(--border); font-size:13px; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody td:not(:first-child):not(:nth-child(2)) { text-align:right; font-family:var(--mono); font-size:13px; font-weight:700; }
+  tbody tr:hover { background:rgba(255,255,255,0.02); }
+  .positive { color:var(--accent); } .negative { color:var(--red); } .neutral { color:var(--text-dim); }
+
+  /* Hierarchical table styles */
+  .geo-row td { background:var(--surface-2) !important; font-weight:700 !important; border-top:2px solid var(--border); }
+  .geo-row td:first-child { font-size:13px; text-transform:uppercase; letter-spacing:1px; color:var(--text); }
+  .geo-row td:first-child .geo-flag { display:inline-flex; align-items:center; gap:8px; }
+  .geo-row td:first-child .geo-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); display:inline-block; }
+  .ts-row td:first-child { padding-left:48px; color:var(--text-dim); font-weight:500; font-size:12px; }
+  .ts-row td:nth-child(2) { font-family:var(--mono); font-weight:700; font-size:13px; }
+  .grand-total-row td { background:var(--surface-3) !important; font-weight:700 !important; border-top:3px solid var(--accent); font-size:14px !important; }
+  .grand-total-row td:first-child { color:var(--accent); font-size:14px !important; letter-spacing:1px; }
+
+  .total-row td { background:var(--surface-2) !important; font-weight:700 !important; border-top:2px solid var(--border); }
+  .tables-row { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:48px; }
+  .charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:48px; }
+  .chart-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px; animation:fadeUp 0.5s ease both; }
+  .chart-card h3 { font-size:15px; font-weight:600; margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+  .chart-card .icon { width:20px; height:20px; border-radius:5px; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
+  .chart-card canvas { width:100% !important; }
+  .chart-card-full { grid-column:1/-1; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @media(max-width:1024px){ .dashboard{padding:24px 20px} .kpi-strip{grid-template-columns:repeat(2,1fr)} .charts-grid,.tables-row{grid-template-columns:1fr} }
+  @media(max-width:600px){ .kpi-strip{grid-template-columns:1fr} .kpi-value{font-size:24px} .header{flex-direction:column;align-items:flex-start;gap:16px} }
+  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:3px}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">MGMX → TS (Geos)</div>
+      <h1>Traffic Source <span>by Geo Performance</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="period-badge">Period: <strong>February 2026</strong> · M2</div>
+    </div>
+  </div>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi-card green"><div class="kpi-label">Total Profit</div><div class="kpi-value">$227,112</div><div class="kpi-sub">All TS across all geos</div></div>
+    <div class="kpi-card blue"><div class="kpi-label">Total Cost</div><div class="kpi-value">$15,546</div><div class="kpi-sub">Media spend in Feb</div></div>
+    <div class="kpi-card amber"><div class="kpi-label">Overall ROI</div><div class="kpi-value">1,461%</div><div class="kpi-sub">Return on investment</div></div>
+    <div class="kpi-card purple"><div class="kpi-label">Active TS</div><div class="kpi-value">11</div><div class="kpi-sub">Sources with ≥$1 cost</div></div>
+    <div class="kpi-card cyan"><div class="kpi-label">Active Geos</div><div class="kpi-value">21</div><div class="kpi-sub">Countries with traffic</div></div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section-title"><span class="dot" style="background:var(--accent)"></span> Key Insights <span class="line"></span></div>
+  <div class="insights-bar">
+    <div class="insight"><div class="icon-i">▲</div><div><strong>PRX is the revenue king</strong> — <span class="num">$85,346</span> profit (38% of total) on <span class="num">$7,191</span> spend. Backbone of the portfolio.</div></div>
+    <div class="insight"><div class="icon-i">◆</div><div><strong>GSM has insane efficiency</strong> — <span class="num">$72,125</span> profit on just <span class="num">$559</span> spend = <span class="num">12,903%</span> ROI. Best ROI by far.</div></div>
+    <div class="insight"><div class="icon-i">▲</div><div><strong>PRX + GSM = 69% of all profit</strong> — Together <span class="num">$157K</span> on <span class="num">$7.7K</span> cost. These two sources dominate everything.</div></div>
+    <div class="insight"><div class="icon-i">◆</div><div><strong>US + PRX is the #1 combo</strong> — <span class="num">$34,604</span> profit. Single biggest geo+TS pair in the entire dataset.</div></div>
+    <div class="insight"><div class="icon-i">▲</div><div><strong>GSM is top ROI in 14 of 21 geos</strong> — In most geos GSM beats every other source by ROI. Scale opportunity everywhere.</div></div>
+    <div class="insight"><div class="icon-i">⚠</div><div><strong>HTA-IOS-3G is near-zero</strong> — <span class="num">$59</span> cost → <span class="num">$2</span> profit (3% ROI). Only runs in UK. Recommend pausing.</div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- MAIN TABLE: GEO → TRAFFIC SOURCE (hierarchical)       -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-title"><span class="dot" style="background:var(--blue)"></span> Geo → Traffic Source Breakdown <span class="line"></span></div>
+  <div class="table-card">
+    <div class="table-header"><h3><span class="icon" style="background:var(--blue-glow);color:var(--blue)">◈</span> Geo → Traffic Source (Cost ≥ $1)</h3><span class="badge">21 geos · 86 rows</span></div>
+    <table>
+      <thead><tr><th>Geo</th><th>Traffic Source</th><th>Cost</th><th>Profit</th><th>ROI</th></tr></thead>
+      <tbody>
+
+        <!-- US -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> US</span></td><td></td><td>$1,442</td><td class="positive">$45,237</td><td class="positive">3,138%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$1,035</td><td class="positive">$34,604</td><td class="positive">3,342%</td></tr>
+        <tr class="ts-row"><td></td><td>CD-IOS-3G</td><td>$226</td><td class="positive">$4,350</td><td class="positive">1,927%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$42</td><td class="positive">$4,222</td><td class="positive">9,969%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$70</td><td class="positive">$1,378</td><td class="positive">1,963%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$27</td><td class="positive">$547</td><td class="positive">2,047%</td></tr>
+        <tr class="ts-row"><td></td><td>ADO-IOS-3G</td><td>$41</td><td class="positive">$136</td><td class="neutral">332%</td></tr>
+
+        <!-- UK -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> UK</span></td><td></td><td>$4,007</td><td class="positive">$34,434</td><td class="positive">859%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$2,030</td><td class="positive">$15,799</td><td class="positive">778%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$39</td><td class="positive">$6,584</td><td class="positive">16,935%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$280</td><td class="positive">$5,125</td><td class="positive">1,828%</td></tr>
+        <tr class="ts-row"><td></td><td>CD-IOS-3G</td><td>$939</td><td class="positive">$3,768</td><td class="neutral">401%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$474</td><td class="positive">$1,784</td><td class="neutral">377%</td></tr>
+        <tr class="ts-row"><td></td><td>ADO-IOS-3G</td><td>$158</td><td class="positive">$1,120</td><td class="positive">708%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-MACOS-3G</td><td>$27</td><td class="positive">$140</td><td class="positive">524%</td></tr>
+        <tr class="ts-row"><td></td><td>ADO-iCloud</td><td>$1</td><td class="positive">$10</td><td class="positive">1,554%</td></tr>
+        <tr class="ts-row"><td></td><td>HTA-IOS-3G</td><td>$59</td><td class="neutral">$2</td><td class="negative">3%</td></tr>
+
+        <!-- DE -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> DE</span></td><td></td><td>$2,399</td><td class="positive">$26,209</td><td class="positive">1,093%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$85</td><td class="positive">$10,529</td><td class="positive">12,419%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$1,536</td><td class="positive">$10,338</td><td class="positive">673%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$325</td><td class="positive">$2,388</td><td class="positive">735%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$211</td><td class="positive">$1,945</td><td class="positive">919%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$234</td><td class="positive">$978</td><td class="neutral">419%</td></tr>
+        <tr class="ts-row"><td></td><td>CD-IOS-3G</td><td>$8</td><td class="positive">$2</td><td class="negative">29%</td></tr>
+
+        <!-- ES -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> ES</span></td><td></td><td>$1,066</td><td class="positive">$22,959</td><td class="positive">2,155%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$59</td><td class="positive">$8,449</td><td class="positive">14,268%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$414</td><td class="positive">$6,114</td><td class="positive">1,478%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$341</td><td class="positive">$5,735</td><td class="positive">1,683%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$171</td><td class="positive">$1,641</td><td class="positive">958%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$66</td><td class="positive">$776</td><td class="positive">1,181%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$15</td><td class="positive">$223</td><td class="positive">1,485%</td></tr>
+
+        <!-- NL -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> NL</span></td><td></td><td>$1,458</td><td class="positive">$18,721</td><td class="positive">1,284%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$31</td><td class="positive">$8,847</td><td class="positive">28,096%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$898</td><td class="positive">$6,142</td><td class="positive">684%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$458</td><td class="positive">$3,315</td><td class="positive">723%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$70</td><td class="positive">$391</td><td class="positive">559%</td></tr>
+
+        <!-- PL -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> PL</span></td><td></td><td>$1,560</td><td class="positive">$16,750</td><td class="positive">1,074%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$45</td><td class="positive">$6,689</td><td class="positive">14,829%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$497</td><td class="positive">$3,041</td><td class="positive">612%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$401</td><td class="positive">$2,979</td><td class="positive">744%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$227</td><td class="positive">$2,320</td><td class="positive">1,021%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$115</td><td class="positive">$1,138</td><td class="positive">988%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$275</td><td class="positive">$569</td><td class="neutral">207%</td></tr>
+
+        <!-- MX -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> MX</span></td><td></td><td>$427</td><td class="positive">$9,296</td><td class="positive">2,178%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$112</td><td class="positive">$4,136</td><td class="positive">3,697%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$33</td><td class="positive">$4,044</td><td class="positive">12,099%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$228</td><td class="positive">$643</td><td class="neutral">282%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$53</td><td class="positive">$473</td><td class="positive">889%</td></tr>
+
+        <!-- DK -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> DK</span></td><td></td><td>$349</td><td class="positive">$7,344</td><td class="positive">2,103%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$29</td><td class="positive">$5,082</td><td class="positive">17,261%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$94</td><td class="positive">$814</td><td class="positive">864%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$85</td><td class="positive">$759</td><td class="positive">895%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$141</td><td class="positive">$688</td><td class="neutral">490%</td></tr>
+
+        <!-- AT -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> AT</span></td><td></td><td>$380</td><td class="positive">$7,217</td><td class="positive">1,899%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$233</td><td class="positive">$3,137</td><td class="positive">1,349%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$38</td><td class="positive">$2,942</td><td class="positive">7,833%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$96</td><td class="positive">$819</td><td class="positive">854%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$14</td><td class="positive">$157</td><td class="positive">1,152%</td></tr>
+
+        <!-- FR -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> FR</span></td><td></td><td>$495</td><td class="positive">$7,173</td><td class="positive">1,450%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$41</td><td class="positive">$3,689</td><td class="positive">8,945%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$330</td><td class="positive">$2,831</td><td class="positive">858%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$123</td><td class="positive">$601</td><td class="neutral">487%</td></tr>
+
+        <!-- FI -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> FI</span></td><td></td><td>$361</td><td class="positive">$6,782</td><td class="positive">1,877%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$25</td><td class="positive">$3,908</td><td class="positive">15,411%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$251</td><td class="positive">$2,236</td><td class="positive">891%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$85</td><td class="positive">$621</td><td class="positive">731%</td></tr>
+
+        <!-- IT -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> IT</span></td><td></td><td>$305</td><td class="positive">$6,376</td><td class="positive">2,092%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$27</td><td class="positive">$2,378</td><td class="positive">8,753%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$38</td><td class="positive">$1,578</td><td class="positive">4,186%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$164</td><td class="positive">$1,308</td><td class="positive">795%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$74</td><td class="positive">$934</td><td class="positive">1,264%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$1</td><td class="positive">$132</td><td class="positive">8,978%</td></tr>
+
+        <!-- AU -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> AU</span></td><td></td><td>$363</td><td class="positive">$4,601</td><td class="positive">1,268%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$228</td><td class="positive">$3,291</td><td class="positive">1,442%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$58</td><td class="positive">$796</td><td class="positive">1,382%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$77</td><td class="positive">$505</td><td class="positive">657%</td></tr>
+
+        <!-- HU -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> HU</span></td><td></td><td>$56</td><td class="positive">$3,687</td><td class="positive">6,589%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$6</td><td class="positive">$1,813</td><td class="positive">31,917%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$34</td><td class="positive">$1,399</td><td class="positive">4,077%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$16</td><td class="positive">$465</td><td class="positive">2,967%</td></tr>
+
+        <!-- NZ -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> NZ</span></td><td></td><td>$311</td><td class="positive">$3,149</td><td class="positive">1,013%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$173</td><td class="positive">$1,949</td><td class="positive">1,129%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$109</td><td class="positive">$678</td><td class="positive">622%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$28</td><td class="positive">$521</td><td class="positive">1,848%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$1</td><td class="positive">$1</td><td class="neutral">78%</td></tr>
+
+        <!-- PT -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> PT</span></td><td></td><td>$134</td><td class="positive">$2,758</td><td class="positive">2,055%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$15</td><td class="positive">$1,232</td><td class="positive">8,105%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$51</td><td class="positive">$1,132</td><td class="positive">2,202%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$65</td><td class="positive">$392</td><td class="positive">599%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-WIFI</td><td>$2</td><td class="negative">−$2</td><td class="negative">-100%</td></tr>
+
+        <!-- CH -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> CH</span></td><td></td><td>$278</td><td class="positive">$2,345</td><td class="positive">844%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$24</td><td class="positive">$1,098</td><td class="positive">4,526%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$223</td><td class="positive">$992</td><td class="neutral">445%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$31</td><td class="positive">$256</td><td class="positive">838%</td></tr>
+
+        <!-- NO -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> NO</span></td><td></td><td>$106</td><td class="positive">$881</td><td class="positive">831%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$42</td><td class="positive">$355</td><td class="positive">856%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$63</td><td class="positive">$278</td><td class="neutral">438%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$1</td><td class="positive">$217</td><td class="positive">21,622%</td></tr>
+
+        <!-- IE -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> IE</span></td><td></td><td>$42</td><td class="positive">$474</td><td class="positive">1,122%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$12</td><td class="positive">$228</td><td class="positive">1,958%</td></tr>
+        <tr class="ts-row"><td></td><td>PA-IOS-3G</td><td>$1</td><td class="positive">$154</td><td class="positive">19,832%</td></tr>
+        <tr class="ts-row"><td></td><td>PRX</td><td>$28</td><td class="positive">$91</td><td class="neutral">323%</td></tr>
+        <tr class="ts-row"><td></td><td>PC-3G</td><td>$2</td><td class="positive">$2</td><td class="neutral">88%</td></tr>
+
+        <!-- SE -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> SE</span></td><td></td><td>$7</td><td class="positive">$174</td><td class="positive">2,510%</td></tr>
+        <tr class="ts-row"><td></td><td>GSM</td><td>$7</td><td class="positive">$174</td><td class="positive">2,510%</td></tr>
+
+        <!-- CA -->
+        <tr class="geo-row"><td><span class="geo-flag"><span class="geo-dot"></span> CA</span></td><td></td><td>$1</td><td class="negative">−$1</td><td class="negative">-100%</td></tr>
+        <tr class="ts-row"><td></td><td>iCloud</td><td>$1</td><td class="negative">−$1</td><td class="negative">-100%</td></tr>
+
+        <!-- GRAND TOTAL -->
+        <tr class="grand-total-row"><td><strong>GRAND TOTAL</strong></td><td></td><td>$15,546</td><td class="positive">$227,112</td><td class="positive">1,461%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- AGGREGATED TABLES                                       -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-title"><span class="dot" style="background:var(--purple)"></span> Aggregated Summary <span class="line"></span></div>
+  <div class="tables-row">
+    <div class="table-card">
+      <div class="table-header"><h3><span class="icon" style="background:var(--amber-glow);color:var(--amber)">T</span> Traffic Source — Aggregated</h3><span class="badge">11 sources</span></div>
+      <table>
+        <thead><tr><th>Traffic Source</th><th style="text-align:right">Cost</th><th>Profit</th><th>ROI</th></tr></thead>
+        <tbody>
+          <tr><td>PRX</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$7,191</td><td class="positive">$85,346</td><td class="positive">1,187%</td></tr>
+          <tr><td>GSM</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$559</td><td class="positive">$72,125</td><td class="positive">12,903%</td></tr>
+          <tr><td>PA-IOS-3G</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$3,897</td><td class="positive">$36,225</td><td class="positive">930%</td></tr>
+          <tr><td>iCloud</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1,163</td><td class="positive">$11,807</td><td class="positive">1,015%</td></tr>
+          <tr><td>CD-IOS-3G</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1,173</td><td class="positive">$8,120</td><td class="positive">692%</td></tr>
+          <tr><td>PC-WIFI</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$793</td><td class="positive">$6,854</td><td class="positive">864%</td></tr>
+          <tr><td>PC-3G</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$481</td><td class="positive">$4,159</td><td class="positive">865%</td></tr>
+          <tr><td>ADO-IOS-3G</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$199</td><td class="positive">$1,256</td><td class="positive">631%</td></tr>
+          <tr><td>PA-MACOS-3G</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$27</td><td class="positive">$140</td><td class="positive">519%</td></tr>
+          <tr><td>ADO-iCloud</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1</td><td class="positive">$10</td><td class="positive">1,000%</td></tr>
+          <tr><td>HTA-IOS-3G</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$59</td><td class="neutral">$2</td><td class="negative">3%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$15,546</td><td class="positive">$227,112</td><td class="positive">1,461%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-card">
+      <div class="table-header"><h3><span class="icon" style="background:var(--accent-glow);color:var(--accent)">G</span> Top Geos — Summary</h3><span class="badge">21 geos</span></div>
+      <table>
+        <thead><tr><th>Geo</th><th style="text-align:right">Cost</th><th>Profit</th><th>ROI</th></tr></thead>
+        <tbody>
+          <tr><td style="font-weight:600;text-transform:uppercase">US</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1,442</td><td class="positive">$45,237</td><td class="positive">3,138%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">UK</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$4,007</td><td class="positive">$34,434</td><td class="positive">859%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">DE</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$2,399</td><td class="positive">$26,209</td><td class="positive">1,093%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">ES</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1,066</td><td class="positive">$22,959</td><td class="positive">2,155%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">NL</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1,458</td><td class="positive">$18,721</td><td class="positive">1,284%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">PL</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1,560</td><td class="positive">$16,750</td><td class="positive">1,074%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">MX</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$427</td><td class="positive">$9,296</td><td class="positive">2,178%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">DK</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$349</td><td class="positive">$7,344</td><td class="positive">2,103%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">AT</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$380</td><td class="positive">$7,217</td><td class="positive">1,899%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">FR</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$495</td><td class="positive">$7,173</td><td class="positive">1,450%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">FI</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$361</td><td class="positive">$6,782</td><td class="positive">1,877%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">IT</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$305</td><td class="positive">$6,376</td><td class="positive">2,092%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">AU</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$363</td><td class="positive">$4,601</td><td class="positive">1,268%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">HU</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$56</td><td class="positive">$3,687</td><td class="positive">6,589%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">NZ</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$311</td><td class="positive">$3,149</td><td class="positive">1,013%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">PT</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$134</td><td class="positive">$2,758</td><td class="positive">2,055%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">CH</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$278</td><td class="positive">$2,345</td><td class="positive">844%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">NO</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$106</td><td class="positive">$881</td><td class="positive">831%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">IE</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$42</td><td class="positive">$474</td><td class="positive">1,122%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">SE</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$7</td><td class="positive">$174</td><td class="positive">2,510%</td></tr>
+          <tr><td style="font-weight:600;text-transform:uppercase">CA</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$1</td><td class="negative">−$1</td><td class="negative">-100%</td></tr>
+          <tr class="total-row"><td>TOTAL</td><td style="text-align:right;font-family:var(--mono);font-weight:700">$15,546</td><td class="positive">$227,112</td><td class="positive">1,461%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- CHARTS                                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-title"><span class="dot" style="background:var(--amber)"></span> Visual Analytics <span class="line"></span></div>
+  <div class="charts-grid">
+    <div class="chart-card"><h3><span class="icon" style="background:var(--accent-glow);color:var(--accent)">$</span> Profit by Traffic Source</h3><canvas id="chartTSProfit" height="300"></canvas></div>
+    <div class="chart-card"><h3><span class="icon" style="background:var(--blue-glow);color:var(--blue)">◉</span> Cost vs Profit — Top TS</h3><canvas id="chartCostProfit" height="300"></canvas></div>
+    <div class="chart-card chart-card-full"><h3><span class="icon" style="background:var(--amber-glow);color:var(--amber)">★</span> Top 15 Geo + TS Combinations by Profit</h3><canvas id="chartTop15" height="280"></canvas></div>
+    <div class="chart-card"><h3><span class="icon" style="background:var(--purple-glow);color:var(--purple)">G</span> GSM Profit by Geo (Best ROI Source)</h3><canvas id="chartGSM" height="300"></canvas></div>
+    <div class="chart-card"><h3><span class="icon" style="background:var(--cyan-glow);color:var(--cyan)">P</span> PRX Profit by Geo (Largest Source)</h3><canvas id="chartPRX" height="300"></canvas></div>
+    <div class="chart-card"><h3><span class="icon" style="background:var(--pink-glow);color:var(--pink)">%</span> Profit Share by Traffic Source</h3><canvas id="chartShare" height="300"></canvas></div>
+    <div class="chart-card"><h3><span class="icon" style="background:var(--amber-glow);color:var(--amber)">↗</span> ROI by Traffic Source</h3><canvas id="chartROI" height="300"></canvas></div>
+  </div>
+
+  <div style="text-align:center; padding:24px 0; border-top:1px solid var(--border); color:var(--text-muted); font-size:12px; font-family:var(--mono); letter-spacing:1px;">
+    MGMX → TS (GEOS) · FEBRUARY 2026 · TRAFFIC SOURCE PERFORMANCE BY GEO
+  </div>
+</div>
+
+<script>
+  Chart.defaults.color='#7A8299'; Chart.defaults.borderColor='rgba(255,255,255,0.06)'; Chart.defaults.font.family="'Outfit',sans-serif";
+  const C={green:'#4ADE80',blue:'#60A5FA',amber:'#FBBF24',purple:'#A78BFA',cyan:'#22D3EE',pink:'#F472B6',orange:'#FB923C',lime:'#A3E635',red:'#F87171',teal:'#2DD4BF',indigo:'#818CF8'};
+  const cA=[C.green,C.blue,C.amber,C.purple,C.cyan,C.pink,C.orange,C.lime,C.red,C.teal,C.indigo];
+
+  new Chart(document.getElementById('chartTSProfit'),{type:'bar',data:{labels:['PRX','GSM','PA-IOS-3G','iCloud','CD-IOS-3G','PC-WIFI','PC-3G','ADO-IOS-3G','PA-MACOS-3G'],datasets:[{data:[85346,72125,36225,11807,8120,6854,4159,1256,140],backgroundColor:cA.slice(0,9).map(c=>c+'33'),borderColor:cA.slice(0,9),borderWidth:1.5,borderRadius:6}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>'$'+x.raw.toLocaleString()}}},scales:{x:{ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(255,255,255,0.04)'}},y:{grid:{display:false},ticks:{font:{weight:600,size:11}}}}}});
+
+  new Chart(document.getElementById('chartCostProfit'),{type:'scatter',data:{datasets:[{label:'Traffic Sources',data:[{x:7191,y:85346},{x:559,y:72125},{x:3897,y:36225},{x:1163,y:11807},{x:1173,y:8120},{x:793,y:6854},{x:481,y:4159},{x:199,y:1256}],backgroundColor:[C.green+'99',C.amber+'99',C.blue+'99',C.purple+'99',C.cyan+'99',C.pink+'99',C.orange+'99',C.lime+'99'],borderColor:[C.green,C.amber,C.blue,C.purple,C.cyan,C.pink,C.orange,C.lime],borderWidth:2,pointRadius:[20,18,14,9,8,7,6,4]}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>{const n=['PRX','GSM','PA-IOS-3G','iCloud','CD-IOS-3G','PC-WIFI','PC-3G','ADO-IOS-3G'];return n[x.dataIndex]+': Cost $'+x.raw.x.toLocaleString()+' → Profit $'+x.raw.y.toLocaleString()}}}},scales:{x:{title:{display:true,text:'Cost ($)',font:{size:11}},ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(255,255,255,0.04)'}},y:{title:{display:true,text:'Profit ($)',font:{size:11}},ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+  new Chart(document.getElementById('chartTop15'),{type:'bar',data:{labels:['US+PRX','UK+PRX','DE+GSM','DE+PRX','NL+GSM','ES+GSM','PL+GSM','UK+GSM','NL+PA-IOS','ES+PA-IOS','ES+PRX','UK+iCloud','DK+GSM','US+CD-IOS','US+GSM'],datasets:[{label:'Profit',data:[34604,15799,10529,10338,8847,8449,6689,6584,6142,6114,5735,5125,5082,4350,4222],backgroundColor:cA.map(c=>c+'44'),borderColor:cA,borderWidth:1.5,borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>'$'+x.raw.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600},maxRotation:45}},y:{ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+  new Chart(document.getElementById('chartGSM'),{type:'bar',data:{labels:['DE','NL','ES','PL','UK','DK','MX','US','FI','FR','AT','IT','HU','PT','CH','IE','NO','SE'],datasets:[{data:[10529,8847,8449,6689,6584,5082,4044,4222,3908,3689,2942,2378,1813,1232,1098,228,217,174],backgroundColor:C.amber+'44',borderColor:C.amber,borderWidth:1.5,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>'$'+x.raw.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600}}},y:{ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+  new Chart(document.getElementById('chartPRX'),{type:'bar',data:{labels:['US','UK','DE','ES','NL','AU','PL','FR','CH','AT','DK','NZ','IT','MX','HU','PT','IE','NO'],datasets:[{data:[34604,15799,10338,5735,3315,3291,2979,2831,992,819,688,678,1578,473,465,392,91,278],backgroundColor:C.blue+'44',borderColor:C.blue,borderWidth:1.5,borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>'$'+x.raw.toLocaleString()}}},scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600}}},y:{ticks:{callback:v=>'$'+(v/1000)+'K'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+
+  new Chart(document.getElementById('chartShare'),{type:'doughnut',data:{labels:['PRX','GSM','PA-IOS-3G','iCloud','CD-IOS-3G','PC-WIFI','PC-3G','Other'],datasets:[{data:[85346,72125,36225,11807,8120,6854,4159,1408],backgroundColor:[C.green+'cc',C.amber+'cc',C.blue+'cc',C.purple+'cc',C.cyan+'cc',C.pink+'cc',C.orange+'cc','#4A516844'],borderColor:'transparent',borderWidth:2,hoverOffset:8}]},options:{responsive:true,cutout:'62%',plugins:{legend:{position:'right',labels:{padding:12,usePointStyle:true,pointStyle:'rectRounded',font:{size:11}}},tooltip:{callbacks:{label:x=>x.label+': $'+x.raw.toLocaleString()+' ('+Math.round(x.raw/2271)+'%)'}}}}});
+
+  new Chart(document.getElementById('chartROI'),{type:'bar',data:{labels:['GSM','PRX','iCloud','ADO-iCl','PA-IOS-3G','PC-WIFI','PC-3G','CD-IOS-3G','ADO-IOS-3G','PA-MAC'],datasets:[{data:[12903,1187,1015,1000,930,864,865,692,631,519],backgroundColor:function(x){return x.raw>2000?C.green+'55':x.raw>800?C.blue+'44':C.amber+'33'},borderColor:function(x){return x.raw>2000?C.green:x.raw>800?C.blue:C.amber},borderWidth:1.5,borderRadius:6}]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>x.raw.toLocaleString()+'%'}}},scales:{x:{grid:{display:false},ticks:{font:{size:10,weight:600},maxRotation:45}},y:{type:'logarithmic',ticks:{callback:v=>v.toLocaleString()+'%'},grid:{color:'rgba(255,255,255,0.04)'}}}}});
+</script>
+</body>
+</html>
