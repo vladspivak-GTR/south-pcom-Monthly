@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Overall Performance · Year Graph</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060c;--surface:#0e0e18;--card:#141420;--border:#1e1e30;
+  --text:#eaeaf4;--text2:#9898b0;--text3:#58586e;
+  --revenue:#3b82f6;--cost:#f59e0b;--profit:#22c55e;--collected:#a78bfa;--roi:#06b6d4;--cr:#f472b6;
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+.container{max-width:1400px;margin:0 auto;padding:0 32px}
+
+/* Header */
+.header{padding:48px 0 24px;text-align:center}
+.header h1{font-size:42px;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--revenue),var(--profit),var(--collected));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header .sub{font-size:14px;color:var(--text3);font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
+
+/* Summary strip */
+.summary{display:flex;justify-content:center;gap:32px;margin:28px 0 40px;flex-wrap:wrap}
+.sum-item{text-align:center}
+.sum-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
+.sum-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800}
+
+/* Chart container */
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;margin-bottom:32px}
+.chart-title{font-size:16px;font-weight:800;margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.chart-title .dot{width:8px;height:8px;border-radius:50%}
+
+/* SVG chart */
+.chart-svg{width:100%;overflow:visible}
+.grid-line{stroke:var(--border);stroke-width:1;stroke-dasharray:4 4}
+.axis-label{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--text3);font-weight:600}
+.month-label{font-family:'DM Sans',sans-serif;font-size:14px;fill:var(--text);font-weight:800}
+
+/* Lines */
+.chart-line{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.line-revenue{stroke:var(--revenue)}
+.line-cost{stroke:var(--cost)}
+.line-profit{stroke:var(--profit)}
+.line-collected{stroke:var(--collected)}
+
+/* Data points */
+.data-point{cursor:pointer;transition:r .2s}
+.data-point:hover{r:8}
+.glow-revenue{filter:drop-shadow(0 0 6px rgba(59,130,246,.5))}
+.glow-cost{filter:drop-shadow(0 0 6px rgba(245,158,11,.5))}
+.glow-profit{filter:drop-shadow(0 0 6px rgba(34,197,94,.5))}
+.glow-collected{filter:drop-shadow(0 0 6px rgba(167,139,250,.5))}
+
+/* Area fills */
+.area-fill{opacity:.06}
+
+/* Value labels on chart */
+.val-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-anchor:middle}
+
+/* Legend */
+.legend{display:flex;justify-content:center;gap:28px;margin-top:20px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:opacity .2s}
+.legend-item:hover{opacity:.7}
+.legend-dot{width:12px;height:12px;border-radius:4px}
+
+/* Month cards */
+.months-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:40px 0}
+.month-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.month-card:hover{border-color:rgba(59,130,246,.3);transform:translateY(-4px)}
+.month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.month-card:nth-child(1)::before{background:linear-gradient(90deg,var(--revenue),var(--profit))}
+.month-card:nth-child(2)::before{background:linear-gradient(90deg,var(--profit),var(--collected))}
+.month-card:nth-child(3)::before{background:linear-gradient(90deg,var(--collected),var(--roi))}
+.month-name{font-size:13px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+.month-metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.metric{padding:10px 12px;background:var(--surface);border-radius:10px}
+.metric-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.metric-val{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:800}
+.metric-val.rev{color:var(--revenue)}
+.metric-val.cost{color:var(--cost)}
+.metric-val.profit{color:var(--profit)}
+.metric-val.coll{color:var(--collected)}
+.metric-val.roi{color:var(--roi)}
+.metric-val.cr{color:var(--cr)}
+
+/* MoM badges */
+.mom{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:4px}
+.mom.up{color:var(--profit);background:rgba(34,197,94,.1)}
+.mom.down{color:#ef4444;background:rgba(239,68,68,.1)}
+
+/* ROI/CR secondary chart */
+.chart-secondary{margin-top:8px}
+
+/* Animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drawLine{from{stroke-dashoffset:2000}to{stroke-dashoffset:0}}
+.animate{animation:fadeUp .6s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+.draw{stroke-dasharray:2000;animation:drawLine 2s ease forwards}
+
+@media(max-width:900px){.months-grid{grid-template-columns:1fr}.summary{gap:16px}}
+
+/* Back to Hub */
+.back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#a0a0b8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
+.back-hub:hover{color:#eaeaf0;border-color:rgba(59,130,246,.3);background:rgba(10,10,15,.95)}
+.back-hub svg{width:16px;height:16px;flex-shrink:0}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Hub</a>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header animate">
+  <h1>2026 Performance Overview</h1>
+  <div class="sub">Monthly Trends · January — March 2026</div>
+</div>
+
+<!-- SUMMARY STRIP -->
+<div class="summary animate d1">
+  <div class="sum-item"><div class="sum-label">Q1 Revenue</div><div class="sum-val" style="color:var(--revenue)">$1,070,377</div></div>
+  <div class="sum-item"><div class="sum-label">Q1 Cost</div><div class="sum-val" style="color:var(--cost)">$82,825</div></div>
+  <div class="sum-item"><div class="sum-label">Q1 Profit</div><div class="sum-val" style="color:var(--profit)">$987,552</div></div>
+  <div class="sum-item"><div class="sum-label">Q1 Collected</div><div class="sum-val" style="color:var(--collected)">$907,653</div></div>
+  <div class="sum-item"><div class="sum-label">Avg ROI</div><div class="sum-val" style="color:var(--roi)">1,214%</div></div>
+  <div class="sum-item"><div class="sum-label">Avg CR</div><div class="sum-val" style="color:var(--cr)">0.05%</div></div>
+</div>
+
+<!-- MAIN CHART: Revenue / Cost / Profit / Collected -->
+<div class="chart-wrap animate d2">
+  <div class="chart-title">Revenue · Cost · Profit · Collected (USD)</div>
+  <svg class="chart-svg" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid meet">
+    <!-- Grid lines -->
+    <line x1="100" y1="60" x2="820" y2="60" class="grid-line"/>
+    <line x1="100" y1="130" x2="820" y2="130" class="grid-line"/>
+    <line x1="100" y1="200" x2="820" y2="200" class="grid-line"/>
+    <line x1="100" y1="270" x2="820" y2="270" class="grid-line"/>
+    <line x1="100" y1="340" x2="820" y2="340" class="grid-line"/>
+
+    <!-- Y axis labels -->
+    <text x="90" y="64" class="axis-label" text-anchor="end">$450K</text>
+    <text x="90" y="134" class="axis-label" text-anchor="end">$350K</text>
+    <text x="90" y="204" class="axis-label" text-anchor="end">$250K</text>
+    <text x="90" y="274" class="axis-label" text-anchor="end">$150K</text>
+    <text x="90" y="344" class="axis-label" text-anchor="end">$50K</text>
+
+    <!-- Month labels -->
+    <text x="220" y="380" class="month-label" text-anchor="middle">JAN</text>
+    <text x="460" y="380" class="month-label" text-anchor="middle">FEB</text>
+    <text x="700" y="380" class="month-label" text-anchor="middle">MAR</text>
+
+    <!-- Vertical month lines -->
+    <line x1="220" y1="55" x2="220" y2="345" stroke="var(--border)" stroke-width="1" opacity=".5"/>
+    <line x1="460" y1="55" x2="460" y2="345" stroke="var(--border)" stroke-width="1" opacity=".5"/>
+    <line x1="700" y1="55" x2="700" y2="345" stroke="var(--border)" stroke-width="1" opacity=".5"/>
+
+    <!-- SCALE: 0=$50K at y=340, $450K at y=60 => range 400K over 280px => 1K = 0.7px -->
+    <!-- Revenue: 408.8K, 293.0K, 368.6K => y: 60+(450-408.8)*.7=88.8, 60+(450-293)*.7=170, 60+(450-368.6)*.7=117 -->
+    <!-- Cost: 30.2K, 20.1K, 32.5K => y: 60+(450-30.2)*.7=354, 60+(450-20.1)*.7=361, 60+(450-32.5)*.7=352 -->
+    <!-- Profit: 378.6K, 272.8K, 336.1K => y: 60+(450-378.6)*.7=110, 60+(450-272.8)*.7=184, 60+(450-336.1)*.7=140 -->
+    <!-- Collected: 200.3K, 246.5K, 460.9K => y: 60+(450-200.3)*.7=235, 60+(450-246.5)*.7=202, 60+(450-460.9)*.7=53 -->
+
+    <!-- Area fills -->
+    <polygon points="220,89 460,170 700,117 700,345 460,345 220,345" fill="var(--revenue)" class="area-fill"/>
+    <polygon points="220,110 460,184 700,140 700,345 460,345 220,345" fill="var(--profit)" class="area-fill"/>
+
+    <!-- Revenue line -->
+    <polyline points="220,89 460,170 700,117" class="chart-line line-revenue draw"/>
+    <!-- Cost line -->
+    <polyline points="220,354 460,361 700,352" class="chart-line line-cost draw" stroke-width="2.5"/>
+    <!-- Profit line -->
+    <polyline points="220,110 460,184 700,140" class="chart-line line-profit draw"/>
+    <!-- Collected line -->
+    <polyline points="220,235 460,202 700,53" class="chart-line line-collected draw" stroke-dasharray="8 4"/>
+
+    <!-- Revenue points + labels -->
+    <circle cx="220" cy="89" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <circle cx="460" cy="170" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <circle cx="700" cy="117" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <text x="220" y="77" class="val-label" fill="var(--revenue)">$408.8K</text>
+    <text x="460" y="158" class="val-label" fill="var(--revenue)">$293.0K</text>
+    <text x="700" y="105" class="val-label" fill="var(--revenue)">$368.6K</text>
+
+    <!-- Cost points + labels -->
+    <circle cx="220" cy="354" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <circle cx="460" cy="361" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <circle cx="700" cy="352" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <text x="220" y="346" class="val-label" fill="var(--cost)">$30.2K</text>
+    <text x="460" y="353" class="val-label" fill="var(--cost)">$20.1K</text>
+    <text x="700" y="344" class="val-label" fill="var(--cost)">$32.5K</text>
+
+    <!-- Profit points + labels -->
+    <circle cx="220" cy="110" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <circle cx="460" cy="184" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <circle cx="700" cy="140" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <text x="220" y="126" class="val-label" fill="var(--profit)">$378.6K</text>
+    <text x="460" y="200" class="val-label" fill="var(--profit)">$272.8K</text>
+    <text x="700" y="156" class="val-label" fill="var(--profit)">$336.1K</text>
+
+    <!-- Collected points + labels -->
+    <circle cx="220" cy="235" r="6" fill="var(--collected)" class="data-point glow-collected"/>
+    <circle cx="460" cy="202" r="6" fill="var(--collected)" class="data-point glow-collected"/>
+    <circle cx="700" cy="53" r="6" fill="var(--collected)" class="data-point glow-collected"/>
+    <text x="220" y="252" class="val-label" fill="var(--collected)">$200.3K</text>
+    <text x="460" y="219" class="val-label" fill="var(--collected)">$246.5K</text>
+    <text x="700" y="46" class="val-label" fill="var(--collected)">$460.9K</text>
+  </svg>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--revenue)"></div>Revenue</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--cost)"></div>Cost</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--profit)"></div>Profit</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--collected);opacity:.7"></div>Collected (dashed)</div>
+  </div>
+</div>
+
+<!-- ROI & CR CHART -->
+<div class="chart-wrap animate d3">
+  <div class="chart-title">ROI & CR Trends</div>
+  <svg class="chart-svg chart-secondary" viewBox="0 0 900 220" preserveAspectRatio="xMidYMid meet">
+    <!-- Grid -->
+    <line x1="100" y1="40" x2="820" y2="40" class="grid-line"/>
+    <line x1="100" y1="90" x2="820" y2="90" class="grid-line"/>
+    <line x1="100" y1="140" x2="820" y2="140" class="grid-line"/>
+    <line x1="100" y1="190" x2="820" y2="190" class="grid-line"/>
+
+    <!-- Y axis - ROI -->
+    <text x="90" y="44" class="axis-label" text-anchor="end">1400%</text>
+    <text x="90" y="94" class="axis-label" text-anchor="end">1300%</text>
+    <text x="90" y="144" class="axis-label" text-anchor="end">1200%</text>
+    <text x="90" y="194" class="axis-label" text-anchor="end">1100%</text>
+
+    <!-- Y axis - CR (right side) -->
+    <text x="830" y="44" class="axis-label" text-anchor="start">0.07%</text>
+    <text x="830" y="94" class="axis-label" text-anchor="start">0.06%</text>
+    <text x="830" y="144" class="axis-label" text-anchor="start">0.05%</text>
+    <text x="830" y="194" class="axis-label" text-anchor="start">0.04%</text>
+
+    <!-- Month labels -->
+    <text x="220" y="215" class="month-label" text-anchor="middle">JAN</text>
+    <text x="460" y="215" class="month-label" text-anchor="middle">FEB</text>
+    <text x="700" y="215" class="month-label" text-anchor="middle">MAR</text>
+
+    <!-- ROI: 1254, 1354, 1034 => scale 1000-1400 over 150px -->
+    <!-- y = 190 - (val-1000)/400*150 -->
+    <!-- Jan: 190-(254/400*150)=190-95.25=94.75 -->
+    <!-- Feb: 190-(354/400*150)=190-132.75=57.25 -->
+    <!-- Mar: 190-(34/400*150)=190-12.75=177.25 -->
+
+    <!-- ROI line -->
+    <polyline points="220,95 460,57 700,177" class="chart-line draw" stroke="var(--roi)" stroke-width="3"/>
+    <circle cx="220" cy="95" r="6" fill="var(--roi)" class="data-point"/>
+    <circle cx="460" cy="57" r="6" fill="var(--roi)" class="data-point"/>
+    <circle cx="700" cy="177" r="6" fill="var(--roi)" class="data-point"/>
+    <text x="220" y="83" class="val-label" fill="var(--roi)">1,254%</text>
+    <text x="460" y="48" class="val-label" fill="var(--roi)">1,354%</text>
+    <text x="700" y="170" class="val-label" fill="var(--roi)">1,034%</text>
+
+    <!-- CR: 0.04, 0.06, 0.06 => scale 0.03-0.07 over 150px -->
+    <!-- y = 190 - (val-0.03)/0.04*150 -->
+    <!-- Jan: 190-(0.01/0.04*150)=190-37.5=152.5 -->
+    <!-- Feb: 190-(0.03/0.04*150)=190-112.5=77.5 -->
+    <!-- Mar: 190-(0.03/0.04*150)=190-112.5=77.5 -->
+
+    <!-- CR line (dashed) -->
+    <polyline points="220,152 460,78 700,78" class="chart-line draw" stroke="var(--cr)" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <circle cx="220" cy="152" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="460" cy="78" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="700" cy="78" r="5" fill="var(--cr)" class="data-point"/>
+    <text x="220" y="168" class="val-label" fill="var(--cr)">0.04%</text>
+    <text x="460" y="70" class="val-label" fill="var(--cr)">0.06%</text>
+    <text x="700" y="70" class="val-label" fill="var(--cr)">0.06%</text>
+  </svg>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--roi)"></div>ROI</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--cr)"></div>CR (dashed)</div>
+  </div>
+</div>
+
+<!-- MONTH DETAIL CARDS -->
+<div class="months-grid">
+  <div class="month-card animate d1">
+    <div class="month-name">January 2026</div>
+    <div class="month-metrics">
+      <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$408,761</div></div>
+      <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$30,187</div></div>
+      <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$378,575</div></div>
+      <div class="metric"><div class="metric-label">Collected</div><div class="metric-val coll">$200,290</div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,254%</div></div>
+      <div class="metric"><div class="metric-label">CR</div><div class="metric-val cr">0.04%</div></div>
+    </div>
+  </div>
+  <div class="month-card animate d2">
+    <div class="month-name">February 2026</div>
+    <div class="month-metrics">
+      <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$292,981 <span class="mom down">-28%</span></div></div>
+      <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$20,138 <span class="mom up">-33%</span></div></div>
+      <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$272,842 <span class="mom down">-28%</span></div></div>
+      <div class="metric"><div class="metric-label">Collected</div><div class="metric-val coll">$246,467 <span class="mom up">+23%</span></div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,354% <span class="mom up">+100</span></div></div>
+      <div class="metric"><div class="metric-label">CR</div><div class="metric-val cr">0.06% <span class="mom up">+50%</span></div></div>
+    </div>
+  </div>
+  <div class="month-card animate d3">
+    <div class="month-name">March 2026</div>
+    <div class="month-metrics">
+      <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$368,635 <span class="mom up">+26%</span></div></div>
+      <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$32,500 <span class="mom down">+61%</span></div></div>
+      <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$336,135 <span class="mom up">+23%</span></div></div>
+      <div class="metric"><div class="metric-label">Collected</div><div class="metric-val coll">$460,896 <span class="mom up">+87%</span></div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,034% <span class="mom down">-320</span></div></div>
+      <div class="metric"><div class="metric-label">CR</div><div class="metric-val cr">0.06% <span class="mom up">0%</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'JetBrains Mono',monospace">
+  2026 Overall Performance · Jan–Mar · Generated April 2026
+</div>
+</div>
+</body>
+</html>

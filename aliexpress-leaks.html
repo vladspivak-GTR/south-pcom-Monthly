@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AliExpress Leaks · March 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--surface:#12121a;--card:#1a1a26;--border:#262636;
+  --text:#e8e8f0;--text2:#a0a0b8;--text3:#606078;
+  --green:#22c55e;--green-bg:rgba(34,197,94,.08);--green-border:rgba(34,197,94,.15);
+  --red:#ef4444;--red-bg:rgba(239,68,68,.08);--red-border:rgba(239,68,68,.15);
+  --blue:#3b82f6;--purple:#a78bfa;--amber:#f59e0b;--cyan:#06b6d4;
+  --orange:#f97316;--orange-bg:rgba(249,115,22,.08);
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 28px}
+.header{padding:48px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:16px}
+.logo-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--red),var(--orange));display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:800;color:#fff}
+.logo h1{font-size:28px;font-weight:800;letter-spacing:-.03em}
+.logo .sub{font-size:12px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:2px}
+.badge{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red);padding:8px 16px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700}
+.alert-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(239,68,68,.12),rgba(249,115,22,.12));border:1px solid rgba(239,68,68,.2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;color:var(--red);letter-spacing:.5px;text-transform:uppercase;margin-top:8px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.kpi.visits::before{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.kpi.cost::before{background:linear-gradient(90deg,var(--red),var(--orange))}
+.kpi.campaigns::before{background:linear-gradient(90deg,var(--amber),var(--orange))}
+.kpi.types::before{background:linear-gradient(90deg,var(--purple),var(--blue))}
+.kpi-label{font-size:12px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.kpi-value{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;letter-spacing:-1px}
+.kpi-sub{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text3);margin-top:4px}
+
+.section{margin:40px 0;animation:fadeUp .6s ease both}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.section-title{font-size:20px;font-weight:800;letter-spacing:-.02em}
+
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{background:var(--surface);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:14px 16px;text-align:right;border-bottom:1px solid var(--border)}
+th:first-child{text-align:left}
+td{padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;text-align:right;border-bottom:1px solid rgba(255,255,255,.03)}
+td:first-child{text-align:left;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+.total-row td{background:rgba(239,68,68,.04);font-weight:700;border-top:2px solid var(--border)}
+
+/* Campaign tags */
+.tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.5px;margin-left:8px}
+.tag-mgmx{background:rgba(59,130,246,.12);color:var(--blue)}
+.tag-yenoti{background:rgba(20,184,166,.12);color:#14b8a6}
+.tag-spread{background:rgba(167,139,250,.12);color:var(--purple)}
+.tag-spirion{background:rgba(245,158,11,.12);color:var(--amber)}
+
+/* Bar visual */
+.bar-wrap{margin:24px 0}
+.bar-item{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.bar-name{width:200px;font-size:13px;font-weight:700;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:36px;background:var(--surface);border-radius:8px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:8px;display:flex;align-items:center;padding:0 14px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.bar-cost{width:80px;text-align:right;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--red);flex-shrink:0}
+
+/* Donut */
+.donut-section{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.donut-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+.donut-card h4{font-size:14px;font-weight:800;margin-bottom:16px}
+.donut-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.donut-row:last-child{border-bottom:none}
+.donut-label{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.donut-dot{width:10px;height:10px;border-radius:3px}
+.donut-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700}
+
+.insights{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:24px}
+.insights h3{font-size:15px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.insight-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.insight-item:last-child{border-bottom:none}
+.insight-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.insight-icon.warn{background:var(--red-bg);border:1px solid var(--red-border)}
+.insight-icon.info{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15)}
+.insight-icon.action{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.15)}
+.insight-text{font-size:13px;color:var(--text2);line-height:1.6}
+.insight-text strong{color:var(--text)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.kpi-value{font-size:24px}.header{flex-direction:column;align-items:flex-start}.donut-section{grid-template-columns:1fr}}
+@media(max-width:600px){.kpi-grid{grid-template-columns:1fr}}
+
+/* Back to Hub */
+.back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#a0a0b8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
+.back-hub:hover{color:#eaeaf0;border-color:rgba(59,130,246,.3);background:rgba(10,10,15,.95)}
+.back-hub svg{width:16px;height:16px;flex-shrink:0}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Hub</a>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">🔍</div>
+    <div>
+      <h1>AliExpress Leaks</h1>
+      <div class="sub">Budget Leak Tracker · March 2026</div>
+      <div class="alert-tag">⚠ Cost leak detected — no revenue generated</div>
+    </div>
+  </div>
+  <div class="badge">-$23.25 wasted</div>
+</div>
+
+<!-- KPIs -->
+<div class="kpi-grid">
+  <div class="kpi visits">
+    <div class="kpi-label">Total Leaked Visits</div>
+    <div class="kpi-value" style="color:var(--blue)">117,530</div>
+    <div class="kpi-sub">Across 4 campaigns</div>
+  </div>
+  <div class="kpi cost">
+    <div class="kpi-label">Total Cost Leaked</div>
+    <div class="kpi-value" style="color:var(--red)">-$23.25</div>
+    <div class="kpi-sub">$0 revenue generated</div>
+  </div>
+  <div class="kpi campaigns">
+    <div class="kpi-label">Campaigns Affected</div>
+    <div class="kpi-value" style="color:var(--amber)">4</div>
+    <div class="kpi-sub">3 MGMX · 1 Yenoti</div>
+  </div>
+  <div class="kpi types">
+    <div class="kpi-label">Companies Involved</div>
+    <div class="kpi-value" style="color:var(--purple)">2</div>
+    <div class="kpi-sub">Spread · Spirion</div>
+  </div>
+</div>
+
+<!-- CAMPAIGN TABLE -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-icon" style="background:var(--red-bg);border:1px solid var(--red-border)">📋</div>
+    <div class="section-title">Leaked Campaigns — Full Breakdown</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Campaign Name</th><th>Traffic</th><th>Company</th><th>Blog</th><th>Visits</th><th>Cost</th><th>% of Visits</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>dealingoo.com - [SPR] <span class="tag tag-mgmx">MGMX</span></td>
+          <td>MGMX</td><td><span class="tag tag-spread">SPREAD</span></td><td>dealingoo.com</td>
+          <td>85,965</td><td style="color:var(--red)">-$6.53</td><td>73.1%</td>
+        </tr>
+        <tr>
+          <td>dealstormzone.com - [DSZ] <span class="tag tag-mgmx">MGMX</span></td>
+          <td>MGMX</td><td><span class="tag tag-spread">SPREAD</span></td><td>dealstormzone.com</td>
+          <td>21,881</td><td style="color:var(--red)">-$7.03</td><td>18.6%</td>
+        </tr>
+        <tr>
+          <td>quickbuyvault.com - [QBV] 24 <span class="tag tag-mgmx">MGMX</span></td>
+          <td>MGMX</td><td><span class="tag tag-spirion">SPIRION</span></td><td>quickbuyvault.com</td>
+          <td>5,218</td><td style="color:var(--red)">-$6.37</td><td>4.4%</td>
+        </tr>
+        <tr>
+          <td>urbanbargainzone.com - [UGZ] <span class="tag tag-yenoti">YENOTI</span></td>
+          <td>Yenoti</td><td><span class="tag tag-spread">SPREAD</span></td><td>urbanbargainzone.com</td>
+          <td>4,466</td><td style="color:var(--red)">-$3.32</td><td>3.8%</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total</td><td></td><td></td><td></td>
+          <td>117,530</td><td style="color:var(--red)">-$23.25</td><td>100%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- VISUAL BREAKDOWN -->
+<div class="section">
+  <div class="section-head">
+    <div class="section-icon" style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15)">📊</div>
+    <div class="section-title">Visual Breakdown</div>
+  </div>
+
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px">
+    <h4 style="font-size:14px;font-weight:800;margin-bottom:16px">Visits by Campaign</h4>
+    <div class="bar-wrap">
+      <div class="bar-item">
+        <div class="bar-name">dealingoo.com</div>
+        <div class="bar-track"><div class="bar-fill" style="width:73.1%;background:linear-gradient(90deg,var(--blue),var(--purple))">85,965 visits (73.1%)</div></div>
+        <div class="bar-cost">-$6.53</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-name">dealstormzone.com</div>
+        <div class="bar-track"><div class="bar-fill" style="width:18.6%;background:linear-gradient(90deg,var(--cyan),var(--blue))">21,881 (18.6%)</div></div>
+        <div class="bar-cost">-$7.03</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-name">quickbuyvault.com</div>
+        <div class="bar-track"><div class="bar-fill" style="width:4.4%;background:linear-gradient(90deg,var(--amber),var(--orange));min-width:120px">5,218 (4.4%)</div></div>
+        <div class="bar-cost">-$6.37</div>
+      </div>
+      <div class="bar-item">
+        <div class="bar-name">urbanbargainzone.com</div>
+        <div class="bar-track"><div class="bar-fill" style="width:3.8%;background:linear-gradient(90deg,#14b8a6,var(--cyan));min-width:120px">4,466 (3.8%)</div></div>
+        <div class="bar-cost">-$3.32</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="donut-section">
+    <div class="donut-card">
+      <h4>By Traffic Type</h4>
+      <div class="donut-row">
+        <div class="donut-label"><div class="donut-dot" style="background:var(--blue)"></div>MGMX</div>
+        <div class="donut-val">113,064 visits · -$19.93</div>
+      </div>
+      <div class="donut-row">
+        <div class="donut-label"><div class="donut-dot" style="background:#14b8a6"></div>Yenoti</div>
+        <div class="donut-val">4,466 visits · -$3.32</div>
+      </div>
+    </div>
+    <div class="donut-card">
+      <h4>By Company</h4>
+      <div class="donut-row">
+        <div class="donut-label"><div class="donut-dot" style="background:var(--purple)"></div>Spread</div>
+        <div class="donut-val">112,312 visits · -$16.88</div>
+      </div>
+      <div class="donut-row">
+        <div class="donut-label"><div class="donut-dot" style="background:var(--amber)"></div>Spirion</div>
+        <div class="donut-val">5,218 visits · -$6.37</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:40px 0 24px;color:var(--text3);font-size:12px;border-top:1px solid var(--border);margin-top:40px;font-family:'JetBrains Mono',monospace">
+  AliExpress Leaks Dashboard · March 2026 · Generated April 2026
+</div>
+</div>
+</body>
+</html>

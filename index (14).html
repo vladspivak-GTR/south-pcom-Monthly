@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pcom South · Dashboard Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#06060c;--surface:#0c0c16;--card:#12121e;--card-hover:#181828;--border:#1c1c30;
+  --text:#eaeaf4;--text2:#9898b0;--text3:#58586e;
+  --blue:#3b82f6;--purple:#a78bfa;--green:#22c55e;--teal:#14b8a6;
+  --amber:#f59e0b;--red:#ef4444;--cyan:#06b6d4;--pink:#ec4899;--emerald:#10b981;
+}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* Animated background */
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:
+  linear-gradient(var(--border) 1px,transparent 1px),
+  linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:60px 60px}
+.bg-glow{position:fixed;z-index:0;pointer-events:none}
+.bg-glow.g1{width:600px;height:600px;top:-200px;left:-100px;background:radial-gradient(circle,rgba(59,130,246,.06),transparent 70%)}
+.bg-glow.g2{width:500px;height:500px;bottom:-150px;right:-100px;background:radial-gradient(circle,rgba(167,139,250,.05),transparent 70%)}
+.bg-glow.g3{width:400px;height:400px;top:40%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(20,184,166,.03),transparent 70%)}
+
+.container{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 28px}
+
+/* Header */
+.header{padding:64px 0 48px;text-align:center}
+.logo-row{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:16px}
+.logo-icon{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--blue),var(--purple),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:900;color:#fff;box-shadow:0 8px 32px rgba(59,130,246,.2)}
+.header h1{font-size:44px;font-weight:800;letter-spacing:-.04em;line-height:1.1}
+.header .sub{font-size:14px;color:var(--text3);font-weight:600;letter-spacing:4px;text-transform:uppercase;margin-top:12px}
+.header-line{width:100px;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple),var(--teal));margin:24px auto 0;border-radius:2px}
+
+/* Stats strip */
+.stats{display:flex;justify-content:center;gap:40px;margin:36px 0 48px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-val{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800}
+.stat-label{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+
+/* Section labels */
+.section-label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:20px;padding-left:4px}
+
+/* Dashboard cards */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:48px}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+
+.dash-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;display:flex;flex-direction:column;position:relative;overflow:hidden;text-decoration:none;color:var(--text);transition:all .35s cubic-bezier(.22,1,.36,1);cursor:pointer}
+.dash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:18px 18px 0 0;transition:height .35s}
+.dash-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.dash-card:hover::before{height:4px}
+
+/* Card accent colors */
+.dash-card.c-blue::before{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.dash-card.c-blue:hover{border-color:rgba(59,130,246,.15);background:var(--card-hover)}
+.dash-card.c-teal::before{background:linear-gradient(90deg,var(--teal),var(--cyan))}
+.dash-card.c-teal:hover{border-color:rgba(20,184,166,.15);background:var(--card-hover)}
+.dash-card.c-amber::before{background:linear-gradient(90deg,var(--amber),#f97316)}
+.dash-card.c-amber:hover{border-color:rgba(245,158,11,.15);background:var(--card-hover)}
+.dash-card.c-red::before{background:linear-gradient(90deg,var(--red),#f97316)}
+.dash-card.c-red:hover{border-color:rgba(239,68,68,.15);background:var(--card-hover)}
+.dash-card.c-green::before{background:linear-gradient(90deg,var(--green),var(--emerald))}
+.dash-card.c-green:hover{border-color:rgba(34,197,94,.15);background:var(--card-hover)}
+.dash-card.c-purple::before{background:linear-gradient(90deg,var(--purple),var(--pink))}
+.dash-card.c-purple:hover{border-color:rgba(167,139,250,.15);background:var(--card-hover)}
+
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;flex-shrink:0}
+.card-icon.i-blue{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.12)}
+.card-icon.i-teal{background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.12)}
+.card-icon.i-amber{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.12)}
+.card-icon.i-red{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.12)}
+.card-icon.i-green{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.12)}
+.card-icon.i-purple{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.12)}
+
+.card-title{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.card-desc{font-size:13px;color:var(--text2);line-height:1.5;flex:1}
+.card-tags{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+.card-tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--surface);color:var(--text3);border:1px solid var(--border)}
+.card-arrow{position:absolute;top:28px;right:24px;width:28px;height:28px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text3);transition:all .35s;font-size:14px}
+.dash-card:hover .card-arrow{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:var(--blue);transform:translateX(3px)}
+
+/* Footer */
+.footer{text-align:center;padding:40px 0 48px;border-top:1px solid var(--border);margin-top:16px}
+.footer-text{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3)}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.animate{animation:fadeUp .6s ease both}
+.d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}
+.d5{animation-delay:.25s}.d6{animation-delay:.3s}.d7{animation-delay:.35s}.d8{animation-delay:.4s}.d9{animation-delay:.45s}
+
+@media(max-width:768px){
+  .grid,.grid-3{grid-template-columns:1fr}
+  .header h1{font-size:30px}
+  .stats{gap:20px}
+  .stat-val{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<!-- Background effects -->
+<div class="bg-grid"></div>
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+<div class="bg-glow g3"></div>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="header animate">
+  <div class="logo-row">
+    <div class="logo-icon">PS</div>
+  </div>
+  <h1>Pcom South</h1>
+  <div class="sub">Monthly Dashboard Hub · 2026</div>
+  <div class="header-line"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats animate d1">
+  <div class="stat"><div class="stat-val" style="color:var(--green)">$336K</div><div class="stat-label">Mar Profit</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--blue)">$369K</div><div class="stat-label">Mar Revenue</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--purple)">$461K</div><div class="stat-label">Mar Collected</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--cyan)">1,034%</div><div class="stat-label">Mar ROI</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--amber)">8</div><div class="stat-label">Dashboards</div></div>
+</div>
+
+<!-- OVERVIEW -->
+<div class="section-label animate d2">Overview</div>
+<div class="grid grid-3 animate d2">
+  <a href="overall-2026.html" class="dash-card c-purple">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-purple">📈</div>
+    <div class="card-title">2026 Year Graph</div>
+    <div class="card-desc">Overall performance trends — Revenue, Cost, Profit, Collected, ROI & CR across Jan–Mar 2026</div>
+    <div class="card-tags"><span class="card-tag">Jan–Mar</span><span class="card-tag">All Metrics</span></div>
+  </a>
+  <a href="goals-focus.html" class="dash-card c-amber">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-amber">🎯</div>
+    <div class="card-title">Goals & Focus</div>
+    <div class="card-desc">March results vs targets + April plans. Profit targets, CR goals, network expansion, and focus areas</div>
+    <div class="card-tags"><span class="card-tag">Mar Results</span><span class="card-tag">Apr Plan</span></div>
+  </a>
+  <a href="collections-dashboard.html" class="dash-card c-green">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-green">💰</div>
+    <div class="card-title">Collections</div>
+    <div class="card-desc">Revenue collected by company — $461K in March (+89% MoM). Currency breakdown, portfolio share</div>
+    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">9 Companies</span></div>
+  </a>
+</div>
+
+<!-- MGMX -->
+<div class="section-label animate d4">MGMX — Profit & ROI</div>
+<div class="grid animate d4">
+  <a href="mgmx-dashboard.html" class="dash-card c-blue">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-blue">🏢</div>
+    <div class="card-title">MGMX Dashboard</div>
+    <div class="card-desc">Companies, Geos & Networks breakdown. $205K profit, 1,247% ROI. All companies with deep dives — Innovate, Spirion, Spread, Galatea</div>
+    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">Profit & ROI</span><span class="card-tag">4 Companies</span></div>
+  </a>
+  <a href="mgmx-ts-dashboard.html" class="dash-card c-blue">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-blue">📡</div>
+    <div class="card-title">MGMX Traffic Sources</div>
+    <div class="card-desc">Traffic source performance — GSM at $72K, 11 new WL/BL sources launched generating $108K+. Geo × Source drilldowns</div>
+    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">17+ Sources</span><span class="card-tag">Geo Drilldown</span></div>
+  </a>
+</div>
+
+<!-- YENOTI -->
+<div class="section-label animate d6">Yenoti — Profit & CR</div>
+<div class="grid animate d6">
+  <a href="yenoti-dashboard.html" class="dash-card c-teal">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-teal">🏢</div>
+    <div class="card-title">Yenoti Dashboard</div>
+    <div class="card-desc">Companies, Geos & Networks breakdown. $113K profit (+149%), CR 0.11%. Every company grew — Spirion +596%, Galatea +207%</div>
+    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">Profit & CR</span><span class="card-tag">4 Companies</span></div>
+  </a>
+  <a href="yenoti-ts-dashboard.html" class="dash-card c-teal">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-teal">📡</div>
+    <div class="card-title">Yenoti Traffic Sources</div>
+    <div class="card-desc">Traffic source performance — PRX family dominates ($66K). PRX at 0.29% CR. DE PRX-BL at 0.41% CR — highest in Yenoti</div>
+    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">12+ Sources</span><span class="card-tag">CR Analysis</span></div>
+  </a>
+</div>
+
+<!-- SPECIAL -->
+<div class="section-label animate d8">Special Reports</div>
+<div class="grid animate d8">
+  <a href="aliexpress-leaks.html" class="dash-card c-red">
+    <div class="card-arrow">→</div>
+    <div class="card-icon i-red">🔍</div>
+    <div class="card-title">AliExpress Leaks</div>
+    <div class="card-desc">Budget leak tracker — 117,530 visits with -$23.25 cost across 4 campaigns. Spread & Spirion affected</div>
+    <div class="card-tags"><span class="card-tag">March 2026</span><span class="card-tag">4 Campaigns</span><span class="card-tag">-$23.25</span></div>
+  </a>
+  <div class="dash-card" style="border-style:dashed;opacity:.4;cursor:default">
+    <div class="card-icon" style="background:var(--surface);border:1px solid var(--border)">➕</div>
+    <div class="card-title" style="color:var(--text3)">More Coming Soon</div>
+    <div class="card-desc" style="color:var(--text3)">Additional dashboards and reports will appear here as they're created</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer animate d9">
+  <div class="footer-text">Pcom South Dashboard Hub · Feb vs Mar 2026 · Generated April 2026</div>
+</div>
+
+</div>
+</body>
+</html>
