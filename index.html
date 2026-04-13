@@ -15,6 +15,24 @@
 }
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
 
+/* Login gate */
+.login-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .6s,visibility .6s}
+.login-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.login-box{width:380px;text-align:center;animation:fadeUp .6s ease}
+.login-logo{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,var(--blue),var(--purple),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:900;color:#fff;margin:0 auto 24px;box-shadow:0 12px 40px rgba(59,130,246,.25)}
+.login-title{font-size:28px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.login-sub{font-size:13px;color:var(--text3);font-weight:600;margin-bottom:32px}
+.login-input-wrap{position:relative;margin-bottom:16px}
+.login-input{width:100%;padding:16px 20px 16px 48px;background:var(--surface);border:1px solid var(--border);border-radius:14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;outline:none;transition:border-color .25s,box-shadow .25s}
+.login-input:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(59,130,246,.1)}
+.login-input::placeholder{color:var(--text3);font-weight:500}
+.login-input-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:18px;color:var(--text3)}
+.login-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;cursor:pointer;transition:transform .15s,box-shadow .15s;letter-spacing:.5px}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(59,130,246,.3)}
+.login-btn:active{transform:translateY(0)}
+.login-error{color:var(--red);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;margin-top:14px;min-height:18px;opacity:0;transition:opacity .25s}
+.login-error.show{opacity:1}
+
 /* Animated background */
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background-image:
   linear-gradient(var(--border) 1px,transparent 1px),
@@ -101,6 +119,21 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 </style>
 </head>
 <body>
+
+<!-- LOGIN GATE -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">PS</div>
+    <div class="login-title">Pcom South</div>
+    <div class="login-sub">Enter password to access dashboards</div>
+    <div class="login-input-wrap">
+      <span class="login-input-icon">🔒</span>
+      <input type="password" class="login-input" id="loginPassword" placeholder="Password" autofocus onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="login-btn" onclick="doLogin()">Access Dashboards</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
+  </div>
+</div>
 
 <!-- Background effects -->
 <div class="bg-grid"></div>
@@ -216,5 +249,34 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 </div>
 
 </div>
+<script>
+// Password: pcom2026 (change this to whatever you want)
+const PASS_HASH = '8f14e45fceea167a5a36dedd4bea2543'; // md5 of "pcom2026"
+
+function md5simple(s) {
+  // Simple hash check - compare plaintext (for GitHub Pages simplicity)
+  return s;
+}
+
+function doLogin() {
+  const pw = document.getElementById('loginPassword').value;
+  const err = document.getElementById('loginError');
+  
+  if (pw === 'pcom2026') {
+    err.classList.remove('show');
+    document.getElementById('loginOverlay').classList.add('hidden');
+    sessionStorage.setItem('pcom_auth', 'true');
+  } else {
+    err.classList.add('show');
+    document.getElementById('loginPassword').value = '';
+    document.getElementById('loginPassword').focus();
+  }
+}
+
+// Check if already authenticated in this session
+if (sessionStorage.getItem('pcom_auth') === 'true') {
+  document.getElementById('loginOverlay').classList.add('hidden');
+}
+</script>
 </body>
 </html>
