@@ -71,7 +71,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .dash-card:hover{border-color:transparent;transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .dash-card:hover::before{height:4px}
 
-/* Card accent colors */
 .dash-card.c-blue::before{background:linear-gradient(90deg,var(--blue),var(--cyan))}
 .dash-card.c-blue:hover{border-color:rgba(59,130,246,.15);background:var(--card-hover)}
 .dash-card.c-teal::before{background:linear-gradient(90deg,var(--teal),var(--cyan))}
@@ -100,11 +99,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .card-arrow{position:absolute;top:28px;right:24px;width:28px;height:28px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text3);transition:all .35s;font-size:14px}
 .dash-card:hover .card-arrow{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2);color:var(--blue);transform:translateX(3px)}
 
-/* Footer */
 .footer{text-align:center;padding:40px 0 48px;border-top:1px solid var(--border);margin-top:16px}
 .footer-text{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text3)}
 
-/* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .animate{animation:fadeUp .6s ease both}
 .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}
@@ -135,7 +132,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   </div>
 </div>
 
-<!-- Background effects -->
 <div class="bg-grid"></div>
 <div class="bg-glow g1"></div>
 <div class="bg-glow g2"></div>
@@ -143,7 +139,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 
 <div class="container">
 
-<!-- HEADER -->
 <div class="header animate">
   <div class="logo-row">
     <div class="logo-icon">PS</div>
@@ -153,13 +148,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   <div class="header-line"></div>
 </div>
 
-<!-- STATS -->
 <div class="stats animate d1">
-  <div class="stat"><div class="stat-val" style="color:var(--green)">$336K</div><div class="stat-label">Mar Profit</div></div>
-  <div class="stat"><div class="stat-val" style="color:var(--blue)">$369K</div><div class="stat-label">Mar Revenue</div></div>
-  <div class="stat"><div class="stat-val" style="color:var(--purple)">$461K</div><div class="stat-label">Mar Collected</div></div>
-  <div class="stat"><div class="stat-val" style="color:var(--cyan)">1,034%</div><div class="stat-label">Mar ROI</div></div>
-  <div class="stat"><div class="stat-val" style="color:var(--amber)">8</div><div class="stat-label">Dashboards</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--green)">$392.7K</div><div class="stat-label">Apr Profit</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--blue)">$431.5K</div><div class="stat-label">Apr Revenue</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--amber)">$38.8K</div><div class="stat-label">Apr Cost</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--cyan)">1,013%</div><div class="stat-label">Apr ROI</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--purple)">+17%</div><div class="stat-label">MoM Profit</div></div>
+  <div class="stat"><div class="stat-val" style="color:var(--pink)">7</div><div class="stat-label">Dashboards</div></div>
 </div>
 
 <!-- OVERVIEW -->
@@ -169,22 +164,22 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="card-arrow">→</div>
     <div class="card-icon i-purple">📈</div>
     <div class="card-title">2026 Year Graph</div>
-    <div class="card-desc">Overall performance trends — Revenue, Cost, Profit, Collected, ROI & CR across Jan–Mar 2026</div>
-    <div class="card-tags"><span class="card-tag">Jan–Mar</span><span class="card-tag">All Metrics</span></div>
+    <div class="card-desc">Overall performance trends — Revenue, Cost, Profit, ROI & CR across Jan–Apr 2026. YTD profit: $1.38M</div>
+    <div class="card-tags"><span class="card-tag">Jan–Apr</span><span class="card-tag">All Metrics</span></div>
   </a>
   <a href="goals-focus.html" class="dash-card c-amber">
     <div class="card-arrow">→</div>
     <div class="card-icon i-amber">🎯</div>
     <div class="card-title">Goals & Focus</div>
-    <div class="card-desc">March results vs targets + April plans. Profit targets, CR goals, network expansion, and focus areas</div>
-    <div class="card-tags"><span class="card-tag">Mar Results</span><span class="card-tag">Apr Plan</span></div>
+    <div class="card-desc">April results vs targets + May plans. Profit targets, CR goals, network expansion, and focus areas</div>
+    <div class="card-tags"><span class="card-tag">Apr Results</span><span class="card-tag">May Plan</span></div>
   </a>
-  <a href="collections-dashboard.html" class="dash-card c-green">
+  <a href="aliexpress-leaks.html" class="dash-card c-red">
     <div class="card-arrow">→</div>
-    <div class="card-icon i-green">💰</div>
-    <div class="card-title">Collections</div>
-    <div class="card-desc">Revenue collected by company — $461K in March (+89% MoM). Currency breakdown, portfolio share</div>
-    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">9 Companies</span></div>
+    <div class="card-icon i-red">🔍</div>
+    <div class="card-title">AliExpress Leaks</div>
+    <div class="card-desc">Budget leak tracker — 274,560 visits leaked with -$33.31 cost across 4 campaigns. Spread (3) + Innovate (1)</div>
+    <div class="card-tags"><span class="card-tag">April 2026</span><span class="card-tag">4 Campaigns</span><span class="card-tag">-$33.31</span></div>
   </a>
 </div>
 
@@ -195,15 +190,15 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="card-arrow">→</div>
     <div class="card-icon i-blue">🏢</div>
     <div class="card-title">MGMX Dashboard</div>
-    <div class="card-desc">Companies, Geos & Networks breakdown. $205K profit, 1,247% ROI. All companies with deep dives — Innovate, Spirion, Spread, Galatea</div>
-    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">Profit & ROI</span><span class="card-tag">4 Companies</span></div>
+    <div class="card-desc">Companies, Geos & Networks breakdown. $186K profit, 1,628% ROI. Spread surged +69%, Innovate cut deeply</div>
+    <div class="card-tags"><span class="card-tag">Mar vs Apr</span><span class="card-tag">Profit & ROI</span><span class="card-tag">5 Companies</span></div>
   </a>
   <a href="mgmx-ts-dashboard.html" class="dash-card c-blue">
     <div class="card-arrow">→</div>
     <div class="card-icon i-blue">📡</div>
     <div class="card-title">MGMX Traffic Sources</div>
-    <div class="card-desc">Traffic source performance — GSM at $72K, 11 new WL/BL sources launched generating $108K+. Geo × Source drilldowns</div>
-    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">17+ Sources</span><span class="card-tag">Geo Drilldown</span></div>
+    <div class="card-desc">Source performance — GSM at $76K (4,954% ROI). PC-WIFI surged +87%. PRX declined -28%. ADM-IOS new at 8,622% ROI</div>
+    <div class="card-tags"><span class="card-tag">Mar vs Apr</span><span class="card-tag">14 Sources</span><span class="card-tag">Geo Drilldown</span></div>
   </a>
 </div>
 
@@ -214,54 +209,27 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="card-arrow">→</div>
     <div class="card-icon i-teal">🏢</div>
     <div class="card-title">Yenoti Dashboard</div>
-    <div class="card-desc">Companies, Geos & Networks breakdown. $113K profit (+149%), CR 0.11%. Every company grew — Spirion +596%, Galatea +207%</div>
-    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">Profit & CR</span><span class="card-tag">4 Companies</span></div>
+    <div class="card-desc">Companies, Geos & Networks breakdown. $206K profit (+82%), CR 0.11%. impulsprom launched. All companies grew ~60%+</div>
+    <div class="card-tags"><span class="card-tag">Mar vs Apr</span><span class="card-tag">Profit & CR</span><span class="card-tag">6 Companies</span></div>
   </a>
   <a href="yenoti-ts-dashboard.html" class="dash-card c-teal">
     <div class="card-arrow">→</div>
     <div class="card-icon i-teal">📡</div>
     <div class="card-title">Yenoti Traffic Sources</div>
-    <div class="card-desc">Traffic source performance — PRX family dominates ($66K). PRX at 0.29% CR. DE PRX-BL at 0.41% CR — highest in Yenoti</div>
-    <div class="card-tags"><span class="card-tag">Feb vs Mar</span><span class="card-tag">12+ Sources</span><span class="card-tag">CR Analysis</span></div>
+    <div class="card-desc">Source performance — PRX #1 at $75K. HTA-IOS exploded +531% to $74K. 5 new sources launched at $48K combined</div>
+    <div class="card-tags"><span class="card-tag">Mar vs Apr</span><span class="card-tag">19 Sources</span><span class="card-tag">CR Analysis</span></div>
   </a>
 </div>
 
-<!-- SPECIAL -->
-<div class="section-label animate d8">Special Reports</div>
-<div class="grid animate d8">
-  <a href="aliexpress-leaks.html" class="dash-card c-red">
-    <div class="card-arrow">→</div>
-    <div class="card-icon i-red">🔍</div>
-    <div class="card-title">AliExpress Leaks</div>
-    <div class="card-desc">Budget leak tracker — 117,530 visits with -$23.25 cost across 4 campaigns. Spread & Spirion affected</div>
-    <div class="card-tags"><span class="card-tag">March 2026</span><span class="card-tag">4 Campaigns</span><span class="card-tag">-$23.25</span></div>
-  </a>
-  <div class="dash-card" style="border-style:dashed;opacity:.4;cursor:default">
-    <div class="card-icon" style="background:var(--surface);border:1px solid var(--border)">➕</div>
-    <div class="card-title" style="color:var(--text3)">More Coming Soon</div>
-    <div class="card-desc" style="color:var(--text3)">Additional dashboards and reports will appear here as they're created</div>
-  </div>
-</div>
-
-<!-- FOOTER -->
 <div class="footer animate d9">
-  <div class="footer-text">Pcom South Dashboard Hub · Feb vs Mar 2026 · Generated April 2026</div>
+  <div class="footer-text">Pcom South Dashboard Hub · Mar vs Apr 2026 · Generated May 2026</div>
 </div>
 
 </div>
 <script>
-// Password: pcom2026 (change this to whatever you want)
-const PASS_HASH = '8f14e45fceea167a5a36dedd4bea2543'; // md5 of "pcom2026"
-
-function md5simple(s) {
-  // Simple hash check - compare plaintext (for GitHub Pages simplicity)
-  return s;
-}
-
 function doLogin() {
   const pw = document.getElementById('loginPassword').value;
   const err = document.getElementById('loginError');
-  
   if (pw === 'pcom2026') {
     err.classList.remove('show');
     document.getElementById('loginOverlay').classList.add('hidden');
@@ -272,8 +240,6 @@ function doLogin() {
     document.getElementById('loginPassword').focus();
   }
 }
-
-// Check if already authenticated in this session
 if (sessionStorage.getItem('pcom_auth') === 'true') {
   document.getElementById('loginOverlay').classList.add('hidden');
 }

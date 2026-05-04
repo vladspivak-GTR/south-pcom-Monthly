@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MGMX Monthly Dashboard · Feb vs Mar 2026</title>
+<title>MGMX Monthly Dashboard · Mar vs Apr 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -17,8 +17,6 @@
 }
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;overflow-x:hidden}
 .mono{font-family:'JetBrains Mono',monospace}
-
-/* Layout */
 .container{max-width:1360px;margin:0 auto;padding:0 28px}
 .header{padding:48px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:1px solid var(--border)}
 .logo{display:flex;align-items:center;gap:16px}
@@ -27,8 +25,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;lin
 .logo .sub{font-size:12px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:2px}
 .badge{background:var(--accent-bg);border:1px solid rgba(59,130,246,.2);color:var(--blue);padding:8px 16px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
 .focus-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(167,139,250,.12));border:1px solid rgba(59,130,246,.2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;color:var(--purple);letter-spacing:.5px;text-transform:uppercase;margin-top:8px}
-
-/* KPI Cards */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
 .kpi{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
@@ -43,15 +39,11 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;lin
 .kpi-delta{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;padding:3px 8px;border-radius:6px}
 .kpi-delta.up{color:var(--green);background:var(--green-bg)}
 .kpi-delta.down{color:var(--red);background:var(--red-bg)}
-
-/* Section */
 .section{margin:40px 0;animation:fadeUp .6s ease both}
 .section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .section-title{font-size:20px;font-weight:800;letter-spacing:-.02em}
 .section-sub{font-size:13px;color:var(--text3);margin-left:auto}
-
-/* Tables */
 .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
 table{width:100%;border-collapse:collapse}
 th{background:var(--surface);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:14px 16px;text-align:right;border-bottom:1px solid var(--border)}
@@ -65,21 +57,12 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .col-m3{color:var(--text)}
 .pos{color:var(--green)}
 .neg{color:var(--red)}
-
-/* Bar */
-.bar-cell{position:relative;min-width:120px}
-.bar-bg{position:absolute;left:0;top:50%;transform:translateY(-50%);height:24px;border-radius:4px;opacity:.15}
-.bar-val{position:relative;z-index:1}
-
-/* Tabs */
 .tabs{display:flex;gap:4px;margin-bottom:20px;background:var(--surface);border-radius:12px;padding:4px;border:1px solid var(--border)}
 .tab{padding:10px 20px;border-radius:9px;font-size:13px;font-weight:700;color:var(--text3);cursor:pointer;transition:all .2s}
 .tab:hover{color:var(--text2)}
 .tab.active{background:var(--card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.3)}
 .tab-content{display:none}
 .tab-content.active{display:block}
-
-/* Insights */
 .insights{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:20px}
 .insights h3{font-size:15px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .insight-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.03)}
@@ -90,24 +73,10 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .insight-icon.action{background:var(--accent-bg);border:1px solid rgba(59,130,246,.2)}
 .insight-text{font-size:13px;color:var(--text2);line-height:1.6}
 .insight-text strong{color:var(--text)}
-
-/* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
-
-/* Responsive */
-@media(max-width:900px){
-  .kpi-grid{grid-template-columns:repeat(2,1fr)}
-  .kpi-value{font-size:24px}
-  .header{flex-direction:column;align-items:flex-start}
-}
-@media(max-width:600px){
-  .kpi-grid{grid-template-columns:1fr}
-  .table-wrap{overflow-x:auto}
-  .tabs{flex-wrap:wrap}
-}
-
-/* Back to Hub */
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.kpi-value{font-size:24px}.header{flex-direction:column;align-items:flex-start}}
+@media(max-width:600px){.kpi-grid{grid-template-columns:1fr}.table-wrap{overflow-x:auto}.tabs{flex-wrap:wrap}}
 .back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#a0a0b8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
 .back-hub:hover{color:#eaeaf0;border-color:rgba(59,130,246,.3);background:rgba(10,10,15,.95)}
 .back-hub svg{width:16px;height:16px;flex-shrink:0}
@@ -117,50 +86,48 @@ tr:hover td{background:rgba(255,255,255,.02)}
 <a href="index.html" class="back-hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Hub</a>
 <div class="container">
 
-<!-- HEADER -->
 <div class="header">
   <div class="logo">
     <div class="logo-icon">MX</div>
     <div>
       <h1>MGMX Monthly Dashboard</h1>
-      <div class="sub">Performance Report · Feb → Mar 2026</div>
+      <div class="sub">Performance Report · Mar → Apr 2026</div>
       <div class="focus-tag">◎ Focus: Profit & ROI</div>
     </div>
   </div>
-  <div class="badge">Month 2 vs Month 3 · 2026</div>
+  <div class="badge">Month 3 vs Month 4 · 2026</div>
 </div>
 
-<!-- TOP KPIs -->
 <div class="kpi-grid">
   <div class="kpi profit">
-    <div class="kpi-label">Total Profit (Mar)</div>
-    <div class="kpi-value" style="color:var(--green)">$205,215</div>
+    <div class="kpi-label">Total Profit (Apr)</div>
+    <div class="kpi-value" style="color:var(--green)">$186,458</div>
     <div class="kpi-row">
-      <span class="kpi-prev">Feb: $225,305</span>
-      <span class="kpi-delta down">▼ -8.9%</span>
+      <span class="kpi-prev">Mar: $205,215</span>
+      <span class="kpi-delta down">▼ -9.1%</span>
     </div>
   </div>
   <div class="kpi roi">
-    <div class="kpi-label">Overall ROI (Mar)</div>
-    <div class="kpi-value" style="color:var(--blue)">1,247%</div>
+    <div class="kpi-label">Overall ROI (Apr)</div>
+    <div class="kpi-value" style="color:var(--blue)">1,628%</div>
     <div class="kpi-row">
-      <span class="kpi-prev">Feb: 1,515%</span>
-      <span class="kpi-delta down">▼ -268pts</span>
+      <span class="kpi-prev">Mar: 1,248%</span>
+      <span class="kpi-delta up">▲ +380pts</span>
     </div>
   </div>
   <div class="kpi cost">
-    <div class="kpi-label">Total Cost (Mar)</div>
-    <div class="kpi-value" style="color:var(--amber)">$16,456</div>
+    <div class="kpi-label">Total Cost (Apr)</div>
+    <div class="kpi-value" style="color:var(--amber)">$11,456</div>
     <div class="kpi-row">
-      <span class="kpi-prev">Feb: $14,869</span>
-      <span class="kpi-delta down">▲ +10.7%</span>
+      <span class="kpi-prev">Mar: $16,444</span>
+      <span class="kpi-delta up">▼ -30.3%</span>
     </div>
   </div>
   <div class="kpi change">
     <div class="kpi-label">Profit Change</div>
-    <div class="kpi-value" style="color:var(--red)">-$20,113</div>
+    <div class="kpi-value" style="color:var(--red)">-$18,756</div>
     <div class="kpi-row">
-      <span class="kpi-prev">$225.3K → $205.2K</span>
+      <span class="kpi-prev">$205,215K → $186,458</span>
     </div>
   </div>
 </div>
@@ -170,58 +137,66 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <div class="section-head">
     <div class="section-icon" style="background:var(--accent-bg);border:1px solid rgba(59,130,246,.2)">🏢</div>
     <div class="section-title">All Companies Overview</div>
-    <div class="section-sub">Feb vs Mar · Profit & ROI</div>
+    <div class="section-sub">Mar vs Apr · Profit & ROI</div>
   </div>
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
           <th>Company</th>
-          <th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th>
           <th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th>
+          <th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th>
           <th>Profit Δ</th><th>ROI Δ</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Spirion</td>
-          <td class="col-m2">$2,878</td><td class="col-m2">$94,778</td><td class="col-m2">3,294%</td>
-          <td class="col-m3">$3,741</td><td class="col-m3">$96,630</td><td class="col-m3">2,583%</td>
-          <td class="pos">+$1,852 (+2.0%)</td><td class="neg">-711pts</td>
-        </tr>
-        <tr>
-          <td>Innovate</td>
-          <td class="col-m2">$6,268</td><td class="col-m2">$84,760</td><td class="col-m2">1,352%</td>
-          <td class="col-m3">$7,191</td><td class="col-m3">$61,594</td><td class="col-m3">857%</td>
-          <td class="neg">-$23,166 (-27.3%)</td><td class="neg">-495pts</td>
-        </tr>
-        <tr>
-          <td>Spread</td>
-          <td class="col-m2">$3,948</td><td class="col-m2">$36,783</td><td class="col-m2">932%</td>
-          <td class="col-m3">$3,648</td><td class="col-m3">$33,307</td><td class="col-m3">913%</td>
-          <td class="neg">-$3,476 (-9.5%)</td><td class="neg">-19pts</td>
-        </tr>
-        <tr>
-          <td>Galatea</td>
-          <td class="col-m2">$1,776</td><td class="col-m2">$8,983</td><td class="col-m2">506%</td>
-          <td class="col-m3">$1,876</td><td class="col-m3">$13,662</td><td class="col-m3">728%</td>
-          <td class="pos">+$4,679 (+52.1%)</td><td class="pos">+222pts</td>
-        </tr>
+    <td>Spirion</td>
+    <td class="col-m2">$3,747</td><td class="col-m2">$96,629</td><td class="col-m2">2,579%</td>
+    <td class="col-m3">$3,186</td><td class="col-m3">$88,389</td><td class="col-m3">2,774%</td>
+    <td class="neg">-$8,240 (-9%)</td>
+    <td class="pos">+196pts</td>
+  </tr><tr>
+    <td>Innovate</td>
+    <td class="col-m2">$7,165</td><td class="col-m2">$61,623</td><td class="col-m2">860%</td>
+    <td class="col-m3">$2,692</td><td class="col-m3">$26,577</td><td class="col-m3">987%</td>
+    <td class="neg">-$35,046 (-57%)</td>
+    <td class="pos">+127pts</td>
+  </tr><tr>
+    <td>Spread</td>
+    <td class="col-m2">$3,655</td><td class="col-m2">$33,301</td><td class="col-m2">911%</td>
+    <td class="col-m3">$4,170</td><td class="col-m3">$56,202</td><td class="col-m3">1,348%</td>
+    <td class="pos">+$22,901 (+69%)</td>
+    <td class="pos">+437pts</td>
+  </tr><tr>
+    <td>Galatea</td>
+    <td class="col-m2">$1,877</td><td class="col-m2">$13,662</td><td class="col-m2">728%</td>
+    <td class="col-m3">$1,304</td><td class="col-m3">$13,870</td><td class="col-m3">1,064%</td>
+    <td class="pos">+$208 (+2%)</td>
+    <td class="pos">+336pts</td>
+  </tr><tr>
+      <td>Omnia</td>
+      <td class="col-m2">—</td><td class="col-m2">—</td><td class="col-m2">—</td>
+      <td class="col-m3">$105</td><td class="col-m3">$1,421</td><td class="col-m3">1,359%</td>
+      <td class="pos">New</td><td class="pos">New</td>
+    </tr>
         <tr class="total-row">
           <td>Grand Total</td>
-          <td>$14,869</td><td>$225,305</td><td>1,515%</td>
-          <td>$16,456</td><td>$205,192</td><td>1,247%</td>
-          <td class="neg">-$20,113 (-8.9%)</td><td class="neg">-268pts</td>
+          <td>$16,444</td><td>$205,215</td><td>1,248%</td>
+          <td>$11,456</td><td>$186,458</td><td>1,628%</td>
+          <td class="neg">-$18,756 (-9.1%)</td>
+          <td class="pos">+380pts</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="insights">
     <h3>📊 Companies Insights & Actions</h3>
-    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>Innovate is the main drag</strong> — profit fell -$23.2K (-27.3%) while cost rose +$923. ROI collapsed from 1,352% to 857%. The rwd network lost -$17.8K and key geos like US (-$11.4K) and ES (-$7.9K) declined heavily. Urgent review needed on Innovate's traffic sources.</div></div>
-    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Spirion remains the profit king</strong> — $96.6K profit (+2%) on slightly higher spend. While ROI dipped from 3,294% to 2,583%, absolute profit still grew. Spirion is the portfolio anchor.</div></div>
-    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Galatea is the growth story</strong> — profit surged +52% ($9.0K → $13.7K) with ROI jumping from 506% to 728%. Scale Galatea spend further — this company has momentum.</div></div>
-    <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Reallocate Innovate rwd budget</strong> to Spirion noc/lbx and Galatea noc/wep where ROI is stronger and trending up. Consider pausing underperforming Innovate ES campaigns.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Spread is the breakout star</strong> — profit jumped +69% ($33.3K → $56.2K) and ROI surged from 911% to 1,348%. Cost grew only +14% to $4.2K, meaning Spread became dramatically more efficient. This is the company to scale next month.</div></div>
+    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>Innovate collapsed -57%</strong> ($61.6K → $26.6K) despite cost falling -62% to $2.7K. ROI actually improved (860% → 987%) because the unprofitable spend was cut, but absolute profit is the lowest in months. Question: is the cut deliberate or did campaigns die?</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Spirion remains rock solid</strong> at $88.4K profit (-9%) with ROI improving to 2,774%. Still the portfolio anchor — generates 47% of all MGMX profit on just 28% of the spend.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Galatea kept pace</strong> ($13.7K → $13.9K, +2%) while cutting cost -31%. ROI jumped from 728% to 1,064%. Galatea is more efficient now than ever — still a growth candidate.</div></div>
+    <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: The Innovate question is the #1 priority.</strong> If the cut was deliberate, no problem — overall portfolio efficiency improved (ROI 1,248% → 1,628%). If campaigns silently died, we lost $35K. Audit Innovate's noc spend specifically (dropped from $3,980 to $1,488). Reallocate any freed budget to Spread (+$22K MoM, ROI 1,348%) and Galatea wep (+5,587% ROI).</div></div>
   </div>
 </div>
 
@@ -230,40 +205,144 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <div class="section-head">
     <div class="section-icon" style="background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15)">🌍</div>
     <div class="section-title">Geo Performance — All Companies</div>
-    <div class="section-sub">Top geos by profit</div>
+    <div class="section-sub">Top geos by April profit</div>
   </div>
   <div class="table-wrap">
     <table>
-      <thead>
-        <tr><th>Geo</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr>
-      </thead>
+      <thead><tr><th>Geo</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead>
       <tbody>
-        <tr><td>🇵🇱 PL</td><td class="col-m2">$1,560</td><td class="col-m2">$16,750</td><td class="col-m2">1,074%</td><td>$2,426</td><td>$39,277</td><td>1,619%</td><td class="pos">+$22,527 (+134%)</td></tr>
-        <tr><td>🇺🇸 US</td><td class="col-m2">$1,442</td><td class="col-m2">$45,237</td><td class="col-m2">3,138%</td><td>$725</td><td>$32,863</td><td>4,532%</td><td class="neg">-$12,374 (-27%)</td></tr>
-        <tr><td>🇩🇪 DE</td><td class="col-m2">$2,399</td><td class="col-m2">$26,209</td><td class="col-m2">1,093%</td><td>$3,064</td><td>$24,372</td><td>796%</td><td class="neg">-$1,837 (-7%)</td></tr>
-        <tr><td>🇳🇱 NL</td><td class="col-m2">$1,458</td><td class="col-m2">$18,721</td><td class="col-m2">1,284%</td><td>$2,277</td><td>$21,851</td><td>959%</td><td class="pos">+$3,130 (+17%)</td></tr>
-        <tr><td>🇬🇧 UK</td><td class="col-m2">$3,330</td><td class="col-m2">$32,627</td><td class="col-m2">980%</td><td>$2,165</td><td>$21,723</td><td>1,003%</td><td class="neg">-$10,904 (-33%)</td></tr>
-        <tr><td>🇪🇸 ES</td><td class="col-m2">$1,066</td><td class="col-m2">$22,959</td><td class="col-m2">2,155%</td><td>$1,813</td><td>$12,622</td><td>696%</td><td class="neg">-$10,337 (-45%)</td></tr>
-        <tr><td>🇫🇷 FR</td><td class="col-m2">$495</td><td class="col-m2">$7,173</td><td class="col-m2">1,450%</td><td>$580</td><td>$9,647</td><td>1,664%</td><td class="pos">+$2,474 (+34%)</td></tr>
-        <tr><td>🇲🇽 MX</td><td class="col-m2">$427</td><td class="col-m2">$9,296</td><td class="col-m2">2,178%</td><td>$268</td><td>$6,865</td><td>2,562%</td><td class="neg">-$2,431 (-26%)</td></tr>
-        <tr><td>🇩🇰 DK</td><td class="col-m2">$349</td><td class="col-m2">$7,344</td><td class="col-m2">2,103%</td><td>$630</td><td>$6,384</td><td>1,014%</td><td class="neg">-$960 (-13%)</td></tr>
-        <tr><td>🇮🇹 IT</td><td class="col-m2">$305</td><td class="col-m2">$6,376</td><td class="col-m2">2,092%</td><td>$381</td><td>$6,219</td><td>1,634%</td><td class="neg">-$157 (-2%)</td></tr>
-        <tr><td>🇫🇮 FI</td><td class="col-m2">$361</td><td class="col-m2">$6,782</td><td class="col-m2">1,877%</td><td>$344</td><td>$4,827</td><td>1,404%</td><td class="neg">-$1,955 (-29%)</td></tr>
-        <tr><td>🇦🇹 AT</td><td class="col-m2">$380</td><td class="col-m2">$7,217</td><td class="col-m2">1,899%</td><td>$547</td><td>$4,660</td><td>853%</td><td class="neg">-$2,557 (-35%)</td></tr>
-        <tr><td>🇦🇺 AU</td><td class="col-m2">$363</td><td class="col-m2">$4,601</td><td class="col-m2">1,268%</td><td>$445</td><td>$4,570</td><td>1,028%</td><td class="neg">-$31 (-1%)</td></tr>
-        <tr><td>🇳🇿 NZ</td><td class="col-m2">$311</td><td class="col-m2">$3,149</td><td class="col-m2">1,013%</td><td>$392</td><td>$3,604</td><td>919%</td><td class="pos">+$455 (+14%)</td></tr>
-        <tr><td>🇨🇭 CH</td><td class="col-m2">$278</td><td class="col-m2">$2,345</td><td class="col-m2">844%</td><td>$152</td><td>$2,832</td><td>1,860%</td><td class="pos">+$487 (+21%)</td></tr>
-        <tr><td>🇵🇹 PT</td><td class="col-m2">$134</td><td class="col-m2">$2,758</td><td class="col-m2">2,055%</td><td>$147</td><td>$2,091</td><td>1,424%</td><td class="neg">-$667 (-24%)</td></tr>
-        <tr class="total-row"><td>Total / Median</td><td>$14,869</td><td>$224,826</td><td>1,664%</td><td>$16,457</td><td>$205,195</td><td>1,216%</td><td class="neg">-$19,631</td></tr>
+        <tr>
+    <td>🇵🇱 PL</td>
+    <td class="col-m2">$2,427</td><td class="col-m2">$39,278</td><td class="col-m2">1,619%</td>
+    <td class="col-m3">$3,219</td><td class="col-m3">$49,280</td><td class="col-m3">1,531%</td>
+    <td class="pos">+$10,002 (+25%)</td>
+    <td class="neg">-88pts</td>
+  </tr><tr>
+    <td>🇺🇸 US</td>
+    <td class="col-m2">$713</td><td class="col-m2">$32,877</td><td class="col-m2">4,612%</td>
+    <td class="col-m3">$534</td><td class="col-m3">$23,794</td><td class="col-m3">4,456%</td>
+    <td class="neg">-$9,084 (-28%)</td>
+    <td class="neg">-156pts</td>
+  </tr><tr>
+    <td>🇩🇪 DE</td>
+    <td class="col-m2">$3,066</td><td class="col-m2">$24,370</td><td class="col-m2">795%</td>
+    <td class="col-m3">$1,686</td><td class="col-m3">$20,451</td><td class="col-m3">1,213%</td>
+    <td class="neg">-$3,919 (-16%)</td>
+    <td class="pos">+419pts</td>
+  </tr><tr>
+    <td>🇮🇹 IT</td>
+    <td class="col-m2">$377</td><td class="col-m2">$6,222</td><td class="col-m2">1,649%</td>
+    <td class="col-m3">$435</td><td class="col-m3">$19,855</td><td class="col-m3">4,568%</td>
+    <td class="pos">+$13,632 (+219%)</td>
+    <td class="pos">+2,918pts</td>
+  </tr><tr>
+    <td>🇬🇧 UK</td>
+    <td class="col-m2">$2,144</td><td class="col-m2">$21,746</td><td class="col-m2">1,014%</td>
+    <td class="col-m3">$1,209</td><td class="col-m3">$15,921</td><td class="col-m3">1,317%</td>
+    <td class="neg">-$5,825 (-27%)</td>
+    <td class="pos">+302pts</td>
+  </tr><tr>
+    <td>🇪🇸 ES</td>
+    <td class="col-m2">$1,825</td><td class="col-m2">$12,612</td><td class="col-m2">691%</td>
+    <td class="col-m3">$824</td><td class="col-m3">$15,457</td><td class="col-m3">1,877%</td>
+    <td class="pos">+$2,845 (+23%)</td>
+    <td class="pos">+1,186pts</td>
+  </tr><tr>
+    <td>🇳🇱 NL</td>
+    <td class="col-m2">$2,281</td><td class="col-m2">$21,849</td><td class="col-m2">958%</td>
+    <td class="col-m3">$1,460</td><td class="col-m3">$14,037</td><td class="col-m3">962%</td>
+    <td class="neg">-$7,812 (-36%)</td>
+    <td class="pos">+4pts</td>
+  </tr><tr>
+    <td>🇫🇷 FR</td>
+    <td class="col-m2">$582</td><td class="col-m2">$9,646</td><td class="col-m2">1,657%</td>
+    <td class="col-m3">$465</td><td class="col-m3">$5,575</td><td class="col-m3">1,198%</td>
+    <td class="neg">-$4,071 (-42%)</td>
+    <td class="neg">-460pts</td>
+  </tr><tr>
+    <td>🇲🇽 MX</td>
+    <td class="col-m2">$269</td><td class="col-m2">$6,864</td><td class="col-m2">2,554%</td>
+    <td class="col-m3">$276</td><td class="col-m3">$3,666</td><td class="col-m3">1,331%</td>
+    <td class="neg">-$3,198 (-47%)</td>
+    <td class="neg">-1,223pts</td>
+  </tr><tr>
+    <td>🇳🇿 NZ</td>
+    <td class="col-m2">$392</td><td class="col-m2">$3,604</td><td class="col-m2">919%</td>
+    <td class="col-m3">$290</td><td class="col-m3">$3,550</td><td class="col-m3">1,225%</td>
+    <td class="neg">-$54 (-2%)</td>
+    <td class="pos">+306pts</td>
+  </tr><tr>
+    <td>🇩🇰 DK</td>
+    <td class="col-m2">$631</td><td class="col-m2">$6,382</td><td class="col-m2">1,011%</td>
+    <td class="col-m3">$446</td><td class="col-m3">$3,490</td><td class="col-m3">783%</td>
+    <td class="neg">-$2,892 (-45%)</td>
+    <td class="neg">-228pts</td>
+  </tr><tr>
+    <td>🇦🇹 AT</td>
+    <td class="col-m2">$547</td><td class="col-m2">$4,660</td><td class="col-m2">852%</td>
+    <td class="col-m3">$129</td><td class="col-m3">$3,266</td><td class="col-m3">2,524%</td>
+    <td class="neg">-$1,394 (-30%)</td>
+    <td class="pos">+1,671pts</td>
+  </tr><tr>
+    <td>🇵🇹 PT</td>
+    <td class="col-m2">$147</td><td class="col-m2">$2,091</td><td class="col-m2">1,424%</td>
+    <td class="col-m3">$54</td><td class="col-m3">$2,588</td><td class="col-m3">4,813%</td>
+    <td class="pos">+$497 (+24%)</td>
+    <td class="pos">+3,389pts</td>
+  </tr><tr>
+    <td>🇨🇭 CH</td>
+    <td class="col-m2">$153</td><td class="col-m2">$2,831</td><td class="col-m2">1,856%</td>
+    <td class="col-m3">$77</td><td class="col-m3">$2,397</td><td class="col-m3">3,106%</td>
+    <td class="neg">-$434 (-15%)</td>
+    <td class="pos">+1,250pts</td>
+  </tr><tr>
+    <td>🇦🇺 AU</td>
+    <td class="col-m2">$446</td><td class="col-m2">$4,568</td><td class="col-m2">1,024%</td>
+    <td class="col-m3">$301</td><td class="col-m3">$1,493</td><td class="col-m3">496%</td>
+    <td class="neg">-$3,076 (-67%)</td>
+    <td class="neg">-528pts</td>
+  </tr><tr>
+    <td>🇫🇮 FI</td>
+    <td class="col-m2">$344</td><td class="col-m2">$4,826</td><td class="col-m2">1,403%</td>
+    <td class="col-m3">$52</td><td class="col-m3">$1,410</td><td class="col-m3">2,692%</td>
+    <td class="neg">-$3,416 (-71%)</td>
+    <td class="pos">+1,289pts</td>
+  </tr><tr>
+    <td>🇳🇴 NO</td>
+    <td class="col-m2">$86</td><td class="col-m2">$435</td><td class="col-m2">508%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$183</td><td class="col-m3">67,626%</td>
+    <td class="neg">-$252 (-58%)</td>
+    <td class="pos">+67,118pts</td>
+  </tr><tr>
+    <td>🇸🇪 SE</td>
+    <td class="col-m2">$5</td><td class="col-m2">$118</td><td class="col-m2">2,435%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$25</td><td class="col-m3">62,975%</td>
+    <td class="neg">-$93 (-79%)</td>
+    <td class="pos">+60,540pts</td>
+  </tr><tr>
+    <td>🇮🇪 IE</td>
+    <td class="col-m2">$10</td><td class="col-m2">$104</td><td class="col-m2">1,018%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$6</td><td class="col-m3">0%</td>
+    <td class="neg">-$98 (-95%)</td>
+    <td class="neg">-1,018pts</td>
+  </tr><tr>
+    <td>🇭🇺 HU</td>
+    <td class="col-m2">$0</td><td class="col-m2">$132</td><td class="col-m2">73,289%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$-0</td><td class="col-m3">-100%</td>
+    <td class="neg">-$132 (-100%)</td>
+    <td class="neg">-73,389pts</td>
+  </tr>
+        <tr class="total-row"><td>Grand Total</td><td>$16,444</td><td>$205,215</td><td>1,248%</td><td>$11,456</td><td>$186,458</td><td>1,628%</td><td class="neg">-$18,756</td><td class="pos">+380pts</td></tr>
       </tbody>
     </table>
   </div>
   <div class="insights">
     <h3>🌍 Geo Insights & Actions</h3>
-    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Poland exploded +134%</strong> ($16.8K → $39.3K) — now the #1 geo, overtaking US. ROI improved from 1,074% to 1,619%. PL is the clear winner this month — increase budget allocation here.</div></div>
-    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>ES collapsed -45%</strong> (-$10.3K) and UK fell -33% (-$10.9K). Both geos saw cost maintained or increased while profit dropped sharply. ROI in ES cratered from 2,155% to 696%.</div></div>
-    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>US ROI actually improved</strong> despite profit drop — went from 3,138% to 4,532% on less spend ($1.4K→$725). Very efficient. Consider carefully scaling US back up.</div></div>
-    <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Shift ES/UK budget to PL and FR.</strong> France grew +34% with improving ROI (1,450%→1,664%). Switzerland doubled ROI to 1,860%. These are the growth corridors.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>PL stayed on top</strong> ($39.3K → $49.3K, +25%) — largest geo by far, generating 26% of MGMX profit. Cost grew with it, ROI held strong at 1,531%. PL is mature and reliable.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>IT exploded +219%</strong> ($6.2K → $19.9K) on similar cost — ROI surged from 1,649% to 4,568%. Italy is the hidden gem of April. Find what changed and double down.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>ES turned around +23%</strong> ($12.6K → $15.5K) with cost halved. ROI jumped 691% → 1,877%. After last month's collapse, ES is recovering nicely. AT (+2,524% ROI), PT (+4,813% ROI) and CH (+3,106% ROI) all became dramatically more efficient.</div></div>
+    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>NL declined -36%</strong> (-$7.8K) and US fell -28% (-$9.1K). Both kept their ROI but lost volume. UK also dropped -27% (-$5.8K). These mature geos are losing momentum — investigate before they keep slipping.</div></div>
+    <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Push IT spend from $435 to $800+</strong> while ROI is at 4,568%. Reduce DK (ROI 783%, declining) and AU (ROI 496%, halved). Test new IT × br/wep combinations — they're the engine networks scaling well.</div></div>
   </div>
 </div>
 
@@ -272,34 +351,89 @@ tr:hover td{background:rgba(255,255,255,.02)}
   <div class="section-head">
     <div class="section-icon" style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.15)">🔗</div>
     <div class="section-title">Network Performance — All Companies</div>
-    <div class="section-sub">Top networks by profit</div>
+    <div class="section-sub">Top networks by April profit</div>
   </div>
   <div class="table-wrap">
     <table>
-      <thead>
-        <tr><th>Network</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr>
-      </thead>
+      <thead><tr><th>Network</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead>
       <tbody>
-        <tr><td>noc</td><td class="col-m2">$4,387</td><td class="col-m2">$83,639</td><td class="col-m2">1,906%</td><td>$6,542</td><td>$80,167</td><td>1,225%</td><td class="neg">-$3,472 (-4%)</td></tr>
-        <tr><td>lbx</td><td class="col-m2">$3,651</td><td class="col-m2">$38,679</td><td class="col-m2">1,059%</td><td>$4,226</td><td>$39,307</td><td>930%</td><td class="pos">+$628 (+2%)</td></tr>
-        <tr><td>br</td><td class="col-m2">$545</td><td class="col-m2">$12,056</td><td class="col-m2">2,213%</td><td>$986</td><td>$23,294</td><td>2,361%</td><td class="pos">+$11,238 (+93%)</td></tr>
-        <tr><td>rwd</td><td class="col-m2">$3,432</td><td class="col-m2">$42,465</td><td class="col-m2">1,237%</td><td>$2,074</td><td>$17,241</td><td>831%</td><td class="neg">-$25,224 (-59%)</td></tr>
-        <tr><td>wep</td><td class="col-m2">$272</td><td class="col-m2">$9,630</td><td class="col-m2">3,535%</td><td>$351</td><td>$15,210</td><td>4,338%</td><td class="pos">+$5,580 (+58%)</td></tr>
-        <tr><td>cue</td><td class="col-m2">$366</td><td class="col-m2">$2,895</td><td class="col-m2">791%</td><td>$374</td><td>$9,836</td><td>2,633%</td><td class="pos">+$6,941 (+240%)</td></tr>
-        <tr><td>YK</td><td class="col-m2">$168</td><td class="col-m2">$5,753</td><td class="col-m2">3,426%</td><td>$321</td><td>$8,600</td><td>2,681%</td><td class="pos">+$2,847 (+49%)</td></tr>
-        <tr><td>lh</td><td class="col-m2">$1,264</td><td class="col-m2">$11,610</td><td class="col-m2">918%</td><td>$1,039</td><td>$7,179</td><td>691%</td><td class="neg">-$4,431 (-38%)</td></tr>
-        <tr><td>ba</td><td class="col-m2">$81</td><td class="col-m2">$11,605</td><td class="col-m2">14,323%</td><td>$7</td><td>$2,279</td><td>32,123%</td><td class="neg">-$9,326 (-80%)</td></tr>
-        <tr><td>ecl</td><td class="col-m2">$373</td><td class="col-m2">$6,682</td><td class="col-m2">1,792%</td><td>$303</td><td>$1,767</td><td>582%</td><td class="neg">-$4,915 (-74%)</td></tr>
-        <tr class="total-row"><td>Total / Median</td><td>$14,539</td><td>$225,014</td><td>1,849%</td><td>$16,223</td><td>$204,880</td><td>1,793%</td><td class="neg">-$20,134</td></tr>
+        <tr>
+    <td>noc</td>
+    <td class="col-m2">$6,522</td><td class="col-m2">$80,191</td><td class="col-m2">1,229%</td>
+    <td class="col-m3">$3,581</td><td class="col-m3">$62,388</td><td class="col-m3">1,742%</td>
+    <td class="neg">-$17,803 (-22%)</td>
+    <td class="pos">+513pts</td>
+  </tr><tr>
+    <td>lbx</td>
+    <td class="col-m2">$4,234</td><td class="col-m2">$39,302</td><td class="col-m2">928%</td>
+    <td class="col-m3">$2,878</td><td class="col-m3">$32,614</td><td class="col-m3">1,133%</td>
+    <td class="neg">-$6,688 (-17%)</td>
+    <td class="pos">+205pts</td>
+  </tr><tr>
+    <td>br</td>
+    <td class="col-m2">$989</td><td class="col-m2">$23,292</td><td class="col-m2">2,355%</td>
+    <td class="col-m3">$1,050</td><td class="col-m3">$29,210</td><td class="col-m3">2,782%</td>
+    <td class="pos">+$5,917 (+25%)</td>
+    <td class="pos">+427pts</td>
+  </tr><tr>
+    <td>wep</td>
+    <td class="col-m2">$351</td><td class="col-m2">$15,211</td><td class="col-m2">4,337%</td>
+    <td class="col-m3">$616</td><td class="col-m3">$28,078</td><td class="col-m3">4,555%</td>
+    <td class="pos">+$12,868 (+85%)</td>
+    <td class="pos">+218pts</td>
+  </tr><tr>
+    <td>rwd</td>
+    <td class="col-m2">$2,070</td><td class="col-m2">$17,246</td><td class="col-m2">833%</td>
+    <td class="col-m3">$1,441</td><td class="col-m3">$11,939</td><td class="col-m3">828%</td>
+    <td class="neg">-$5,307 (-31%)</td>
+    <td class="neg">-5pts</td>
+  </tr><tr>
+    <td>YK</td>
+    <td class="col-m2">$321</td><td class="col-m2">$8,600</td><td class="col-m2">2,678%</td>
+    <td class="col-m3">$281</td><td class="col-m3">$7,325</td><td class="col-m3">2,609%</td>
+    <td class="neg">-$1,275 (-15%)</td>
+    <td class="neg">-69pts</td>
+  </tr><tr>
+    <td>cue</td>
+    <td class="col-m2">$373</td><td class="col-m2">$9,837</td><td class="col-m2">2,635%</td>
+    <td class="col-m3">$178</td><td class="col-m3">$7,013</td><td class="col-m3">3,932%</td>
+    <td class="neg">-$2,824 (-29%)</td>
+    <td class="pos">+1,297pts</td>
+  </tr><tr>
+    <td>lh</td>
+    <td class="col-m2">$1,040</td><td class="col-m2">$7,179</td><td class="col-m2">691%</td>
+    <td class="col-m3">$1,147</td><td class="col-m3">$4,421</td><td class="col-m3">385%</td>
+    <td class="neg">-$2,758 (-38%)</td>
+    <td class="neg">-305pts</td>
+  </tr><tr>
+    <td>ecl</td>
+    <td class="col-m2">$304</td><td class="col-m2">$1,767</td><td class="col-m2">582%</td>
+    <td class="col-m3">$177</td><td class="col-m3">$2,050</td><td class="col-m3">1,160%</td>
+    <td class="pos">+$284 (+16%)</td>
+    <td class="pos">+578pts</td>
+  </tr><tr>
+    <td>td</td>
+    <td class="col-m2">$0</td><td class="col-m2">$0</td><td class="col-m2">0%</td>
+    <td class="col-m3">$105</td><td class="col-m3">$1,421</td><td class="col-m3">1,359%</td>
+    <td class="pos">New</td>
+    <td class="pos">+1,359pts</td>
+  </tr><tr>
+    <td>ba</td>
+    <td class="col-m2">$7</td><td class="col-m2">$2,279</td><td class="col-m2">32,795%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$-0</td><td class="col-m3">-100%</td>
+    <td class="neg">-$2,279 (-100%)</td>
+    <td class="neg">-32,895pts</td>
+  </tr>
       </tbody>
     </table>
   </div>
   <div class="insights">
     <h3>🔗 Network Insights & Actions</h3>
-    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>rwd network collapsed -59%</strong> (-$25.2K). This is the single biggest driver of the monthly decline. Mostly from Innovate's rwd campaigns losing profitability. Investigate rwd traffic quality urgently.</div></div>
-    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>br network nearly doubled</strong> (+93%, $12.1K→$23.3K) at great ROI (2,361%). wep surged +58% and cue exploded +240%. These three networks are the future growth engines.</div></div>
-    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>ba dropped -80%</strong> (-$9.3K) and ecl fell -74% (-$4.9K). ba saw spend collapse from $81 to $7 — check if this was intentional budget reallocation or a supply issue.</div></div>
-    <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Double down on br, wep, cue.</strong> Combined they went from $24.6K to $48.3K profit. Scale br from $986 to $1.5K spend and wep from $351 to $600. These are high-ROI, high-growth networks.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>wep nearly doubled (+85%)</strong> from $15.2K to $28.1K profit — became the #4 network. ROI rose to 4,555%. wep is the best ROI engine in MGMX right now. cue (3,932% ROI), br (2,782% ROI), and YK (2,609% ROI) round out the high-efficiency cluster.</div></div>
+    <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>br grew +25%</strong> ($23.3K → $29.2K) maintaining its 2,782% ROI on $1,050 spend. Combined with wep (+85%), these two networks added +$18.7K to MGMX in April. They are the breakout duo of the month.</div></div>
+    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>noc declined -22%</strong> (-$17.8K) — the largest network shed nearly half its cost ($6.5K → $3.6K) but profit fell harder than expected. ROI did improve to 1,742%, but absolute profit loss is significant. Connected to the Innovate cut.</div></div>
+    <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>lh fell -38%</strong> ($7.2K → $4.4K) and ROI halved to 385%. This network is in trouble — cut spend or audit campaigns. ba dropped to ~$0 (was at $2,279 in March on essentially zero spend — supply seemingly gone).</div></div>
+    <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Increase wep spend from $616 to $1,200</strong> — its 4,555% ROI suggests massive headroom. Push br to $1,500 spend (currently $1,050 at 2,782% ROI). Pause lh until profitability returns. Re-investigate ba supply — it had explosive ROI when it had volume.</div></div>
   </div>
 </div>
 
@@ -310,215 +444,606 @@ tr:hover td{background:rgba(255,255,255,.02)}
     <div class="section-title">Company Deep Dives</div>
   </div>
   <div class="tabs">
-    <div class="tab active" data-tab="innovate">Innovate</div>
+    <div class="tab active" data-tab="spread">Spread</div>
     <div class="tab" data-tab="spirion">Spirion</div>
-    <div class="tab" data-tab="spread">Spread</div>
+    <div class="tab" data-tab="innovate">Innovate</div>
     <div class="tab" data-tab="galatea">Galatea</div>
   </div>
 
-  <!-- INNOVATE -->
-  <div class="tab-content active" id="tab-innovate">
+  <!-- SPREAD -->
+  <div class="tab-content active" id="tab-spread">
     <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="kpi profit"><div class="kpi-label">Profit (Mar)</div><div class="kpi-value" style="color:var(--red);font-size:26px">$61,594</div><div class="kpi-row"><span class="kpi-prev">Feb: $84,760</span><span class="kpi-delta down">▼ -27.3%</span></div></div>
-      <div class="kpi roi"><div class="kpi-label">ROI (Mar)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">857%</div><div class="kpi-row"><span class="kpi-prev">Feb: 1,352%</span><span class="kpi-delta down">▼ -495pts</span></div></div>
-      <div class="kpi cost"><div class="kpi-label">Cost (Mar)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$7,191</div><div class="kpi-row"><span class="kpi-prev">Feb: $6,268</span><span class="kpi-delta down">▲ +14.7%</span></div></div>
+      <div class="kpi profit"><div class="kpi-label">Profit (Apr)</div><div class="kpi-value" style="color:var(--green);font-size:26px">$56,202</div><div class="kpi-row"><span class="kpi-prev">Mar: $33,301</span><span class="kpi-delta up">▲ +68.8%</span></div></div>
+      <div class="kpi roi"><div class="kpi-label">ROI (Apr)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">1,348%</div><div class="kpi-row"><span class="kpi-prev">Mar: 911%</span><span class="kpi-delta up">▲ +437pts</span></div></div>
+      <div class="kpi cost"><div class="kpi-label">Cost (Apr)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$4,170</div><div class="kpi-row"><span class="kpi-prev">Mar: $3,655</span><span class="kpi-delta down">▲ +14.1%</span></div></div>
     </div>
-    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Innovate — Geo Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Geo</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>🇺🇸 US</td><td class="col-m2">$1,151</td><td class="col-m2">$28,853</td><td class="col-m2">2,506%</td><td>$430</td><td>$17,420</td><td>4,051%</td><td class="neg">-$11,433 (-40%)</td></tr>
-          <tr><td>🇵🇱 PL</td><td class="col-m2">$664</td><td class="col-m2">$3,000</td><td class="col-m2">452%</td><td>$832</td><td>$10,791</td><td>1,297%</td><td class="pos">+$7,791 (+260%)</td></tr>
-          <tr><td>🇩🇪 DE</td><td class="col-m2">$659</td><td class="col-m2">$10,127</td><td class="col-m2">1,537%</td><td>$1,737</td><td>$9,805</td><td>564%</td><td class="neg">-$322 (-3%)</td></tr>
-          <tr><td>🇬🇧 UK</td><td class="col-m2">$2,160</td><td class="col-m2">$15,732</td><td class="col-m2">728%</td><td>$1,256</td><td>$8,327</td><td>663%</td><td class="neg">-$7,405 (-47%)</td></tr>
-          <tr><td>🇳🇱 NL</td><td class="col-m2">$630</td><td class="col-m2">$7,117</td><td class="col-m2">1,130%</td><td>$1,255</td><td>$6,506</td><td>519%</td><td class="neg">-$611 (-9%)</td></tr>
-          <tr><td>🇩🇰 DK</td><td class="col-m2">$199</td><td class="col-m2">$3,604</td><td class="col-m2">1,810%</td><td>$522</td><td>$3,169</td><td>607%</td><td class="neg">-$435 (-12%)</td></tr>
-          <tr><td>🇲🇽 MX</td><td class="col-m2">$56</td><td class="col-m2">$2,908</td><td class="col-m2">5,187%</td><td>$56</td><td>$2,933</td><td>5,198%</td><td class="pos">+$25 (+1%)</td></tr>
-          <tr><td>🇪🇸 ES</td><td class="col-m2">$528</td><td class="col-m2">$9,533</td><td class="col-m2">1,805%</td><td>$728</td><td>$1,596</td><td>219%</td><td class="neg">-$7,937 (-83%)</td></tr>
-          <tr><td>🇦🇹 AT</td><td class="col-m2">$220</td><td class="col-m2">$3,382</td><td class="col-m2">1,539%</td><td>$374</td><td>$1,018</td><td>272%</td><td class="neg">-$2,364 (-70%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$6,267</td><td>$84,256</td><td>1,539%</td><td>$7,190</td><td>$61,565</td><td>607%</td><td class="neg">-$22,691</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Innovate — Network Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Network</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>noc</td><td class="col-m2">$2,313</td><td class="col-m2">$40,680</td><td class="col-m2">1,759%</td><td>$4,000</td><td>$37,044</td><td>926%</td><td class="neg">-$3,636 (-9%)</td></tr>
-          <tr><td>lbx</td><td class="col-m2">$1,066</td><td class="col-m2">$9,022</td><td class="col-m2">846%</td><td>$1,767</td><td>$6,985</td><td>395%</td><td class="neg">-$2,037 (-23%)</td></tr>
-          <tr><td>rwd</td><td class="col-m2">$2,056</td><td class="col-m2">$24,765</td><td class="col-m2">1,204%</td><td>$871</td><td>$6,974</td><td>801%</td><td class="neg">-$17,791 (-72%)</td></tr>
-          <tr><td>cue</td><td class="col-m2">$329</td><td class="col-m2">$2,341</td><td class="col-m2">711%</td><td>$263</td><td>$5,946</td><td>2,258%</td><td class="pos">+$3,605 (+154%)</td></tr>
-          <tr><td>wep</td><td class="col-m2">$60</td><td class="col-m2">$1,532</td><td class="col-m2">2,567%</td><td>$87</td><td>$3,078</td><td>3,555%</td><td class="pos">+$1,546 (+101%)</td></tr>
-          <tr><td>lh</td><td class="col-m2">$147</td><td class="col-m2">$1,435</td><td class="col-m2">979%</td><td>$154</td><td>$1,250</td><td>811%</td><td class="neg">-$185 (-13%)</td></tr>
-          <tr><td>ba</td><td class="col-m2">$23</td><td class="col-m2">$2,414</td><td class="col-m2">10,410%</td><td>$0</td><td>$0</td><td>-100%</td><td class="neg">-$2,414 (-100%)</td></tr>
-          <tr><td>ecl</td><td class="col-m2">$83</td><td class="col-m2">$2,194</td><td class="col-m2">2,642%</td><td>$15</td><td>$109</td><td>724%</td><td class="neg">-$2,085 (-95%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$6,077</td><td>$84,383</td><td>1,482%</td><td>$7,157</td><td>$61,386</td><td>806%</td><td class="neg">-$22,997</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Spread — Geo Breakdown</h4>
+    <div class="table-wrap"><table><thead><tr><th>Geo</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>🇵🇱 PL</td>
+    <td class="col-m2">$897</td><td class="col-m2">$17,239</td><td class="col-m2">1,923%</td>
+    <td class="col-m3">$1,828</td><td class="col-m3">$25,741</td><td class="col-m3">1,408%</td>
+    <td class="pos">+$8,501 (+49%)</td>
+    <td class="neg">-515pts</td>
+  </tr><tr>
+    <td>🇮🇹 IT</td>
+    <td class="col-m2">$278</td><td class="col-m2">$2,581</td><td class="col-m2">930%</td>
+    <td class="col-m3">$365</td><td class="col-m3">$13,109</td><td class="col-m3">3,592%</td>
+    <td class="pos">+$10,528 (+408%)</td>
+    <td class="pos">+2,662pts</td>
+  </tr><tr>
+    <td>🇪🇸 ES</td>
+    <td class="col-m2">$657</td><td class="col-m2">$3,228</td><td class="col-m2">491%</td>
+    <td class="col-m3">$468</td><td class="col-m3">$7,088</td><td class="col-m3">1,514%</td>
+    <td class="pos">+$3,859 (+120%)</td>
+    <td class="pos">+1,023pts</td>
+  </tr><tr>
+    <td>🇲🇽 MX</td>
+    <td class="col-m2">$127</td><td class="col-m2">$3,007</td><td class="col-m2">2,366%</td>
+    <td class="col-m3">$203</td><td class="col-m3">$2,959</td><td class="col-m3">1,458%</td>
+    <td class="neg">-$48 (-2%)</td>
+    <td class="neg">-908pts</td>
+  </tr><tr>
+    <td>🇩🇪 DE</td>
+    <td class="col-m2">$605</td><td class="col-m2">$2,807</td><td class="col-m2">464%</td>
+    <td class="col-m3">$472</td><td class="col-m3">$2,446</td><td class="col-m3">518%</td>
+    <td class="neg">-$361 (-13%)</td>
+    <td class="pos">+54pts</td>
+  </tr><tr>
+    <td>🇬🇧 UK</td>
+    <td class="col-m2">$81</td><td class="col-m2">$304</td><td class="col-m2">376%</td>
+    <td class="col-m3">$196</td><td class="col-m3">$1,772</td><td class="col-m3">904%</td>
+    <td class="pos">+$1,468 (+483%)</td>
+    <td class="pos">+528pts</td>
+  </tr><tr>
+    <td>🇫🇷 FR</td>
+    <td class="col-m2">$178</td><td class="col-m2">$579</td><td class="col-m2">326%</td>
+    <td class="col-m3">$136</td><td class="col-m3">$1,228</td><td class="col-m3">900%</td>
+    <td class="pos">+$649 (+112%)</td>
+    <td class="pos">+574pts</td>
+  </tr><tr>
+    <td>🇳🇱 NL</td>
+    <td class="col-m2">$455</td><td class="col-m2">$928</td><td class="col-m2">204%</td>
+    <td class="col-m3">$441</td><td class="col-m3">$831</td><td class="col-m3">189%</td>
+    <td class="neg">-$97 (-10%)</td>
+    <td class="neg">-15pts</td>
+  </tr><tr>
+    <td>🇺🇸 US</td>
+    <td class="col-m2">$38</td><td class="col-m2">$598</td><td class="col-m2">1,593%</td>
+    <td class="col-m3">$50</td><td class="col-m3">$666</td><td class="col-m3">1,345%</td>
+    <td class="pos">+$68 (+11%)</td>
+    <td class="neg">-248pts</td>
+  </tr><tr>
+    <td>🇦🇹 AT</td>
+    <td class="col-m2">$11</td><td class="col-m2">$142</td><td class="col-m2">1,338%</td>
+    <td class="col-m3">$10</td><td class="col-m3">$348</td><td class="col-m3">3,548%</td>
+    <td class="pos">+$207 (+146%)</td>
+    <td class="pos">+2,209pts</td>
+  </tr><tr>
+    <td>🇫🇮 FI</td>
+    <td class="col-m2">$305</td><td class="col-m2">$1,806</td><td class="col-m2">593%</td>
+    <td class="col-m3">$1</td><td class="col-m3">-$1</td><td class="col-m3">-100%</td>
+    <td class="neg">-$1,807 (-100%)</td>
+    <td class="neg">-693pts</td>
+  </tr></tbody></table></div>
+    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Spread — Network Breakdown</h4>
+    <div class="table-wrap"><table><thead><tr><th>Network</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>wep</td>
+    <td class="col-m2">$151</td><td class="col-m2">$6,806</td><td class="col-m2">4,514%</td>
+    <td class="col-m3">$393</td><td class="col-m3">$15,614</td><td class="col-m3">3,977%</td>
+    <td class="pos">+$8,808 (+129%)</td>
+    <td class="neg">-537pts</td>
+  </tr><tr>
+    <td>br</td>
+    <td class="col-m2">$644</td><td class="col-m2">$10,992</td><td class="col-m2">1,708%</td>
+    <td class="col-m3">$712</td><td class="col-m3">$15,561</td><td class="col-m3">2,186%</td>
+    <td class="pos">+$4,569 (+42%)</td>
+    <td class="pos">+478pts</td>
+  </tr><tr>
+    <td>rwd</td>
+    <td class="col-m2">$519</td><td class="col-m2">$1,921</td><td class="col-m2">370%</td>
+    <td class="col-m3">$865</td><td class="col-m3">$8,415</td><td class="col-m3">973%</td>
+    <td class="pos">+$6,494 (+338%)</td>
+    <td class="pos">+603pts</td>
+  </tr><tr>
+    <td>lbx</td>
+    <td class="col-m2">$649</td><td class="col-m2">$1,949</td><td class="col-m2">300%</td>
+    <td class="col-m3">$1,100</td><td class="col-m3">$6,437</td><td class="col-m3">585%</td>
+    <td class="pos">+$4,488 (+230%)</td>
+    <td class="pos">+285pts</td>
+  </tr><tr>
+    <td>noc</td>
+    <td class="col-m2">$912</td><td class="col-m2">$6,336</td><td class="col-m2">695%</td>
+    <td class="col-m3">$250</td><td class="col-m3">$5,202</td><td class="col-m3">2,083%</td>
+    <td class="neg">-$1,134 (-18%)</td>
+    <td class="pos">+1,388pts</td>
+  </tr><tr>
+    <td>lh</td>
+    <td class="col-m2">$447</td><td class="col-m2">$3,902</td><td class="col-m2">873%</td>
+    <td class="col-m3">$745</td><td class="col-m3">$3,331</td><td class="col-m3">447%</td>
+    <td class="neg">-$571 (-15%)</td>
+    <td class="neg">-426pts</td>
+  </tr><tr>
+    <td>cue</td>
+    <td class="col-m2">$25</td><td class="col-m2">$1,011</td><td class="col-m2">3,979%</td>
+    <td class="col-m3">$30</td><td class="col-m3">$1,099</td><td class="col-m3">3,683%</td>
+    <td class="pos">+$88 (+9%)</td>
+    <td class="neg">-297pts</td>
+  </tr><tr>
+    <td>ecl</td>
+    <td class="col-m2">$120</td><td class="col-m2">$276</td><td class="col-m2">229%</td>
+    <td class="col-m3">$74</td><td class="col-m3">$545</td><td class="col-m3">737%</td>
+    <td class="pos">+$269 (+98%)</td>
+    <td class="pos">+508pts</td>
+  </tr><tr>
+    <td>pm</td>
+    <td class="col-m2">$17</td><td class="col-m2">$253</td><td class="col-m2">1,456%</td>
+    <td class="col-m3">$2</td><td class="col-m3">-$2</td><td class="col-m3">-100%</td>
+    <td class="neg">-$254 (-101%)</td>
+    <td class="neg">-1,556pts</td>
+  </tr></tbody></table></div>
     <div class="insights">
-      <h3>🔎 Innovate Actions</h3>
-      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>rwd crashed -$17.8K (-72%)</strong> — this single network accounts for most of Innovate's decline. Spend halved but profit collapsed disproportionately. Deep-dive into rwd campaign creatives and landing pages.</div></div>
-      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>ES profit cratered -83%</strong> ($9.5K→$1.6K) and AT fell -70%. These geos need immediate campaign audits. Check if keyword competition or seasonal factors are driving the decline.</div></div>
-      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>PL surged +260%</strong> ($3K→$10.8K) — the star geo. cue (+154%) and wep (+101%) are breakout networks. Redirect budget from rwd/ecl/ba into cue and wep for Innovate.</div></div>
+      <h3>🔎 Spread Actions</h3>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Every major geo grew or held.</strong> PL +$8.5K (+49%), IT exploded +$10.5K (+408%, ROI 3,592%), ES +$3.9K (+120%), UK +$1.5K (+483%). Spread's geo expansion is real.</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>wep + br are the engines</strong> — wep grew +$8.8K (+129%) at 3,977% ROI; br grew +$4.6K (+42%) at 2,186% ROI. Combined they generated $31.2K of Spread's $56.2K (55%).</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>rwd turnaround</strong> — went from $1.9K profit at 370% ROI to $8.4K profit at 973% ROI on more spend. Whatever changed in rwd Spread campaigns is working.</div></div>
+      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Spread is the priority for May.</strong> Push budget from $4.2K to $6K. Focus the new spend on wep (already at $393, push to $700) and IT/ES/UK geos where ROI doubled. lbx is recovering (ROI 585%) — keep monitoring before scaling further.</div></div>
     </div>
   </div>
 
   <!-- SPIRION -->
   <div class="tab-content" id="tab-spirion">
     <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="kpi profit"><div class="kpi-label">Profit (Mar)</div><div class="kpi-value" style="color:var(--green);font-size:26px">$96,630</div><div class="kpi-row"><span class="kpi-prev">Feb: $94,778</span><span class="kpi-delta up">▲ +2.0%</span></div></div>
-      <div class="kpi roi"><div class="kpi-label">ROI (Mar)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">2,583%</div><div class="kpi-row"><span class="kpi-prev">Feb: 3,294%</span><span class="kpi-delta down">▼ -711pts</span></div></div>
-      <div class="kpi cost"><div class="kpi-label">Cost (Mar)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$3,741</div><div class="kpi-row"><span class="kpi-prev">Feb: $2,878</span><span class="kpi-delta down">▲ +30.0%</span></div></div>
+      <div class="kpi profit"><div class="kpi-label">Profit (Apr)</div><div class="kpi-value" style="color:var(--red);font-size:26px">$88,389</div><div class="kpi-row"><span class="kpi-prev">Mar: $96,629</span><span class="kpi-delta down">▼ -8.5%</span></div></div>
+      <div class="kpi roi"><div class="kpi-label">ROI (Apr)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">2,774%</div><div class="kpi-row"><span class="kpi-prev">Mar: 2,579%</span><span class="kpi-delta up">▲ +196pts</span></div></div>
+      <div class="kpi cost"><div class="kpi-label">Cost (Apr)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$3,186</div><div class="kpi-row"><span class="kpi-prev">Mar: $3,747</span><span class="kpi-delta up">▼ -15.0%</span></div></div>
     </div>
     <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Spirion — Geo Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Geo</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>🇬🇧 UK</td><td class="col-m2">$602</td><td class="col-m2">$15,057</td><td class="col-m2">2,499%</td><td>$636</td><td>$12,485</td><td>1,965%</td><td class="neg">-$2,572 (-17%)</td></tr>
-          <tr><td>🇺🇸 US</td><td class="col-m2">$106</td><td class="col-m2">$12,558</td><td class="col-m2">11,866%</td><td>$142</td><td>$11,833</td><td>8,324%</td><td class="neg">-$725 (-6%)</td></tr>
-          <tr><td>🇩🇪 DE</td><td class="col-m2">$500</td><td class="col-m2">$10,175</td><td class="col-m2">2,037%</td><td>$430</td><td>$11,232</td><td>2,612%</td><td class="pos">+$1,057 (+10%)</td></tr>
-          <tr><td>🇳🇱 NL</td><td class="col-m2">$153</td><td class="col-m2">$6,080</td><td class="col-m2">3,964%</td><td>$277</td><td>$10,843</td><td>3,921%</td><td class="pos">+$4,763 (+78%)</td></tr>
-          <tr><td>🇵🇱 PL</td><td class="col-m2">$68</td><td class="col-m2">$4,710</td><td class="col-m2">6,922%</td><td>$392</td><td>$8,721</td><td>2,226%</td><td class="pos">+$4,011 (+85%)</td></tr>
-          <tr><td>🇫🇷 FR</td><td class="col-m2">$167</td><td class="col-m2">$5,889</td><td class="col-m2">3,537%</td><td>$292</td><td>$8,616</td><td>2,955%</td><td class="pos">+$2,727 (+46%)</td></tr>
-          <tr><td>🇪🇸 ES</td><td class="col-m2">$113</td><td class="col-m2">$7,154</td><td class="col-m2">6,354%</td><td>$288</td><td>$6,048</td><td>2,100%</td><td class="neg">-$1,106 (-15%)</td></tr>
-          <tr><td>🇦🇺 AU</td><td class="col-m2">$97</td><td class="col-m2">$2,947</td><td class="col-m2">3,029%</td><td>$239</td><td>$3,775</td><td>1,583%</td><td class="pos">+$828 (+28%)</td></tr>
-          <tr><td>🇮🇹 IT</td><td class="col-m2">$78</td><td class="col-m2">$3,534</td><td class="col-m2">4,540%</td><td>$100</td><td>$3,615</td><td>3,609%</td><td class="pos">+$81 (+2%)</td></tr>
-          <tr><td>🇦🇹 AT</td><td class="col-m2">$138</td><td class="col-m2">$3,562</td><td class="col-m2">2,576%</td><td>$161</td><td>$3,501</td><td>2,172%</td><td class="neg">-$61 (-2%)</td></tr>
-          <tr><td>🇳🇿 NZ</td><td class="col-m2">$148</td><td class="col-m2">$3,130</td><td class="col-m2">2,110%</td><td>$164</td><td>$3,300</td><td>2,017%</td><td class="pos">+$170 (+5%)</td></tr>
-          <tr><td>🇩🇰 DK</td><td class="col-m2">$86</td><td class="col-m2">$3,216</td><td class="col-m2">3,739%</td><td>$108</td><td>$3,212</td><td>2,985%</td><td class="neg">-$4 (0%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$2,256</td><td>$78,012</td><td>3,638%</td><td>$3,229</td><td>$87,181</td><td>2,419%</td><td class="pos">+$9,169</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="table-wrap"><table><thead><tr><th>Geo</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>🇺🇸 US</td>
+    <td class="col-m2">$141</td><td class="col-m2">$11,834</td><td class="col-m2">8,387%</td>
+    <td class="col-m3">$196</td><td class="col-m3">$15,698</td><td class="col-m3">8,021%</td>
+    <td class="pos">+$3,864 (+33%)</td>
+    <td class="neg">-366pts</td>
+  </tr><tr>
+    <td>🇵🇱 PL</td>
+    <td class="col-m2">$391</td><td class="col-m2">$8,722</td><td class="col-m2">2,230%</td>
+    <td class="col-m3">$477</td><td class="col-m3">$13,357</td><td class="col-m3">2,801%</td>
+    <td class="pos">+$4,635 (+53%)</td>
+    <td class="pos">+571pts</td>
+  </tr><tr>
+    <td>🇩🇪 DE</td>
+    <td class="col-m2">$431</td><td class="col-m2">$11,231</td><td class="col-m2">2,607%</td>
+    <td class="col-m3">$404</td><td class="col-m3">$9,820</td><td class="col-m3">2,433%</td>
+    <td class="neg">-$1,411 (-13%)</td>
+    <td class="neg">-174pts</td>
+  </tr><tr>
+    <td>🇬🇧 UK</td>
+    <td class="col-m2">$637</td><td class="col-m2">$12,484</td><td class="col-m2">1,959%</td>
+    <td class="col-m3">$565</td><td class="col-m3">$9,320</td><td class="col-m3">1,648%</td>
+    <td class="neg">-$3,164 (-25%)</td>
+    <td class="neg">-311pts</td>
+  </tr><tr>
+    <td>🇳🇱 NL</td>
+    <td class="col-m2">$277</td><td class="col-m2">$10,843</td><td class="col-m2">3,910%</td>
+    <td class="col-m3">$271</td><td class="col-m3">$8,178</td><td class="col-m3">3,014%</td>
+    <td class="neg">-$2,665 (-25%)</td>
+    <td class="neg">-896pts</td>
+  </tr><tr>
+    <td>🇮🇹 IT</td>
+    <td class="col-m2">$100</td><td class="col-m2">$3,615</td><td class="col-m2">3,623%</td>
+    <td class="col-m3">$70</td><td class="col-m3">$6,733</td><td class="col-m3">9,659%</td>
+    <td class="pos">+$3,118 (+86%)</td>
+    <td class="pos">+6,036pts</td>
+  </tr><tr>
+    <td>🇪🇸 ES</td>
+    <td class="col-m2">$289</td><td class="col-m2">$6,047</td><td class="col-m2">2,094%</td>
+    <td class="col-m3">$254</td><td class="col-m3">$5,953</td><td class="col-m3">2,340%</td>
+    <td class="neg">-$94 (-2%)</td>
+    <td class="pos">+245pts</td>
+  </tr><tr>
+    <td>🇫🇷 FR</td>
+    <td class="col-m2">$293</td><td class="col-m2">$8,616</td><td class="col-m2">2,944%</td>
+    <td class="col-m3">$237</td><td class="col-m3">$3,787</td><td class="col-m3">1,597%</td>
+    <td class="neg">-$4,829 (-56%)</td>
+    <td class="neg">-1,347pts</td>
+  </tr><tr>
+    <td>🇦🇹 AT</td>
+    <td class="col-m2">$162</td><td class="col-m2">$3,500</td><td class="col-m2">2,167%</td>
+    <td class="col-m3">$111</td><td class="col-m3">$2,878</td><td class="col-m3">2,592%</td>
+    <td class="neg">-$622 (-18%)</td>
+    <td class="pos">+425pts</td>
+  </tr><tr>
+    <td>🇳🇿 NZ</td>
+    <td class="col-m2">$164</td><td class="col-m2">$3,300</td><td class="col-m2">2,015%</td>
+    <td class="col-m3">$178</td><td class="col-m3">$2,667</td><td class="col-m3">1,502%</td>
+    <td class="neg">-$633 (-19%)</td>
+    <td class="neg">-513pts</td>
+  </tr><tr>
+    <td>🇵🇹 PT</td>
+    <td class="col-m2">$147</td><td class="col-m2">$2,086</td><td class="col-m2">1,421%</td>
+    <td class="col-m3">$54</td><td class="col-m3">$2,588</td><td class="col-m3">4,813%</td>
+    <td class="pos">+$502 (+24%)</td>
+    <td class="pos">+3,392pts</td>
+  </tr><tr>
+    <td>🇨🇭 CH</td>
+    <td class="col-m2">$152</td><td class="col-m2">$2,811</td><td class="col-m2">1,846%</td>
+    <td class="col-m3">$77</td><td class="col-m3">$2,397</td><td class="col-m3">3,111%</td>
+    <td class="neg">-$414 (-15%)</td>
+    <td class="pos">+1,266pts</td>
+  </tr><tr>
+    <td>🇩🇰 DK</td>
+    <td class="col-m2">$108</td><td class="col-m2">$3,212</td><td class="col-m2">2,976%</td>
+    <td class="col-m3">$104</td><td class="col-m3">$2,035</td><td class="col-m3">1,965%</td>
+    <td class="neg">-$1,177 (-37%)</td>
+    <td class="neg">-1,011pts</td>
+  </tr><tr>
+    <td>🇫🇮 FI</td>
+    <td class="col-m2">$31</td><td class="col-m2">$2,861</td><td class="col-m2">9,105%</td>
+    <td class="col-m3">$27</td><td class="col-m3">$1,212</td><td class="col-m3">4,408%</td>
+    <td class="neg">-$1,649 (-58%)</td>
+    <td class="neg">-4,696pts</td>
+  </tr><tr>
+    <td>🇦🇺 AU</td>
+    <td class="col-m2">$239</td><td class="col-m2">$3,774</td><td class="col-m2">1,576%</td>
+    <td class="col-m3">$146</td><td class="col-m3">$1,151</td><td class="col-m3">787%</td>
+    <td class="neg">-$2,623 (-69%)</td>
+    <td class="neg">-789pts</td>
+  </tr><tr>
+    <td>🇲🇽 MX</td>
+    <td class="col-m2">$85</td><td class="col-m2">$925</td><td class="col-m2">1,094%</td>
+    <td class="col-m3">$15</td><td class="col-m3">$400</td><td class="col-m3">2,743%</td>
+    <td class="neg">-$525 (-57%)</td>
+    <td class="pos">+1,650pts</td>
+  </tr><tr>
+    <td>🇳🇴 NO</td>
+    <td class="col-m2">$85</td><td class="col-m2">$417</td><td class="col-m2">488%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$183</td><td class="col-m3">107,465%</td>
+    <td class="neg">-$234 (-56%)</td>
+    <td class="pos">+106,977pts</td>
+  </tr><tr>
+    <td>🇸🇪 SE</td>
+    <td class="col-m2">$5</td><td class="col-m2">$116</td><td class="col-m2">2,399%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$25</td><td class="col-m3">126,050%</td>
+    <td class="neg">-$90 (-78%)</td>
+    <td class="pos">+123,651pts</td>
+  </tr><tr>
+    <td>🇮🇪 IE</td>
+    <td class="col-m2">$10</td><td class="col-m2">$104</td><td class="col-m2">1,018%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$6</td><td class="col-m3">0%</td>
+    <td class="neg">-$98 (-95%)</td>
+    <td class="neg">-1,018pts</td>
+  </tr><tr>
+    <td>🇭🇺 HU</td>
+    <td class="col-m2">$0</td><td class="col-m2">$132</td><td class="col-m2">73,289%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$-0</td><td class="col-m3">-100%</td>
+    <td class="neg">-$132 (-100%)</td>
+    <td class="neg">-73,389pts</td>
+  </tr></tbody></table></div>
     <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Spirion — Network Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Network</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>noc</td><td class="col-m2">$735</td><td class="col-m2">$30,866</td><td class="col-m2">4,200%</td><td>$939</td><td>$29,408</td><td>3,132%</td><td class="neg">-$1,458 (-5%)</td></tr>
-          <tr><td>lbx</td><td class="col-m2">$983</td><td class="col-m2">$24,094</td><td class="col-m2">2,450%</td><td>$1,278</td><td>$27,268</td><td>2,134%</td><td class="pos">+$3,174 (+13%)</td></tr>
-          <tr><td>br</td><td class="col-m2">$97</td><td class="col-m2">$3,853</td><td class="col-m2">3,963%</td><td>$342</td><td>$12,302</td><td>3,596%</td><td class="pos">+$8,449 (+219%)</td></tr>
-          <tr><td>YK</td><td class="col-m2">$168</td><td class="col-m2">$5,753</td><td class="col-m2">3,426%</td><td>$321</td><td>$8,600</td><td>2,681%</td><td class="pos">+$2,847 (+49%)</td></tr>
-          <tr><td>rwd</td><td class="col-m2">$547</td><td class="col-m2">$13,474</td><td class="col-m2">2,465%</td><td>$464</td><td>$8,302</td><td>1,789%</td><td class="neg">-$5,172 (-38%)</td></tr>
-          <tr><td>wep</td><td class="col-m2">$25</td><td class="col-m2">$2,626</td><td class="col-m2">10,320%</td><td>$59</td><td>$3,147</td><td>5,300%</td><td class="pos">+$521 (+20%)</td></tr>
-          <tr><td>ba</td><td class="col-m2">$23</td><td class="col-m2">$6,932</td><td class="col-m2">29,588%</td><td>$5</td><td>$2,281</td><td>44,010%</td><td class="neg">-$4,651 (-67%)</td></tr>
-          <tr><td>cue</td><td class="col-m2">$8</td><td class="col-m2">$317</td><td class="col-m2">4,155%</td><td>$67</td><td>$2,343</td><td>3,506%</td><td class="pos">+$2,026 (+639%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$2,586</td><td>$87,915</td><td>4,059%</td><td>$3,475</td><td>$93,651</td><td>3,319%</td><td class="pos">+$5,736</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="table-wrap"><table><thead><tr><th>Network</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>noc</td>
+    <td class="col-m2">$940</td><td class="col-m2">$29,408</td><td class="col-m2">3,129%</td>
+    <td class="col-m3">$1,118</td><td class="col-m3">$33,935</td><td class="col-m3">3,035%</td>
+    <td class="pos">+$4,527 (+15%)</td>
+    <td class="neg">-94pts</td>
+  </tr><tr>
+    <td>lbx</td>
+    <td class="col-m2">$1,280</td><td class="col-m2">$27,267</td><td class="col-m2">2,130%</td>
+    <td class="col-m3">$871</td><td class="col-m3">$20,513</td><td class="col-m3">2,354%</td>
+    <td class="neg">-$6,754 (-25%)</td>
+    <td class="pos">+224pts</td>
+  </tr><tr>
+    <td>br</td>
+    <td class="col-m2">$342</td><td class="col-m2">$12,302</td><td class="col-m2">3,593%</td>
+    <td class="col-m3">$338</td><td class="col-m3">$13,649</td><td class="col-m3">4,035%</td>
+    <td class="pos">+$1,347 (+11%)</td>
+    <td class="pos">+442pts</td>
+  </tr><tr>
+    <td>YK</td>
+    <td class="col-m2">$321</td><td class="col-m2">$8,600</td><td class="col-m2">2,678%</td>
+    <td class="col-m3">$281</td><td class="col-m3">$7,325</td><td class="col-m3">2,609%</td>
+    <td class="neg">-$1,275 (-15%)</td>
+    <td class="neg">-69pts</td>
+  </tr><tr>
+    <td>wep</td>
+    <td class="col-m2">$59</td><td class="col-m2">$3,147</td><td class="col-m2">5,295%</td>
+    <td class="col-m3">$104</td><td class="col-m3">$6,259</td><td class="col-m3">5,992%</td>
+    <td class="pos">+$3,112 (+99%)</td>
+    <td class="pos">+697pts</td>
+  </tr><tr>
+    <td>cue</td>
+    <td class="col-m2">$67</td><td class="col-m2">$2,344</td><td class="col-m2">3,509%</td>
+    <td class="col-m3">$63</td><td class="col-m3">$3,062</td><td class="col-m3">4,833%</td>
+    <td class="pos">+$719 (+31%)</td>
+    <td class="pos">+1,324pts</td>
+  </tr><tr>
+    <td>rwd</td>
+    <td class="col-m2">$465</td><td class="col-m2">$8,301</td><td class="col-m2">1,784%</td>
+    <td class="col-m3">$213</td><td class="col-m3">$1,561</td><td class="col-m3">733%</td>
+    <td class="neg">-$6,740 (-81%)</td>
+    <td class="neg">-1,051pts</td>
+  </tr><tr>
+    <td>ecl</td>
+    <td class="col-m2">$104</td><td class="col-m2">$1,186</td><td class="col-m2">1,141%</td>
+    <td class="col-m3">$83</td><td class="col-m3">$1,083</td><td class="col-m3">1,300%</td>
+    <td class="neg">-$103 (-9%)</td>
+    <td class="pos">+160pts</td>
+  </tr><tr>
+    <td>lh</td>
+    <td class="col-m2">$159</td><td class="col-m2">$1,788</td><td class="col-m2">1,124%</td>
+    <td class="col-m3">$113</td><td class="col-m3">$1,000</td><td class="col-m3">884%</td>
+    <td class="neg">-$788 (-44%)</td>
+    <td class="neg">-240pts</td>
+  </tr><tr>
+    <td>ba</td>
+    <td class="col-m2">$5</td><td class="col-m2">$2,281</td><td class="col-m2">45,261%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$0</td><td class="col-m3">0%</td>
+    <td class="neg">Dropped</td>
+    <td class="neg">-45,261pts</td>
+  </tr></tbody></table></div>
     <div class="insights">
       <h3>🔎 Spirion Actions</h3>
-      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>br network exploded +219%</strong> ($3.9K→$12.3K) — Spirion's biggest growth driver. Scale br spend from $342 to $600+. cue grew +639% — small base but massive momentum.</div></div>
-      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>NL (+78%), PL (+85%), FR (+46%)</strong> — three geos driving strong Spirion growth. NL nearly doubled to $10.8K. These are Spirion's expansion corridors.</div></div>
-      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Investigate ba volume drop</strong> — profit fell -67% as spend collapsed from $23 to $5. If this is a supply issue, find alternative sources. ba ROI is 44,010% — any volume here is gold.</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>US grew +33%</strong> ($11.8K → $15.7K) and PL +53% ($8.7K → $13.4K). These two combined generated $29.1K — a third of Spirion. IT also surged +86% ($3.6K → $6.7K, ROI 9,659% — the highest in the portfolio).</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>noc and br are doing the heavy lifting</strong> — noc held steady at $33.9K (+15%), br grew +11% to $13.6K. cue (+30%) and wep (+99%) are accelerating with stellar ROIs.</div></div>
+      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>UK declined -25%</strong> (-$3.2K) and FR fell -56% (-$4.8K). These were big March contributors. NL dropped -25% too. The decline is concentrated in Western Europe.</div></div>
+      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>rwd cratered -81%</strong> ($8.3K → $1.6K) — same network problem we saw last month. ba is gone (was $2.3K at 45,000% ROI). lh fell -44%.</div></div>
+      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Don't touch noc/lbx/br — they're working.</strong> Push wep further — it's the breakout (cost $59→$104, profit $3.1K→$6.3K, ROI 5,992%). Audit FR/UK Spirion campaigns urgently. Consider whether the rwd issue is platform-wide or campaign-specific.</div></div>
     </div>
   </div>
 
-  <!-- SPREAD -->
-  <div class="tab-content" id="tab-spread">
+  <!-- INNOVATE -->
+  <div class="tab-content" id="tab-innovate">
     <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="kpi profit"><div class="kpi-label">Profit (Mar)</div><div class="kpi-value" style="color:var(--red);font-size:26px">$33,307</div><div class="kpi-row"><span class="kpi-prev">Feb: $36,783</span><span class="kpi-delta down">▼ -9.5%</span></div></div>
-      <div class="kpi roi"><div class="kpi-label">ROI (Mar)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">913%</div><div class="kpi-row"><span class="kpi-prev">Feb: 932%</span><span class="kpi-delta down">▼ -19pts</span></div></div>
-      <div class="kpi cost"><div class="kpi-label">Cost (Mar)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$3,648</div><div class="kpi-row"><span class="kpi-prev">Feb: $3,948</span><span class="kpi-delta up">▼ -7.6%</span></div></div>
+      <div class="kpi profit"><div class="kpi-label">Profit (Apr)</div><div class="kpi-value" style="color:var(--red);font-size:26px">$26,577</div><div class="kpi-row"><span class="kpi-prev">Mar: $61,623</span><span class="kpi-delta down">▼ -56.9%</span></div></div>
+      <div class="kpi roi"><div class="kpi-label">ROI (Apr)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">987%</div><div class="kpi-row"><span class="kpi-prev">Mar: 860%</span><span class="kpi-delta up">▲ +127pts</span></div></div>
+      <div class="kpi cost"><div class="kpi-label">Cost (Apr)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$2,692</div><div class="kpi-row"><span class="kpi-prev">Mar: $7,165</span><span class="kpi-delta up">▼ -62.4%</span></div></div>
     </div>
-    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Spread — Geo Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Geo</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>🇵🇱 PL</td><td class="col-m2">$712</td><td class="col-m2">$7,871</td><td class="col-m2">1,106%</td><td>$895</td><td>$17,240</td><td>1,927%</td><td class="pos">+$9,369 (+119%)</td></tr>
-          <tr><td>🇪🇸 ES</td><td class="col-m2">$298</td><td class="col-m2">$5,244</td><td class="col-m2">1,761%</td><td>$650</td><td>$3,236</td><td>498%</td><td class="neg">-$2,008 (-38%)</td></tr>
-          <tr><td>🇲🇽 MX</td><td class="col-m2">$288</td><td class="col-m2">$2,480</td><td class="col-m2">861%</td><td>$127</td><td>$3,007</td><td>2,367%</td><td class="pos">+$527 (+21%)</td></tr>
-          <tr><td>🇩🇪 DE</td><td class="col-m2">$795</td><td class="col-m2">$4,700</td><td class="col-m2">591%</td><td>$604</td><td>$2,808</td><td>465%</td><td class="neg">-$1,892 (-40%)</td></tr>
-          <tr><td>🇮🇹 IT</td><td class="col-m2">$227</td><td class="col-m2">$2,658</td><td class="col-m2">1,172%</td><td>$280</td><td>$2,578</td><td>919%</td><td class="neg">-$80 (-3%)</td></tr>
-          <tr><td>🇫🇮 FI</td><td class="col-m2">$342</td><td class="col-m2">$4,366</td><td class="col-m2">1,276%</td><td>$305</td><td>$1,806</td><td>593%</td><td class="neg">-$2,560 (-59%)</td></tr>
-          <tr><td>🇳🇱 NL</td><td class="col-m2">$497</td><td class="col-m2">$3,457</td><td class="col-m2">695%</td><td>$454</td><td>$929</td><td>205%</td><td class="neg">-$2,528 (-73%)</td></tr>
-          <tr><td>🇺🇸 US</td><td class="col-m2">$113</td><td class="col-m2">$2,605</td><td class="col-m2">2,315%</td><td>$38</td><td>$598</td><td>1,575%</td><td class="neg">-$2,007 (-77%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$3,272</td><td>$33,381</td><td>1,139%</td><td>$3,353</td><td>$32,202</td><td>756%</td><td class="neg">-$1,179</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Spread — Network Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Network</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>br</td><td class="col-m2">$373</td><td class="col-m2">$8,194</td><td class="col-m2">2,195%</td><td>$641</td><td>$10,994</td><td>1,714%</td><td class="pos">+$2,800 (+34%)</td></tr>
-          <tr><td>wep</td><td class="col-m2">$159</td><td class="col-m2">$4,734</td><td class="col-m2">2,976%</td><td>$151</td><td>$6,806</td><td>4,516%</td><td class="pos">+$2,072 (+44%)</td></tr>
-          <tr><td>noc</td><td class="col-m2">$684</td><td class="col-m2">$7,276</td><td class="col-m2">1,063%</td><td>$912</td><td>$6,336</td><td>695%</td><td class="neg">-$940 (-13%)</td></tr>
-          <tr><td>lh</td><td class="col-m2">$534</td><td class="col-m2">$5,499</td><td class="col-m2">1,030%</td><td>$447</td><td>$3,902</td><td>874%</td><td class="neg">-$1,597 (-29%)</td></tr>
-          <tr><td>lbx</td><td class="col-m2">$1,278</td><td class="col-m2">$4,046</td><td class="col-m2">317%</td><td>$646</td><td>$1,952</td><td>302%</td><td class="neg">-$2,094 (-52%)</td></tr>
-          <tr><td>rwd</td><td class="col-m2">$564</td><td class="col-m2">$3,843</td><td class="col-m2">682%</td><td>$518</td><td>$1,922</td><td>371%</td><td class="neg">-$1,921 (-50%)</td></tr>
-          <tr><td>cue</td><td class="col-m2">$22</td><td class="col-m2">$60</td><td class="col-m2">272%</td><td>$25</td><td>$1,011</td><td>3,980%</td><td class="pos">+$951 (+1585%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$3,614</td><td>$33,652</td><td>1,030%</td><td>$3,340</td><td>$32,923</td><td>874%</td><td class="neg">-$729</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Innovate — Geo Breakdown</h4>
+    <div class="table-wrap"><table><thead><tr><th>Geo</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>🇵🇱 PL</td>
+    <td class="col-m2">$831</td><td class="col-m2">$10,792</td><td class="col-m2">1,298%</td>
+    <td class="col-m3">$546</td><td class="col-m3">$8,551</td><td class="col-m3">1,565%</td>
+    <td class="neg">-$2,241 (-21%)</td>
+    <td class="pos">+266pts</td>
+  </tr><tr>
+    <td>🇩🇪 DE</td>
+    <td class="col-m2">$1,739</td><td class="col-m2">$9,804</td><td class="col-m2">564%</td>
+    <td class="col-m3">$795</td><td class="col-m3">$7,666</td><td class="col-m3">964%</td>
+    <td class="neg">-$2,139 (-22%)</td>
+    <td class="pos">+400pts</td>
+  </tr><tr>
+    <td>🇳🇱 NL</td>
+    <td class="col-m2">$1,256</td><td class="col-m2">$6,505</td><td class="col-m2">518%</td>
+    <td class="col-m3">$661</td><td class="col-m3">$2,638</td><td class="col-m3">399%</td>
+    <td class="neg">-$3,867 (-59%)</td>
+    <td class="neg">-119pts</td>
+  </tr><tr>
+    <td>🇬🇧 UK</td>
+    <td class="col-m2">$1,234</td><td class="col-m2">$8,350</td><td class="col-m2">677%</td>
+    <td class="col-m3">$144</td><td class="col-m3">$2,440</td><td class="col-m3">1,698%</td>
+    <td class="neg">-$5,910 (-71%)</td>
+    <td class="pos">+1,022pts</td>
+  </tr><tr>
+    <td>🇪🇸 ES</td>
+    <td class="col-m2">$730</td><td class="col-m2">$1,593</td><td class="col-m2">218%</td>
+    <td class="col-m3">$34</td><td class="col-m3">$1,906</td><td class="col-m3">5,652%</td>
+    <td class="pos">+$312 (+20%)</td>
+    <td class="pos">+5,434pts</td>
+  </tr><tr>
+    <td>🇺🇸 US</td>
+    <td class="col-m2">$420</td><td class="col-m2">$17,432</td><td class="col-m2">4,155%</td>
+    <td class="col-m3">$103</td><td class="col-m3">$1,511</td><td class="col-m3">1,473%</td>
+    <td class="neg">-$15,921 (-91%)</td>
+    <td class="neg">-2,682pts</td>
+  </tr><tr>
+    <td>🇩🇰 DK</td>
+    <td class="col-m2">$523</td><td class="col-m2">$3,168</td><td class="col-m2">605%</td>
+    <td class="col-m3">$342</td><td class="col-m3">$1,455</td><td class="col-m3">425%</td>
+    <td class="neg">-$1,712 (-54%)</td>
+    <td class="neg">-180pts</td>
+  </tr><tr>
+    <td>🇲🇽 MX</td>
+    <td class="col-m2">$57</td><td class="col-m2">$2,932</td><td class="col-m2">5,132%</td>
+    <td class="col-m3">$58</td><td class="col-m3">$308</td><td class="col-m3">530%</td>
+    <td class="neg">-$2,625 (-90%)</td>
+    <td class="neg">-4,602pts</td>
+  </tr><tr>
+    <td>🇦🇺 AU</td>
+    <td class="col-m2">$0</td><td class="col-m2">$1</td><td class="col-m2">0%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$50</td><td class="col-m3">0%</td>
+    <td class="pos">+$49 (+6086%)</td>
+    <td class="pos">+0pts</td>
+  </tr><tr>
+    <td>🇦🇹 AT</td>
+    <td class="col-m2">$375</td><td class="col-m2">$1,018</td><td class="col-m2">272%</td>
+    <td class="col-m3">$9</td><td class="col-m3">$40</td><td class="col-m3">469%</td>
+    <td class="neg">-$978 (-96%)</td>
+    <td class="pos">+197pts</td>
+  </tr></tbody></table></div>
+    <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Innovate — Network Breakdown</h4>
+    <div class="table-wrap"><table><thead><tr><th>Network</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>noc</td>
+    <td class="col-m2">$3,980</td><td class="col-m2">$37,066</td><td class="col-m2">931%</td>
+    <td class="col-m3">$1,488</td><td class="col-m3">$13,944</td><td class="col-m3">937%</td>
+    <td class="neg">-$23,122 (-62%)</td>
+    <td class="pos">+6pts</td>
+  </tr><tr>
+    <td>wep</td>
+    <td class="col-m2">$87</td><td class="col-m2">$3,078</td><td class="col-m2">3,555%</td>
+    <td class="col-m3">$88</td><td class="col-m3">$4,929</td><td class="col-m3">5,587%</td>
+    <td class="pos">+$1,852 (+60%)</td>
+    <td class="pos">+2,032pts</td>
+  </tr><tr>
+    <td>lbx</td>
+    <td class="col-m2">$1,768</td><td class="col-m2">$6,984</td><td class="col-m2">395%</td>
+    <td class="col-m3">$716</td><td class="col-m3">$3,586</td><td class="col-m3">501%</td>
+    <td class="neg">-$3,399 (-49%)</td>
+    <td class="pos">+106pts</td>
+  </tr><tr>
+    <td>cue</td>
+    <td class="col-m2">$263</td><td class="col-m2">$5,946</td><td class="col-m2">2,261%</td>
+    <td class="col-m3">$59</td><td class="col-m3">$2,124</td><td class="col-m3">3,619%</td>
+    <td class="neg">-$3,822 (-64%)</td>
+    <td class="pos">+1,358pts</td>
+  </tr><tr>
+    <td>rwd</td>
+    <td class="col-m2">$864</td><td class="col-m2">$6,981</td><td class="col-m2">808%</td>
+    <td class="col-m3">$236</td><td class="col-m3">$1,869</td><td class="col-m3">793%</td>
+    <td class="neg">-$5,112 (-73%)</td>
+    <td class="neg">-15pts</td>
+  </tr><tr>
+    <td>lh</td>
+    <td class="col-m2">$154</td><td class="col-m2">$1,250</td><td class="col-m2">811%</td>
+    <td class="col-m3">$105</td><td class="col-m3">$102</td><td class="col-m3">97%</td>
+    <td class="neg">-$1,148 (-92%)</td>
+    <td class="neg">-714pts</td>
+  </tr><tr>
+    <td>ecl</td>
+    <td class="col-m2">$15</td><td class="col-m2">$109</td><td class="col-m2">730%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$22</td><td class="col-m3">0%</td>
+    <td class="neg">-$88 (-80%)</td>
+    <td class="neg">-730pts</td>
+  </tr><tr>
+    <td>pm</td>
+    <td class="col-m2">$14</td><td class="col-m2">$225</td><td class="col-m2">1,618%</td>
+    <td class="col-m3">$0</td><td class="col-m3">$0</td><td class="col-m3">0%</td>
+    <td class="neg">-$225 (-100%)</td>
+    <td class="neg">-1,618pts</td>
+  </tr></tbody></table></div>
     <div class="insights">
-      <h3>🔎 Spread Actions</h3>
-      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>PL doubled to $17.2K (+119%)</strong> — Spread's hero geo, now generating over half of total profit. wep (4,516% ROI) and cue (+1,585%) are the breakout networks.</div></div>
-      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>NL (-73%), US (-77%), FI (-59%)</strong> all saw major drops. lbx and rwd networks declined roughly 50% each. Audit these network-geo combinations.</div></div>
-      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Consolidate on PL+br+wep.</strong> These are working. Cut lbx spend (302% ROI, declining) and reallocate to wep (4,516% ROI) and cue (3,980% ROI) where momentum is explosive.</div></div>
+      <h3>🔎 Innovate Actions</h3>
+      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>noc collapsed -62%</strong> ($37.1K → $13.9K) — but cost was cut by exactly the same proportion ($3,980 → $1,488). ROI is unchanged at ~937%. So this is a deliberate budget cut, not a quality issue. Question: was it intentional?</div></div>
+      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>US disappeared</strong> ($17.4K → $1.5K, -91%) on cost cut from $420 to $103. UK also collapsed -71%. These are the geos that drove most of Innovate's previous strength.</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>wep + cue are the bright spots</strong> — wep grew +60% to $4.9K at 5,587% ROI. cue is more efficient than ever (3,619% ROI). ES turned around (+20% profit on 95% less cost — ROI 5,652%).</div></div>
+      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Confirm intent on noc/US cuts.</strong> If accidental, push noc spend back to $4K immediately. If deliberate, reallocate the freed budget — Spread, Galatea, or push Innovate's wep/cue. Innovate's overall ROI improved (860% → 987%), so the efficiency story is good even if absolute profit shrunk.</div></div>
     </div>
   </div>
 
   <!-- GALATEA -->
   <div class="tab-content" id="tab-galatea">
     <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
-      <div class="kpi profit"><div class="kpi-label">Profit (Mar)</div><div class="kpi-value" style="color:var(--green);font-size:26px">$13,662</div><div class="kpi-row"><span class="kpi-prev">Feb: $8,983</span><span class="kpi-delta up">▲ +52.1%</span></div></div>
-      <div class="kpi roi"><div class="kpi-label">ROI (Mar)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">728%</div><div class="kpi-row"><span class="kpi-prev">Feb: 506%</span><span class="kpi-delta up">▲ +222pts</span></div></div>
-      <div class="kpi cost"><div class="kpi-label">Cost (Mar)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$1,876</div><div class="kpi-row"><span class="kpi-prev">Feb: $1,776</span><span class="kpi-delta down">▲ +5.6%</span></div></div>
+      <div class="kpi profit"><div class="kpi-label">Profit (Apr)</div><div class="kpi-value" style="color:var(--green);font-size:26px">$13,870</div><div class="kpi-row"><span class="kpi-prev">Mar: $13,662</span><span class="kpi-delta up">▲ +1.5%</span></div></div>
+      <div class="kpi roi"><div class="kpi-label">ROI (Apr)</div><div class="kpi-value" style="color:var(--blue);font-size:26px">1,064%</div><div class="kpi-row"><span class="kpi-prev">Mar: 728%</span><span class="kpi-delta up">▲ +336pts</span></div></div>
+      <div class="kpi cost"><div class="kpi-label">Cost (Apr)</div><div class="kpi-value" style="color:var(--amber);font-size:26px">$1,304</div><div class="kpi-row"><span class="kpi-prev">Mar: $1,877</span><span class="kpi-delta up">▼ -30.5%</span></div></div>
     </div>
     <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Galatea — Geo Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Geo</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>🇳🇱 NL</td><td class="col-m2">$178</td><td class="col-m2">$2,067</td><td class="col-m2">1,162%</td><td>$292</td><td>$3,573</td><td>1,222%</td><td class="pos">+$1,506 (+73%)</td></tr>
-          <tr><td>🇺🇸 US</td><td class="col-m2">$72</td><td class="col-m2">$1,221</td><td class="col-m2">1,696%</td><td>$115</td><td>$3,013</td><td>2,617%</td><td class="pos">+$1,792 (+147%)</td></tr>
-          <tr><td>🇵🇱 PL</td><td class="col-m2">$116</td><td class="col-m2">$1,169</td><td class="col-m2">1,011%</td><td>$308</td><td>$2,525</td><td>819%</td><td class="pos">+$1,356 (+116%)</td></tr>
-          <tr><td>🇪🇸 ES</td><td class="col-m2">$127</td><td class="col-m2">$1,030</td><td class="col-m2">809%</td><td>$148</td><td>$1,743</td><td>1,181%</td><td class="pos">+$713 (+69%)</td></tr>
-          <tr><td>🇦🇺 AU</td><td class="col-m2">$213</td><td class="col-m2">$1,170</td><td class="col-m2">549%</td><td>$181</td><td>$759</td><td>419%</td><td class="neg">-$411 (-35%)</td></tr>
-          <tr><td>🇬🇧 UK</td><td class="col-m2">$373</td><td class="col-m2">$456</td><td class="col-m2">122%</td><td>$192</td><td>$607</td><td>316%</td><td class="pos">+$151 (+33%)</td></tr>
-          <tr><td>🇩🇪 DE</td><td class="col-m2">$445</td><td class="col-m2">$1,207</td><td class="col-m2">271%</td><td>$292</td><td>$527</td><td>180%</td><td class="neg">-$680 (-56%)</td></tr>
-          <tr><td>🇫🇷 FR</td><td class="col-m2">$130</td><td class="col-m2">$547</td><td class="col-m2">422%</td><td>$111</td><td>$450</td><td>407%</td><td class="neg">-$97 (-18%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$1,654</td><td>$8,867</td><td>679%</td><td>$1,639</td><td>$13,197</td><td>619%</td><td class="pos">+$4,330</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="table-wrap"><table><thead><tr><th>Geo</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>🇺🇸 US</td>
+    <td class="col-m2">$115</td><td class="col-m2">$3,013</td><td class="col-m2">2,629%</td>
+    <td class="col-m3">$186</td><td class="col-m3">$5,919</td><td class="col-m3">3,179%</td>
+    <td class="pos">+$2,905 (+96%)</td>
+    <td class="pos">+550pts</td>
+  </tr><tr>
+    <td>🇳🇱 NL</td>
+    <td class="col-m2">$292</td><td class="col-m2">$3,574</td><td class="col-m2">1,223%</td>
+    <td class="col-m3">$87</td><td class="col-m3">$2,390</td><td class="col-m3">2,758%</td>
+    <td class="neg">-$1,183 (-33%)</td>
+    <td class="pos">+1,535pts</td>
+  </tr><tr>
+    <td>🇵🇱 PL</td>
+    <td class="col-m2">$308</td><td class="col-m2">$2,525</td><td class="col-m2">821%</td>
+    <td class="col-m3">$367</td><td class="col-m3">$1,631</td><td class="col-m3">444%</td>
+    <td class="neg">-$894 (-35%)</td>
+    <td class="neg">-376pts</td>
+  </tr><tr>
+    <td>🇬🇧 UK</td>
+    <td class="col-m2">$192</td><td class="col-m2">$608</td><td class="col-m2">317%</td>
+    <td class="col-m3">$199</td><td class="col-m3">$967</td><td class="col-m3">485%</td>
+    <td class="pos">+$359 (+59%)</td>
+    <td class="pos">+168pts</td>
+  </tr><tr>
+    <td>🇳🇿 NZ</td>
+    <td class="col-m2">$229</td><td class="col-m2">$304</td><td class="col-m2">133%</td>
+    <td class="col-m3">$112</td><td class="col-m3">$883</td><td class="col-m3">787%</td>
+    <td class="pos">+$578 (+190%)</td>
+    <td class="pos">+654pts</td>
+  </tr><tr>
+    <td>🇫🇷 FR</td>
+    <td class="col-m2">$111</td><td class="col-m2">$450</td><td class="col-m2">404%</td>
+    <td class="col-m3">$92</td><td class="col-m3">$560</td><td class="col-m3">611%</td>
+    <td class="pos">+$111 (+25%)</td>
+    <td class="pos">+207pts</td>
+  </tr><tr>
+    <td>🇩🇪 DE</td>
+    <td class="col-m2">$292</td><td class="col-m2">$527</td><td class="col-m2">181%</td>
+    <td class="col-m3">$14</td><td class="col-m3">$519</td><td class="col-m3">3,664%</td>
+    <td class="neg">-$8 (-1%)</td>
+    <td class="pos">+3,484pts</td>
+  </tr><tr>
+    <td>🇪🇸 ES</td>
+    <td class="col-m2">$148</td><td class="col-m2">$1,742</td><td class="col-m2">1,174%</td>
+    <td class="col-m3">$67</td><td class="col-m3">$510</td><td class="col-m3">756%</td>
+    <td class="neg">-$1,232 (-71%)</td>
+    <td class="neg">-417pts</td>
+  </tr><tr>
+    <td>🇦🇺 AU</td>
+    <td class="col-m2">$182</td><td class="col-m2">$759</td><td class="col-m2">417%</td>
+    <td class="col-m3">$155</td><td class="col-m3">$291</td><td class="col-m3">188%</td>
+    <td class="neg">-$468 (-62%)</td>
+    <td class="neg">-229pts</td>
+  </tr><tr>
+    <td>🇫🇮 FI</td>
+    <td class="col-m2">$8</td><td class="col-m2">$160</td><td class="col-m2">2,007%</td>
+    <td class="col-m3">$24</td><td class="col-m3">$199</td><td class="col-m3">819%</td>
+    <td class="pos">+$39 (+25%)</td>
+    <td class="neg">-1,188pts</td>
+  </tr></tbody></table></div>
     <h4 style="font-size:15px;font-weight:700;margin:20px 0 12px">Galatea — Network Breakdown</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Network</th><th>Feb Cost</th><th>Feb Profit</th><th>Feb ROI</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Profit Δ</th></tr></thead>
-        <tbody>
-          <tr><td>noc</td><td class="col-m2">$655</td><td class="col-m2">$4,816</td><td class="col-m2">735%</td><td>$691</td><td>$7,380</td><td>1,068%</td><td class="pos">+$2,564 (+53%)</td></tr>
-          <tr><td>lbx</td><td class="col-m2">$324</td><td class="col-m2">$1,517</td><td class="col-m2">469%</td><td>$536</td><td>$3,102</td><td>578%</td><td class="pos">+$1,585 (+104%)</td></tr>
-          <tr><td>wep</td><td class="col-m2">$28</td><td class="col-m2">$737</td><td class="col-m2">2,614%</td><td>$54</td><td>$2,180</td><td>4,041%</td><td class="pos">+$1,443 (+196%)</td></tr>
-          <tr><td>cue</td><td class="col-m2">$7</td><td class="col-m2">$178</td><td class="col-m2">2,435%</td><td>$18</td><td>$535</td><td>2,957%</td><td class="pos">+$357 (+201%)</td></tr>
-          <tr><td>lh</td><td class="col-m2">$372</td><td class="col-m2">$734</td><td class="col-m2">197%</td><td>$279</td><td>$238</td><td>85%</td><td class="neg">-$496 (-68%)</td></tr>
-          <tr><td>ecl</td><td class="col-m2">$106</td><td class="col-m2">$600</td><td class="col-m2">564%</td><td>$64</td><td>$196</td><td>305%</td><td class="neg">-$404 (-67%)</td></tr>
-          <tr><td>rwd</td><td class="col-m2">$265</td><td class="col-m2">$383</td><td class="col-m2">144%</td><td>$221</td><td>$43</td><td>19%</td><td class="neg">-$340 (-89%)</td></tr>
-          <tr class="total-row"><td>Total / Median</td><td>$1,757</td><td>$8,965</td><td>564%</td><td>$1,863</td><td>$13,674</td><td>578%</td><td class="pos">+$4,709</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="table-wrap"><table><thead><tr><th>Network</th><th>Mar Cost</th><th>Mar Profit</th><th>Mar ROI</th><th>Apr Cost</th><th>Apr Profit</th><th>Apr ROI</th><th>Profit Δ</th><th>ROI Δ</th></tr></thead><tbody><tr>
+    <td>noc</td>
+    <td class="col-m2">$691</td><td class="col-m2">$7,380</td><td class="col-m2">1,069%</td>
+    <td class="col-m3">$725</td><td class="col-m3">$9,307</td><td class="col-m3">1,283%</td>
+    <td class="pos">+$1,927 (+26%)</td>
+    <td class="pos">+215pts</td>
+  </tr><tr>
+    <td>lbx</td>
+    <td class="col-m2">$537</td><td class="col-m2">$3,101</td><td class="col-m2">578%</td>
+    <td class="col-m3">$191</td><td class="col-m3">$2,078</td><td class="col-m3">1,089%</td>
+    <td class="neg">-$1,023 (-33%)</td>
+    <td class="pos">+510pts</td>
+  </tr><tr>
+    <td>wep</td>
+    <td class="col-m2">$54</td><td class="col-m2">$2,180</td><td class="col-m2">4,040%</td>
+    <td class="col-m3">$31</td><td class="col-m3">$1,276</td><td class="col-m3">4,104%</td>
+    <td class="neg">-$904 (-41%)</td>
+    <td class="pos">+63pts</td>
+  </tr><tr>
+    <td>cue</td>
+    <td class="col-m2">$18</td><td class="col-m2">$535</td><td class="col-m2">2,961%</td>
+    <td class="col-m3">$26</td><td class="col-m3">$727</td><td class="col-m3">2,751%</td>
+    <td class="pos">+$192 (+36%)</td>
+    <td class="neg">-210pts</td>
+  </tr><tr>
+    <td>ecl</td>
+    <td class="col-m2">$64</td><td class="col-m2">$196</td><td class="col-m2">305%</td>
+    <td class="col-m3">$20</td><td class="col-m3">$401</td><td class="col-m3">2,052%</td>
+    <td class="pos">+$205 (+105%)</td>
+    <td class="pos">+1,747pts</td>
+  </tr><tr>
+    <td>rwd</td>
+    <td class="col-m2">$221</td><td class="col-m2">$43</td><td class="col-m2">19%</td>
+    <td class="col-m3">$127</td><td class="col-m3">$94</td><td class="col-m3">73%</td>
+    <td class="pos">+$51 (+118%)</td>
+    <td class="pos">+54pts</td>
+  </tr><tr>
+    <td>lh</td>
+    <td class="col-m2">$280</td><td class="col-m2">$238</td><td class="col-m2">85%</td>
+    <td class="col-m3">$184</td><td class="col-m3">-$13</td><td class="col-m3">-7%</td>
+    <td class="neg">-$251 (-105%)</td>
+    <td class="neg">-92pts</td>
+  </tr></tbody></table></div>
     <div class="insights">
       <h3>🔎 Galatea Actions</h3>
-      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Every metric improved — profit +52%, ROI +222pts.</strong> Galatea is firing on all cylinders. noc (+53%), lbx (+104%), wep (+196%), cue (+201%) — all core networks growing.</div></div>
-      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>US profit nearly tripled</strong> ($1.2K→$3.0K, +147%). NL, PL, ES all grew strongly. The geo portfolio is diversifying well.</div></div>
-      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Scale Galatea aggressively.</strong> Increase total budget from $1.9K to $3K+. Focus on wep (4,041% ROI) and noc (1,068% ROI). Cut rwd (19% ROI — nearly dead) and lh (85% ROI — declining).</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>US doubled to $5.9K (+96%)</strong> at 3,179% ROI on $186 spend. NZ went from $304 to $883 (+190%). UK +59%. Geo expansion is working.</div></div>
+      <div class="insight-item"><div class="insight-icon win">✓</div><div class="insight-text"><strong>Efficiency surge</strong> — Galatea cost dropped 31% but profit held. noc $691→$725 produced +26% more profit. lbx halved cost while only halving profit (ROI 578% → 1,089%). Galatea is in optimization mode.</div></div>
+      <div class="insight-item"><div class="insight-icon warn">⚠</div><div class="insight-text"><strong>NL fell -33%</strong> ($3.6K → $2.4K) and PL -35% ($2.5K → $1.6K). Two of Galatea's strong March geos lost ground. ES also dropped -71%.</div></div>
+      <div class="insight-item"><div class="insight-icon action">⚡</div><div class="insight-text"><strong>Action: Galatea is ready to scale.</strong> Cost has been efficient for two months in a row. Push spend from $1.3K to $2K, focusing on US (3,179% ROI) and wep (4,104% ROI). Audit NL/PL declines — both were strong before.</div></div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
 <div style="text-align:center;padding:40px 0 24px;color:var(--text3);font-size:12px;border-top:1px solid var(--border);margin-top:40px;font-family:'JetBrains Mono',monospace">
-  MGMX Monthly Dashboard · Feb vs Mar 2026 · Generated April 2026
+  MGMX Monthly Dashboard · Mar vs Apr 2026 · Generated May 2026
 </div>
 
 </div>
