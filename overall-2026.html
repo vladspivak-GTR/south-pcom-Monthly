@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026 Overall Performance · Year Graph</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#06060c;--surface:#0e0e18;--card:#141420;--border:#1e1e30;
-  --text:#eaeaf4;--text2:#9898b0;--text3:#58586e;
-  --revenue:#3b82f6;--cost:#f59e0b;--profit:#22c55e;--roi:#06b6d4;--cr:#f472b6;
+  --bg:#f1f5fb;--surface:#ffffff;--card:#ffffff;--border:#d6dfeb;
+  --text:#0b1220;--text2:#2d3748;--text3:#5a6b85;
+  --revenue:#1d4ed8;--cost:#b45309;--profit:#047857;--roi:#0369a1;--cr:#db2777;
 }
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .container{max-width:1400px;margin:0 auto;padding:0 32px}
 .header{padding:48px 0 24px;text-align:center}
 .header h1{font-size:42px;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--revenue),var(--profit),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -20,13 +20,13 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .summary{display:flex;justify-content:center;gap:32px;margin:28px 0 40px;flex-wrap:wrap}
 .sum-item{text-align:center}
 .sum-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
-.sum-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:800}
-.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;margin-bottom:32px}
+.sum-val{font-family:'Outfit',sans-serif;font-size:18px;font-weight:900}
+.chart-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;position:relative;margin-bottom:32px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 .chart-title{font-size:16px;font-weight:800;margin-bottom:24px;display:flex;align-items:center;gap:10px}
 .chart-svg{width:100%;overflow:visible}
 .grid-line{stroke:var(--border);stroke-width:1;stroke-dasharray:4 4}
-.axis-label{font-family:'JetBrains Mono',monospace;font-size:11px;fill:var(--text3);font-weight:600}
-.month-label{font-family:'DM Sans',sans-serif;font-size:14px;fill:var(--text);font-weight:800}
+.axis-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;fill:var(--text3);font-weight:700}
+.month-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;fill:var(--text);font-weight:800}
 .chart-line{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .line-revenue{stroke:var(--revenue)}
 .line-cost{stroke:var(--cost)}
@@ -36,14 +36,14 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .glow-revenue{filter:drop-shadow(0 0 6px rgba(59,130,246,.5))}
 .glow-cost{filter:drop-shadow(0 0 6px rgba(245,158,11,.5))}
 .glow-profit{filter:drop-shadow(0 0 6px rgba(34,197,94,.5))}
-.area-fill{opacity:.06}
-.val-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-anchor:middle}
+.area-fill{opacity:.08}
+.val-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;text-anchor:middle}
 .legend{display:flex;justify-content:center;gap:28px;margin-top:20px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text2)}
 .legend-dot{width:12px;height:12px;border-radius:4px}
 .months-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:40px 0}
-.month-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
-.month-card:hover{border-color:rgba(59,130,246,.3);transform:translateY(-4px)}
+.month-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
+.month-card:hover{border-color:rgba(29,78,216,.2);transform:translateY(-4px);box-shadow:0 8px 24px rgba(15,23,42,.1)}
 .month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .month-card:nth-child(1)::before{background:linear-gradient(90deg,var(--revenue),var(--profit))}
 .month-card:nth-child(2)::before{background:linear-gradient(90deg,var(--profit),#a78bfa)}
@@ -51,17 +51,17 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .month-card:nth-child(4)::before{background:linear-gradient(90deg,var(--roi),var(--cr))}
 .month-name{font-size:13px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
 .month-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.metric{padding:10px 12px;background:var(--surface);border-radius:10px}
+.metric{padding:10px 12px;background:#f4f7fc;border-radius:10px}
 .metric-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
-.metric-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:800}
+.metric-val{font-family:'Outfit',sans-serif;font-size:14px;font-weight:900}
 .metric-val.rev{color:var(--revenue)}
 .metric-val.cost{color:var(--cost)}
 .metric-val.profit{color:var(--profit)}
 .metric-val.roi{color:var(--roi)}
 .metric-val.cr{color:var(--cr)}
-.mom{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;margin-left:3px}
-.mom.up{color:var(--profit);background:rgba(34,197,94,.1)}
-.mom.down{color:#ef4444;background:rgba(239,68,68,.1)}
+.mom{display:inline-block;font-family:'Plus Jakarta Sans',sans-serif;font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;margin-left:3px}
+.mom.up{color:var(--profit);background:rgba(4,120,87,.1)}
+.mom.down{color:#be123c;background:rgba(190,18,60,.1)}
 .chart-secondary{margin-top:8px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes drawLine{from{stroke-dashoffset:2000}to{stroke-dashoffset:0}}
@@ -70,12 +70,12 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .draw{stroke-dasharray:2000;animation:drawLine 2s ease forwards}
 @media(max-width:1100px){.months-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.months-grid{grid-template-columns:1fr}.summary{gap:16px}}
-.back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#a0a0b8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
-.back-hub:hover{color:#eaeaf0;border-color:rgba(59,130,246,.3);background:rgba(10,10,15,.95)}
+.back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
+.back-hub:hover{color:var(--text);border-color:rgba(59,130,246,.3);background:#ffffff}
 .back-hub svg{width:16px;height:16px;flex-shrink:0}
 .story-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:32px}
 .story-box h3{font-size:15px;font-weight:800;margin-bottom:14px}
-.story-row{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;color:var(--text2);line-height:1.6}
+.story-row{padding:10px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px;color:var(--text2);line-height:1.6}
 .story-row:last-child{border-bottom:none}
 .story-row strong{color:var(--text)}
 </style>
@@ -289,7 +289,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
   <div class="story-row"><strong>YTD profit: $1.38M.</strong> If May matches April pace, we cross $1.77M YTD by end of May. On track for a $4M+ year.</div>
 </div>
 
-<div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'JetBrains Mono',monospace">
+<div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'Outfit',sans-serif">
   2026 Overall Performance · Jan–Apr · Generated May 2026
 </div>
 </div>

@@ -4,50 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MGMX Traffic Sources · Mar vs Apr 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a0f;--surface:#12121a;--card:#1a1a26;--border:#262636;
-  --text:#e8e8f0;--text2:#a0a0b8;--text3:#606078;
-  --green:#22c55e;--green-bg:rgba(34,197,94,.08);--green-border:rgba(34,197,94,.15);
-  --red:#ef4444;--red-bg:rgba(239,68,68,.08);--red-border:rgba(239,68,68,.15);
-  --blue:#3b82f6;--purple:#a78bfa;--amber:#f59e0b;--cyan:#06b6d4;
-  --accent:#3b82f6;--accent-bg:rgba(59,130,246,.08);
+  --bg:#f1f5fb;--surface:#ffffff;--card:#ffffff;--border:#d6dfeb;
+  --text:#0b1220;--text2:#2d3748;--text3:#5a6b85;
+  --green:#047857;--green-bg:rgba(4,120,87,.08);--green-border:rgba(4,120,87,.2);
+  --red:#be123c;--red-bg:rgba(190,18,60,.06);--red-border:rgba(190,18,60,.15);
+  --blue:#1d4ed8;--purple:#6d28d9;--amber:#b45309;--cyan:#0369a1;
+  --accent:#1d4ed8;--accent-bg:rgba(29,78,216,.08);
 }
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.5;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 .container{max-width:1400px;margin:0 auto;padding:0 28px}
 .header{padding:48px 0 32px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;border-bottom:1px solid var(--border)}
 .logo{display:flex;align-items:center;gap:16px}
-.logo-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:800;color:#fff;letter-spacing:-1px}
+.logo-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#f59e0b,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:16px;font-weight:900;color:#fff;letter-spacing:-1px}
 .logo h1{font-size:28px;font-weight:800;letter-spacing:-.03em}
 .logo .sub{font-size:12px;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-top:2px}
-.badge{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--amber);padding:8px 16px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
+.badge{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--amber);padding:8px 16px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600}
 .focus-tag{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.12));border:1px solid rgba(245,158,11,.2);padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;color:var(--amber);letter-spacing:.5px;text-transform:uppercase;margin-top:8px}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
 .kpi.a::before{background:linear-gradient(90deg,var(--green),var(--cyan))}
 .kpi.b::before{background:linear-gradient(90deg,var(--blue),var(--purple))}
 .kpi.c::before{background:linear-gradient(90deg,var(--amber),#f97316)}
 .kpi.d::before{background:linear-gradient(90deg,var(--purple),var(--blue))}
 .kpi-label{font-size:12px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
-.kpi-value{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;letter-spacing:-1px}
+.kpi-value{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;letter-spacing:-1px}
 .kpi-row{display:flex;align-items:baseline;gap:10px;margin-top:4px}
-.kpi-prev{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text3)}
+.kpi-prev{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text3)}
 .section{margin:40px 0;animation:fadeUp .6s ease both}
 .section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
 .section-title{font-size:20px;font-weight:800;letter-spacing:-.02em}
 .section-sub{font-size:13px;color:var(--text3);margin-left:auto}
-.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow-x:auto}
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow-x:auto;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 table{width:100%;border-collapse:collapse;min-width:700px}
 th{background:var(--surface);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding:14px 14px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
 th:first-child{text-align:left}
-td{padding:11px 14px;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:500;text-align:right;border-bottom:1px solid rgba(255,255,255,.03);white-space:nowrap}
-td:first-child{text-align:left;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px}
+td{padding:11px 14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12.5px;font-weight:700;text-align:right;border-bottom:1px solid rgba(0,0,0,.05);white-space:nowrap}
+td:first-child{text-align:left;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,.02)}
+tr:hover td{background:rgba(0,0,0,.02)}
 .total-row td{background:rgba(59,130,246,.04);font-weight:700;border-top:2px solid var(--border)}
 .col-m2{color:var(--text2)}
 .pos{color:var(--green)}
@@ -56,22 +56,22 @@ tr:hover td{background:rgba(255,255,255,.02)}
 .bar-chart{display:flex;flex-direction:column;gap:8px;margin:20px 0}
 .bar-row{display:flex;align-items:center;gap:12px}
 .bar-label{width:140px;font-size:12px;font-weight:700;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bar-track{flex:1;height:28px;background:var(--surface);border-radius:6px;position:relative;overflow:hidden}
-.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;min-width:fit-content;transition:width .8s ease}
+.bar-track{flex:1;height:28px;background:#eaeff8;border-radius:6px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding:0 10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;min-width:fit-content;transition:width .8s ease}
 .bar-fill.mar{background:linear-gradient(90deg,var(--blue),var(--purple))}
 .geo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin-top:20px}
-.geo-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color .2s}
+.geo-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:border-color .2s;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 .geo-card:hover{border-color:rgba(59,130,246,.3)}
 .geo-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .geo-card-head h4{font-size:15px;font-weight:800}
-.geo-card-head .geo-profit{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
-.geo-ts-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:12px}
+.geo-card-head .geo-profit{font-family:'Outfit',sans-serif;font-size:14px;font-weight:800}
+.geo-ts-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:12px}
 .geo-ts-row:last-child{border-bottom:none}
 .geo-ts-name{font-weight:600;color:var(--text2)}
-.geo-ts-val{font-family:'JetBrains Mono',monospace;font-weight:600}
-.insights{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:20px}
+.geo-ts-val{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700}
+.insights{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:20px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 .insights h3{font-size:15px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.insight-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.03)}
+.insight-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid rgba(0,0,0,.05)}
 .insight-item:last-child{border-bottom:none}
 .insight-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
 .insight-icon.win{background:var(--green-bg);border:1px solid var(--green-border)}
@@ -82,8 +82,8 @@ tr:hover td{background:rgba(255,255,255,.02)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}.kpi-value{font-size:22px}.header{flex-direction:column;align-items:flex-start}.geo-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.kpi-grid{grid-template-columns:1fr}}
-.back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#a0a0b8;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
-.back-hub:hover{color:#eaeaf0;border-color:rgba(59,130,246,.3);background:rgba(10,10,15,.95)}
+.back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
+.back-hub:hover{color:var(--text);border-color:rgba(59,130,246,.3);background:#ffffff}
 .back-hub svg{width:16px;height:16px;flex-shrink:0}
 </style>
 </head>
@@ -323,7 +323,7 @@ tr:hover td{background:rgba(255,255,255,.02)}
   </div>
 </div>
 
-<div style="text-align:center;padding:40px 0 24px;color:var(--text3);font-size:12px;border-top:1px solid var(--border);margin-top:40px;font-family:'JetBrains Mono',monospace">
+<div style="text-align:center;padding:40px 0 24px;color:var(--text3);font-size:12px;border-top:1px solid var(--border);margin-top:40px;font-family:'Outfit',sans-serif">
   MGMX Traffic Sources Dashboard · Mar vs Apr 2026 · Generated May 2026
 </div>
 </div>
