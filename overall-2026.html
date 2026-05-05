@@ -94,7 +94,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <div class="sum-item"><div class="sum-label">YTD Cost</div><div class="sum-val" style="color:var(--cost)">$121,600</div></div>
   <div class="sum-item"><div class="sum-label">YTD Profit</div><div class="sum-val" style="color:var(--profit)">$1,380,283</div></div>
   <div class="sum-item"><div class="sum-label">Avg ROI</div><div class="sum-val" style="color:var(--roi)">1,135%</div></div>
-  <div class="sum-item"><div class="sum-label">Avg CR</div><div class="sum-val" style="color:var(--cr)">0.07%</div></div>
+  <div class="sum-item"><div class="sum-label">Avg CR</div><div class="sum-val" style="color:var(--cr)">0.05%</div></div>
 </div>
 
 <!-- MAIN CHART: Revenue / Cost / Profit -->
@@ -187,10 +187,10 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <text x="90" y="144" class="axis-label" text-anchor="end">1100%</text>
     <text x="90" y="194" class="axis-label" text-anchor="end">1000%</text>
 
-    <text x="830" y="44" class="axis-label" text-anchor="start">0.12%</text>
-    <text x="830" y="94" class="axis-label" text-anchor="start">0.09%</text>
-    <text x="830" y="144" class="axis-label" text-anchor="start">0.06%</text>
-    <text x="830" y="194" class="axis-label" text-anchor="start">0.03%</text>
+    <text x="830" y="44" class="axis-label" text-anchor="start">0.08%</text>
+    <text x="830" y="94" class="axis-label" text-anchor="start">0.06%</text>
+    <text x="830" y="144" class="axis-label" text-anchor="start">0.04%</text>
+    <text x="830" y="194" class="axis-label" text-anchor="start">0.02%</text>
 
     <text x="180" y="215" class="month-label" text-anchor="middle">JAN</text>
     <text x="380" y="215" class="month-label" text-anchor="middle">FEB</text>
@@ -213,21 +213,21 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <text x="580" y="170" class="val-label" fill="var(--roi)">1,034%</text>
     <text x="780" y="178" class="val-label" fill="var(--roi)">1,013%</text>
 
-    <!-- CR: 0.04, 0.06, 0.06, 0.11 — scale 0.03-0.12 over 150px -->
-    <!-- y = 190 - (val-0.03)/0.09*150 -->
-    <!-- Jan: 190-(0.01/0.09*150)=190-16.67=173.33 -->
-    <!-- Feb: 190-(0.03/0.09*150)=190-50=140 -->
-    <!-- Mar: 190-(0.03/0.09*150)=140 -->
-    <!-- Apr: 190-(0.08/0.09*150)=190-133.33=56.67 -->
-    <polyline points="180,173 380,140 580,140 780,57" class="chart-line draw" stroke="var(--cr)" stroke-width="2.5" stroke-dasharray="6 4"/>
-    <circle cx="180" cy="173" r="5" fill="var(--cr)" class="data-point"/>
-    <circle cx="380" cy="140" r="5" fill="var(--cr)" class="data-point"/>
-    <circle cx="580" cy="140" r="5" fill="var(--cr)" class="data-point"/>
-    <circle cx="780" cy="57" r="5" fill="var(--cr)" class="data-point"/>
-    <text x="180" y="189" class="val-label" fill="var(--cr)">0.04%</text>
-    <text x="380" y="132" class="val-label" fill="var(--cr)">0.06%</text>
-    <text x="580" y="132" class="val-label" fill="var(--cr)">0.06%</text>
-    <text x="780" y="48" class="val-label" fill="var(--cr)">0.11%</text>
+    <!-- CR: 0.04, 0.06, 0.06, 0.05 — scale 0.02-0.08 over 150px -->
+    <!-- y = 190 - (val-0.02)/0.06*150 -->
+    <!-- Jan 0.04: 190-(0.02/0.06*150)=140 -->
+    <!-- Feb 0.06: 190-(0.04/0.06*150)=90 -->
+    <!-- Mar 0.06: 90 -->
+    <!-- Apr 0.05: 190-(0.03/0.06*150)=115 -->
+    <polyline points="180,140 380,90 580,90 780,115" class="chart-line draw" stroke="var(--cr)" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <circle cx="180" cy="140" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="380" cy="90" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="580" cy="90" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="780" cy="115" r="5" fill="var(--cr)" class="data-point"/>
+    <text x="180" y="156" class="val-label" fill="var(--cr)">0.04%</text>
+    <text x="380" y="106" class="val-label" fill="var(--cr)">0.06%</text>
+    <text x="580" y="80" class="val-label" fill="var(--cr)">0.06%</text>
+    <text x="780" y="131" class="val-label" fill="var(--cr)">0.05%</text>
   </svg>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--roi)"></div>ROI</div>
@@ -274,7 +274,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$38,775 <span class="mom down">+19%</span></div></div>
       <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$392,731 <span class="mom up">+17%</span></div></div>
       <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,013% <span class="mom down">-21</span></div></div>
-      <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.11% <span class="mom up">+83%</span></div></div>
+      <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.05% <span class="mom down">-17%</span></div></div>
     </div>
   </div>
 </div>
@@ -284,7 +284,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   <h3>📖 The 2026 Story · Jan → Apr</h3>
   <div class="story-row"><strong>April was the best profit month since January</strong> — $392.7K (+17% MoM). Revenue hit a Q2 high of $431.5K. The portfolio recovered from the February dip and now exceeds the March peak.</div>
   <div class="story-row"><strong>Yenoti is the engine of growth</strong> — went from $113K profit in March to $206K in April (+82%). MGMX held at ~$186K. The portfolio is now nearly 50/50 between the two — a year ago it was MGMX-dominant.</div>
-  <div class="story-row"><strong>CR jumped to 0.11%</strong> — nearly double the Q1 average of 0.05%. Yenoti's expansion in DE/UK/PL is driving conversion efficiency higher despite scaling spend by +19%.</div>
+  <div class="story-row"><strong>Combined CR landed at 0.05%</strong> — slightly below March's 0.06%. Yenoti's CR alone climbed to 0.11% (from a higher visit base), but MGMX's much larger volume at 0.03% pulls the blended number down. The two cohorts are diverging.</div>
   <div class="story-row"><strong>ROI compressed to 1,013%</strong> — the trade-off for scaling. Cost grew faster than the start of the year, but absolute profit reached YTD high. Healthy compression, not concerning.</div>
   <div class="story-row"><strong>YTD profit: $1.38M.</strong> If May matches April pace, we cross $1.77M YTD by end of May. On track for a $4M+ year.</div>
 </div>
