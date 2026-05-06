@@ -102,6 +102,19 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .footer{text-align:center;padding:40px 0 48px;border-top:1px solid var(--border);margin-top:16px}
 .footer-text{font-family:'Outfit',sans-serif;font-size:12px;color:var(--text3)}
 
+/* Team section */
+.team-section{margin:0 0 56px}
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:24px}
+.team-member{display:flex;flex-direction:column;align-items:center;gap:12px;cursor:default}
+.team-photo-wrap{position:relative;width:110px;height:110px;flex-shrink:0}
+.team-photo-wrap::before{content:'';position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple),var(--teal));z-index:0;opacity:0;transition:opacity .35s}
+.team-member:hover .team-photo-wrap::before{opacity:1}
+.team-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;object-position:center top;position:relative;z-index:1;border:3px solid var(--surface);box-shadow:0 2px 8px rgba(15,23,42,.10);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.team-member:hover .team-photo{transform:scale(1.06);box-shadow:0 8px 28px rgba(29,78,216,.18)}
+.team-name{font-size:13px;font-weight:800;color:var(--text);letter-spacing:-.01em;text-align:center}
+@media(max-width:900px){.team-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.team-grid{grid-template-columns:repeat(3,1fr)}}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .animate{animation:fadeUp .6s ease both}
 .d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}
@@ -219,6 +232,73 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <div class="card-desc">Source performance — PRX #1 at $75K. HTA-IOS exploded +531% to $74K. 5 new sources launched at $48K combined</div>
     <div class="card-tags"><span class="card-tag">Mar vs Apr</span><span class="card-tag">19 Sources</span><span class="card-tag">CR Analysis</span></div>
   </a>
+</div>
+
+<!-- TEAM -->
+<div class="section-label animate d8">The Team</div>
+<div class="team-section animate d8">
+  <div class="team-grid">
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Vlad.png" alt="Vlad">
+      </div>
+      <div class="team-name">Vlad</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Anxhela.png" alt="Anxhela">
+      </div>
+      <div class="team-name">Anxhela</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Yoav.png" alt="Yoav">
+      </div>
+      <div class="team-name">Yoav</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Renald.png" alt="Renald">
+      </div>
+      <div class="team-name">Renald</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Ina.png" alt="Ina">
+      </div>
+      <div class="team-name">Ina</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Ledia.png" alt="Ledia">
+      </div>
+      <div class="team-name">Ledia</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Giljana.png" alt="Giljana">
+      </div>
+      <div class="team-name">Giljana</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Klaura.png" alt="Klaura">
+      </div>
+      <div class="team-name">Klaura</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/David.png" alt="David">
+      </div>
+      <div class="team-name">David</div>
+    </div>
+    <div class="team-member">
+      <div class="team-photo-wrap">
+        <img class="team-photo" src="team/Ergys.png" alt="Ergys">
+      </div>
+      <div class="team-name">Ergys</div>
+    </div>
+  </div>
 </div>
 
 <div class="footer animate d9">
