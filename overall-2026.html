@@ -73,6 +73,37 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
 .back-hub:hover{color:var(--text);border-color:rgba(59,130,246,.3);background:#ffffff}
 .back-hub svg{width:16px;height:16px;flex-shrink:0}
+.buyers-section{margin:40px 0}
+.buyers-section-head{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.buyers-section-head .icon{font-size:20px}
+.buyers-section-head h2{font-size:18px;font-weight:800;letter-spacing:-.02em}
+.buyers-section-head .sub{font-size:12px;color:var(--text3);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
+.buyers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.buyer-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
+.buyer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.buyer-card.ahead::before{background:linear-gradient(90deg,#047857,#10b981)}
+.buyer-card.slight::before{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.buyer-card.behind::before{background:linear-gradient(90deg,#be123c,#f43f5e)}
+.buyer-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.buyer-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:#fff;flex-shrink:0}
+.buyer-avatar.ahead{background:linear-gradient(135deg,#047857,#10b981)}
+.buyer-avatar.slight{background:linear-gradient(135deg,#b45309,#f59e0b)}
+.buyer-avatar.behind{background:linear-gradient(135deg,#be123c,#f43f5e)}
+.buyer-name{font-size:14px;font-weight:800;letter-spacing:-.01em}
+.buyer-status{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.buyer-status.ahead{color:#047857}.buyer-status.slight{color:#b45309}.buyer-status.behind{color:#be123c}
+.buyer-pct{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:10px}
+.buyer-pct.ahead{color:#047857}.buyer-pct.slight{color:#b45309}.buyer-pct.behind{color:#be123c}
+.buyer-bar-bg{background:#e8edf4;border-radius:6px;height:6px;margin-bottom:14px;overflow:hidden}
+.buyer-bar-fill{height:100%;border-radius:6px;transition:width .6s ease}
+.buyer-bar-fill.ahead{background:linear-gradient(90deg,#047857,#10b981)}
+.buyer-bar-fill.slight{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.buyer-bar-fill.behind{background:linear-gradient(90deg,#be123c,#f43f5e)}
+.buyer-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.buyer-stat-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:3px}
+.buyer-stat-val{font-family:'Outfit',sans-serif;font-size:12px;font-weight:900;color:var(--text)}
+@media(max-width:1100px){.buyers-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.buyers-grid{grid-template-columns:1fr}}
 .story-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:32px}
 .story-box h3{font-size:15px;font-weight:800;margin-bottom:14px}
 .story-row{padding:10px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px;color:var(--text2);line-height:1.6}
@@ -276,6 +307,116 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,013% <span class="mom down">-21</span></div></div>
       <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.05% <span class="mom down">-17%</span></div></div>
     </div>
+  </div>
+</div>
+
+<!-- MEDIA BUYERS -->
+<div class="buyers-section animate d4">
+  <div class="buyers-section-head">
+    <span class="icon">👤</span>
+    <h2>Individual Performance</h2>
+    <span class="sub">April 2026 · Profit vs Goal</span>
+  </div>
+  <div class="buyers-grid">
+
+    <div class="buyer-card ahead">
+      <div class="buyer-top">
+        <div class="buyer-avatar ahead">A</div>
+        <div><div class="buyer-name">Anxhela</div><div class="buyer-status ahead">Ahead · 1.09×</div></div>
+      </div>
+      <div class="buyer-pct ahead">109.0%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill ahead" style="width:100%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$82,821</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$76,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#047857">+$6,821</div></div>
+      </div>
+    </div>
+
+    <div class="buyer-card slight">
+      <div class="buyer-top">
+        <div class="buyer-avatar slight">Y</div>
+        <div><div class="buyer-name">Yoav</div><div class="buyer-status slight">Slightly Behind · 0.81×</div></div>
+      </div>
+      <div class="buyer-pct slight">80.6%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill slight" style="width:80.6%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$66,114</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$82,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$15,886</div></div>
+      </div>
+    </div>
+
+    <div class="buyer-card slight">
+      <div class="buyer-top">
+        <div class="buyer-avatar slight">R</div>
+        <div><div class="buyer-name">Renald</div><div class="buyer-status slight">Slightly Behind · 0.83×</div></div>
+      </div>
+      <div class="buyer-pct slight">83.0%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill slight" style="width:83%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$63,115</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$76,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$12,885</div></div>
+      </div>
+    </div>
+
+    <div class="buyer-card ahead">
+      <div class="buyer-top">
+        <div class="buyer-avatar ahead">I</div>
+        <div><div class="buyer-name">Ina</div><div class="buyer-status ahead">Ahead · 1.83×</div></div>
+      </div>
+      <div class="buyer-pct ahead">183.4%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill ahead" style="width:100%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$58,674</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$32,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#047857">+$26,674</div></div>
+      </div>
+    </div>
+
+    <div class="buyer-card ahead">
+      <div class="buyer-top">
+        <div class="buyer-avatar ahead">L</div>
+        <div><div class="buyer-name">Ledia</div><div class="buyer-status ahead">Ahead · 1.27×</div></div>
+      </div>
+      <div class="buyer-pct ahead">126.9%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill ahead" style="width:100%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$48,221</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$38,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#047857">+$10,221</div></div>
+      </div>
+    </div>
+
+    <div class="buyer-card behind">
+      <div class="buyer-top">
+        <div class="buyer-avatar behind">G</div>
+        <div><div class="buyer-name">Giljana</div><div class="buyer-status behind">Behind · 0.73×</div></div>
+      </div>
+      <div class="buyer-pct behind">72.9%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill behind" style="width:72.9%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$45,192</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$62,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$16,808</div></div>
+      </div>
+    </div>
+
+    <div class="buyer-card behind">
+      <div class="buyer-top">
+        <div class="buyer-avatar behind">K</div>
+        <div><div class="buyer-name">Klaura</div><div class="buyer-status behind">Behind · 0.66×</div></div>
+      </div>
+      <div class="buyer-pct behind">66.3%</div>
+      <div class="buyer-bar-bg"><div class="buyer-bar-fill behind" style="width:66.3%"></div></div>
+      <div class="buyer-stats">
+        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$27,199</div></div>
+        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$41,000</div></div>
+        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$13,801</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
