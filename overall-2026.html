@@ -41,14 +41,15 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .legend{display:flex;justify-content:center;gap:28px;margin-top:20px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text2)}
 .legend-dot{width:12px;height:12px;border-radius:4px}
-.months-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:40px 0}
-.month-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
+.months-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:40px 0}
+.month-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 .month-card:hover{border-color:rgba(29,78,216,.2);transform:translateY(-4px);box-shadow:0 8px 24px rgba(15,23,42,.1)}
 .month-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .month-card:nth-child(1)::before{background:linear-gradient(90deg,var(--revenue),var(--profit))}
 .month-card:nth-child(2)::before{background:linear-gradient(90deg,var(--profit),#a78bfa)}
 .month-card:nth-child(3)::before{background:linear-gradient(90deg,#a78bfa,var(--roi))}
 .month-card:nth-child(4)::before{background:linear-gradient(90deg,var(--roi),var(--cr))}
+.month-card:nth-child(5)::before{background:linear-gradient(90deg,var(--cr),var(--revenue))}
 .month-name{font-size:13px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
 .month-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .metric{padding:10px 12px;background:#f4f7fc;border-radius:10px}
@@ -73,37 +74,6 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
 .back-hub:hover{color:var(--text);border-color:rgba(59,130,246,.3);background:#ffffff}
 .back-hub svg{width:16px;height:16px;flex-shrink:0}
-.buyers-section{margin:40px 0}
-.buyers-section-head{display:flex;align-items:center;gap:10px;margin-bottom:20px}
-.buyers-section-head .icon{font-size:20px}
-.buyers-section-head h2{font-size:18px;font-weight:800;letter-spacing:-.02em}
-.buyers-section-head .sub{font-size:12px;color:var(--text3);font-weight:600;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
-.buyers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.buyer-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 22px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
-.buyer-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
-.buyer-card.ahead::before{background:linear-gradient(90deg,#047857,#10b981)}
-.buyer-card.slight::before{background:linear-gradient(90deg,#b45309,#f59e0b)}
-.buyer-card.behind::before{background:linear-gradient(90deg,#be123c,#f43f5e)}
-.buyer-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
-.buyer-avatar{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:18px;font-weight:900;color:#fff;flex-shrink:0}
-.buyer-avatar.ahead{background:linear-gradient(135deg,#047857,#10b981)}
-.buyer-avatar.slight{background:linear-gradient(135deg,#b45309,#f59e0b)}
-.buyer-avatar.behind{background:linear-gradient(135deg,#be123c,#f43f5e)}
-.buyer-name{font-size:14px;font-weight:800;letter-spacing:-.01em}
-.buyer-status{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
-.buyer-status.ahead{color:#047857}.buyer-status.slight{color:#b45309}.buyer-status.behind{color:#be123c}
-.buyer-pct{font-family:'Outfit',sans-serif;font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:10px}
-.buyer-pct.ahead{color:#047857}.buyer-pct.slight{color:#b45309}.buyer-pct.behind{color:#be123c}
-.buyer-bar-bg{background:#e8edf4;border-radius:6px;height:6px;margin-bottom:14px;overflow:hidden}
-.buyer-bar-fill{height:100%;border-radius:6px;transition:width .6s ease}
-.buyer-bar-fill.ahead{background:linear-gradient(90deg,#047857,#10b981)}
-.buyer-bar-fill.slight{background:linear-gradient(90deg,#b45309,#f59e0b)}
-.buyer-bar-fill.behind{background:linear-gradient(90deg,#be123c,#f43f5e)}
-.buyer-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.buyer-stat-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:3px}
-.buyer-stat-val{font-family:'Outfit',sans-serif;font-size:12px;font-weight:900;color:var(--text)}
-@media(max-width:1100px){.buyers-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.buyers-grid{grid-template-columns:1fr}}
 .story-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:32px}
 .story-box h3{font-size:15px;font-weight:800;margin-bottom:14px}
 .story-row{padding:10px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:13px;color:var(--text2);line-height:1.6}
@@ -117,14 +87,14 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 
 <div class="header animate">
   <h1>2026 Performance Overview</h1>
-  <div class="sub">Monthly Trends · January — April 2026</div>
+  <div class="sub">Monthly Trends · January — May 2026</div>
 </div>
 
 <div class="summary animate d1">
-  <div class="sum-item"><div class="sum-label">YTD Revenue</div><div class="sum-val" style="color:var(--revenue)">$1,501,872</div></div>
-  <div class="sum-item"><div class="sum-label">YTD Cost</div><div class="sum-val" style="color:var(--cost)">$121,600</div></div>
-  <div class="sum-item"><div class="sum-label">YTD Profit</div><div class="sum-val" style="color:var(--profit)">$1,380,283</div></div>
-  <div class="sum-item"><div class="sum-label">Avg ROI</div><div class="sum-val" style="color:var(--roi)">1,135%</div></div>
+  <div class="sum-item"><div class="sum-label">YTD Revenue</div><div class="sum-val" style="color:var(--revenue)">$1,936,941</div></div>
+  <div class="sum-item"><div class="sum-label">YTD Cost</div><div class="sum-val" style="color:var(--cost)">$170,244</div></div>
+  <div class="sum-item"><div class="sum-label">YTD Profit</div><div class="sum-val" style="color:var(--profit)">$1,766,720</div></div>
+  <div class="sum-item"><div class="sum-label">Avg ROI</div><div class="sum-val" style="color:var(--roi)">1,038%</div></div>
   <div class="sum-item"><div class="sum-label">Avg CR</div><div class="sum-val" style="color:var(--cr)">0.05%</div></div>
 </div>
 
@@ -144,58 +114,57 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <text x="90" y="274" class="axis-label" text-anchor="end">$150K</text>
     <text x="90" y="344" class="axis-label" text-anchor="end">$50K</text>
 
-    <text x="180" y="380" class="month-label" text-anchor="middle">JAN</text>
-    <text x="380" y="380" class="month-label" text-anchor="middle">FEB</text>
-    <text x="580" y="380" class="month-label" text-anchor="middle">MAR</text>
-    <text x="780" y="380" class="month-label" text-anchor="middle">APR</text>
+    <text x="160" y="380" class="month-label" text-anchor="middle">JAN</text>
+    <text x="325" y="380" class="month-label" text-anchor="middle">FEB</text>
+    <text x="490" y="380" class="month-label" text-anchor="middle">MAR</text>
+    <text x="655" y="380" class="month-label" text-anchor="middle">APR</text>
+    <text x="820" y="380" class="month-label" text-anchor="middle" fill="var(--profit)">MAY</text>
 
-    <line x1="180" y1="55" x2="180" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
-    <line x1="380" y1="55" x2="380" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
-    <line x1="580" y1="55" x2="580" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
-    <line x1="780" y1="55" x2="780" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
+    <line x1="160" y1="55" x2="160" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
+    <line x1="325" y1="55" x2="325" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
+    <line x1="490" y1="55" x2="490" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
+    <line x1="655" y1="55" x2="655" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
+    <line x1="820" y1="55" x2="820" y2="345" stroke="var(--border)" stroke-width="1" opacity=".4"/>
 
-    <!-- SCALE: 0=$50K at y=340, $450K at y=60 => range 400K over 280px => 1K = 0.7px -->
-    <!-- y = 60 + (450 - val) * 0.7 -->
-    <!-- Revenue: 408.8K, 293.0K, 368.6K, 431.5K -->
-    <!--   y: 60+(450-408.8)*.7=88.8, 60+(450-293)*.7=170, 60+(450-368.6)*.7=117, 60+(450-431.5)*.7=73 -->
-    <!-- Cost:    30.2K, 20.1K, 32.5K, 38.8K -->
-    <!--   y: 60+(450-30.2)*.7=354, 60+(450-20.1)*.7=361, 60+(450-32.5)*.7=352, 60+(450-38.8)*.7=348 -->
-    <!-- Profit:  378.6K, 272.8K, 336.1K, 392.7K -->
-    <!--   y: 60+(450-378.6)*.7=110, 60+(450-272.8)*.7=184, 60+(450-336.1)*.7=140, 60+(450-392.7)*.7=100 -->
+    <polygon points="160,89 325,170 490,117 655,73 820,70 820,345 655,345 490,345 325,345 160,345" fill="var(--revenue)" class="area-fill"/>
+    <polygon points="160,110 325,184 490,140 655,100 820,105 820,345 655,345 490,345 325,345 160,345" fill="var(--profit)" class="area-fill"/>
 
-    <polygon points="180,89 380,170 580,117 780,73 780,345 580,345 380,345 180,345" fill="var(--revenue)" class="area-fill"/>
-    <polygon points="180,110 380,184 580,140 780,100 780,345 580,345 380,345 180,345" fill="var(--profit)" class="area-fill"/>
+    <polyline points="160,89 325,170 490,117 655,73 820,70" class="chart-line line-revenue draw"/>
+    <polyline points="160,354 325,361 490,352 655,348 820,341" class="chart-line line-cost draw" stroke-width="2.5"/>
+    <polyline points="160,110 325,184 490,140 655,100 820,105" class="chart-line line-profit draw"/>
 
-    <polyline points="180,89 380,170 580,117 780,73" class="chart-line line-revenue draw"/>
-    <polyline points="180,354 380,361 580,352 780,348" class="chart-line line-cost draw" stroke-width="2.5"/>
-    <polyline points="180,110 380,184 580,140 780,100" class="chart-line line-profit draw"/>
+    <circle cx="160" cy="89" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <circle cx="325" cy="170" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <circle cx="490" cy="117" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <circle cx="655" cy="73" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <circle cx="820" cy="70" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
+    <text x="160" y="77" class="val-label" fill="var(--revenue)">$408.8K</text>
+    <text x="325" y="158" class="val-label" fill="var(--revenue)">$293.0K</text>
+    <text x="490" y="105" class="val-label" fill="var(--revenue)">$368.6K</text>
+    <text x="655" y="61" class="val-label" fill="var(--revenue)">$431.5K</text>
+    <text x="820" y="58" class="val-label" fill="var(--revenue)">$435.1K</text>
 
-    <circle cx="180" cy="89" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
-    <circle cx="380" cy="170" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
-    <circle cx="580" cy="117" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
-    <circle cx="780" cy="73" r="6" fill="var(--revenue)" class="data-point glow-revenue"/>
-    <text x="180" y="77" class="val-label" fill="var(--revenue)">$408.8K</text>
-    <text x="380" y="158" class="val-label" fill="var(--revenue)">$293.0K</text>
-    <text x="580" y="105" class="val-label" fill="var(--revenue)">$368.6K</text>
-    <text x="780" y="61" class="val-label" fill="var(--revenue)">$431.5K</text>
+    <circle cx="160" cy="354" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <circle cx="325" cy="361" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <circle cx="490" cy="352" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <circle cx="655" cy="348" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <circle cx="820" cy="341" r="5" fill="var(--cost)" class="data-point glow-cost"/>
+    <text x="160" y="346" class="val-label" fill="var(--cost)">$30.2K</text>
+    <text x="325" y="353" class="val-label" fill="var(--cost)">$20.1K</text>
+    <text x="490" y="344" class="val-label" fill="var(--cost)">$32.5K</text>
+    <text x="655" y="340" class="val-label" fill="var(--cost)">$38.8K</text>
+    <text x="820" y="333" class="val-label" fill="var(--cost)">$48.6K</text>
 
-    <circle cx="180" cy="354" r="5" fill="var(--cost)" class="data-point glow-cost"/>
-    <circle cx="380" cy="361" r="5" fill="var(--cost)" class="data-point glow-cost"/>
-    <circle cx="580" cy="352" r="5" fill="var(--cost)" class="data-point glow-cost"/>
-    <circle cx="780" cy="348" r="5" fill="var(--cost)" class="data-point glow-cost"/>
-    <text x="180" y="346" class="val-label" fill="var(--cost)">$30.2K</text>
-    <text x="380" y="353" class="val-label" fill="var(--cost)">$20.1K</text>
-    <text x="580" y="344" class="val-label" fill="var(--cost)">$32.5K</text>
-    <text x="780" y="340" class="val-label" fill="var(--cost)">$38.8K</text>
-
-    <circle cx="180" cy="110" r="6" fill="var(--profit)" class="data-point glow-profit"/>
-    <circle cx="380" cy="184" r="6" fill="var(--profit)" class="data-point glow-profit"/>
-    <circle cx="580" cy="140" r="6" fill="var(--profit)" class="data-point glow-profit"/>
-    <circle cx="780" cy="100" r="6" fill="var(--profit)" class="data-point glow-profit"/>
-    <text x="180" y="126" class="val-label" fill="var(--profit)">$378.6K</text>
-    <text x="380" y="200" class="val-label" fill="var(--profit)">$272.8K</text>
-    <text x="580" y="156" class="val-label" fill="var(--profit)">$336.1K</text>
-    <text x="780" y="116" class="val-label" fill="var(--profit)">$392.7K</text>
+    <circle cx="160" cy="110" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <circle cx="325" cy="184" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <circle cx="490" cy="140" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <circle cx="655" cy="100" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <circle cx="820" cy="105" r="6" fill="var(--profit)" class="data-point glow-profit"/>
+    <text x="160" y="126" class="val-label" fill="var(--profit)">$378.6K</text>
+    <text x="325" y="200" class="val-label" fill="var(--profit)">$272.8K</text>
+    <text x="490" y="156" class="val-label" fill="var(--profit)">$336.1K</text>
+    <text x="655" y="116" class="val-label" fill="var(--profit)">$392.7K</text>
+    <text x="820" y="121" class="val-label" fill="var(--profit)">$386.4K</text>
   </svg>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--revenue)"></div>Revenue</div>
@@ -214,51 +183,44 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
     <line x1="100" y1="190" x2="820" y2="190" class="grid-line"/>
 
     <text x="90" y="44" class="axis-label" text-anchor="end">1400%</text>
-    <text x="90" y="94" class="axis-label" text-anchor="end">1300%</text>
-    <text x="90" y="144" class="axis-label" text-anchor="end">1100%</text>
-    <text x="90" y="194" class="axis-label" text-anchor="end">1000%</text>
+    <text x="90" y="94" class="axis-label" text-anchor="end">1150%</text>
+    <text x="90" y="144" class="axis-label" text-anchor="end">900%</text>
+    <text x="90" y="194" class="axis-label" text-anchor="end">650%</text>
 
-    <text x="830" y="44" class="axis-label" text-anchor="start">0.08%</text>
-    <text x="830" y="94" class="axis-label" text-anchor="start">0.06%</text>
-    <text x="830" y="144" class="axis-label" text-anchor="start">0.04%</text>
+    <text x="830" y="44" class="axis-label" text-anchor="start">0.11%</text>
+    <text x="830" y="94" class="axis-label" text-anchor="start">0.08%</text>
+    <text x="830" y="144" class="axis-label" text-anchor="start">0.05%</text>
     <text x="830" y="194" class="axis-label" text-anchor="start">0.02%</text>
 
-    <text x="180" y="215" class="month-label" text-anchor="middle">JAN</text>
-    <text x="380" y="215" class="month-label" text-anchor="middle">FEB</text>
-    <text x="580" y="215" class="month-label" text-anchor="middle">MAR</text>
-    <text x="780" y="215" class="month-label" text-anchor="middle">APR</text>
+    <text x="160" y="215" class="month-label" text-anchor="middle">JAN</text>
+    <text x="325" y="215" class="month-label" text-anchor="middle">FEB</text>
+    <text x="490" y="215" class="month-label" text-anchor="middle">MAR</text>
+    <text x="655" y="215" class="month-label" text-anchor="middle">APR</text>
+    <text x="820" y="215" class="month-label" text-anchor="middle" fill="var(--profit)">MAY</text>
 
-    <!-- ROI: 1254, 1354, 1034, 1013 — scale 1000-1400 over 150px (40 to 190) -->
-    <!-- y = 190 - (val-1000)/400*150 -->
-    <!-- Jan: 190-(254/400*150)=94.75 -->
-    <!-- Feb: 190-(354/400*150)=57.25 -->
-    <!-- Mar: 190-(34/400*150)=177.25 -->
-    <!-- Apr: 190-(13/400*150)=185.13 -->
-    <polyline points="180,95 380,57 580,177 780,185" class="chart-line draw" stroke="var(--roi)" stroke-width="3"/>
-    <circle cx="180" cy="95" r="6" fill="var(--roi)" class="data-point"/>
-    <circle cx="380" cy="57" r="6" fill="var(--roi)" class="data-point"/>
-    <circle cx="580" cy="177" r="6" fill="var(--roi)" class="data-point"/>
-    <circle cx="780" cy="185" r="6" fill="var(--roi)" class="data-point"/>
-    <text x="180" y="83" class="val-label" fill="var(--roi)">1,254%</text>
-    <text x="380" y="48" class="val-label" fill="var(--roi)">1,354%</text>
-    <text x="580" y="170" class="val-label" fill="var(--roi)">1,034%</text>
-    <text x="780" y="178" class="val-label" fill="var(--roi)">1,013%</text>
+    <polyline points="160,69 325,49 490,113 655,117 820,161" class="chart-line draw" stroke="var(--roi)" stroke-width="3"/>
+    <circle cx="160" cy="69" r="6" fill="var(--roi)" class="data-point"/>
+    <circle cx="325" cy="49" r="6" fill="var(--roi)" class="data-point"/>
+    <circle cx="490" cy="113" r="6" fill="var(--roi)" class="data-point"/>
+    <circle cx="655" cy="117" r="6" fill="var(--roi)" class="data-point"/>
+    <circle cx="820" cy="161" r="6" fill="var(--roi)" class="data-point"/>
+    <text x="160" y="57" class="val-label" fill="var(--roi)">1,254%</text>
+    <text x="325" y="42" class="val-label" fill="var(--roi)">1,354%</text>
+    <text x="490" y="105" class="val-label" fill="var(--roi)">1,034%</text>
+    <text x="655" y="109" class="val-label" fill="var(--roi)">1,013%</text>
+    <text x="820" y="151" class="val-label" fill="var(--roi)">794%</text>
 
-    <!-- CR: 0.04, 0.06, 0.06, 0.05 — scale 0.02-0.08 over 150px -->
-    <!-- y = 190 - (val-0.02)/0.06*150 -->
-    <!-- Jan 0.04: 190-(0.02/0.06*150)=140 -->
-    <!-- Feb 0.06: 190-(0.04/0.06*150)=90 -->
-    <!-- Mar 0.06: 90 -->
-    <!-- Apr 0.05: 190-(0.03/0.06*150)=115 -->
-    <polyline points="180,140 380,90 580,90 780,115" class="chart-line draw" stroke="var(--cr)" stroke-width="2.5" stroke-dasharray="6 4"/>
-    <circle cx="180" cy="140" r="5" fill="var(--cr)" class="data-point"/>
-    <circle cx="380" cy="90" r="5" fill="var(--cr)" class="data-point"/>
-    <circle cx="580" cy="90" r="5" fill="var(--cr)" class="data-point"/>
-    <circle cx="780" cy="115" r="5" fill="var(--cr)" class="data-point"/>
-    <text x="180" y="156" class="val-label" fill="var(--cr)">0.04%</text>
-    <text x="380" y="106" class="val-label" fill="var(--cr)">0.06%</text>
-    <text x="580" y="80" class="val-label" fill="var(--cr)">0.06%</text>
-    <text x="780" y="131" class="val-label" fill="var(--cr)">0.05%</text>
+    <polyline points="160,157 325,123 490,123 655,140 820,57" class="chart-line draw" stroke="var(--cr)" stroke-width="2.5" stroke-dasharray="6 4"/>
+    <circle cx="160" cy="157" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="325" cy="123" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="490" cy="123" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="655" cy="140" r="5" fill="var(--cr)" class="data-point"/>
+    <circle cx="820" cy="57" r="5" fill="var(--cr)" class="data-point"/>
+    <text x="160" y="173" class="val-label" fill="var(--cr)">0.04%</text>
+    <text x="325" y="139" class="val-label" fill="var(--cr)">0.06%</text>
+    <text x="490" y="113" class="val-label" fill="var(--cr)">0.06%</text>
+    <text x="655" y="156" class="val-label" fill="var(--cr)">0.05%</text>
+    <text x="820" y="49" class="val-label" fill="var(--cr)">0.10%</text>
   </svg>
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:var(--roi)"></div>ROI</div>
@@ -284,7 +246,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$292,981 <span class="mom down">-28%</span></div></div>
       <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$20,138 <span class="mom up">-33%</span></div></div>
       <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$272,842 <span class="mom down">-28%</span></div></div>
-      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,354% <span class="mom up">+100</span></div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,354% <span class="mom up">+8%</span></div></div>
       <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.06% <span class="mom up">+50%</span></div></div>
     </div>
   </div>
@@ -294,144 +256,44 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
       <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$368,635 <span class="mom up">+26%</span></div></div>
       <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$32,500 <span class="mom down">+61%</span></div></div>
       <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$336,135 <span class="mom up">+23%</span></div></div>
-      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,034% <span class="mom down">-320</span></div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,034% <span class="mom down">-24%</span></div></div>
       <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.06% <span class="mom up">0%</span></div></div>
     </div>
   </div>
   <div class="month-card animate d4">
-    <div class="month-name" style="color:var(--profit)">April 2026 ◉</div>
+    <div class="month-name">April 2026</div>
     <div class="month-metrics">
       <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$431,495 <span class="mom up">+17%</span></div></div>
       <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$38,775 <span class="mom down">+19%</span></div></div>
       <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$392,731 <span class="mom up">+17%</span></div></div>
-      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,013% <span class="mom down">-21</span></div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">1,013% <span class="mom down">-2%</span></div></div>
       <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.05% <span class="mom down">-17%</span></div></div>
     </div>
   </div>
-</div>
-
-<!-- MEDIA BUYERS -->
-<div class="buyers-section animate d4">
-  <div class="buyers-section-head">
-    <span class="icon">👤</span>
-    <h2>Individual Performance</h2>
-    <span class="sub">April 2026 · Profit vs Goal</span>
-  </div>
-  <div class="buyers-grid">
-
-    <div class="buyer-card ahead">
-      <div class="buyer-top">
-        <div class="buyer-avatar ahead">A</div>
-        <div><div class="buyer-name">Anxhela</div><div class="buyer-status ahead">Ahead · 1.09×</div></div>
-      </div>
-      <div class="buyer-pct ahead">109.0%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill ahead" style="width:100%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$82,821</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$76,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#047857">+$6,821</div></div>
-      </div>
+  <div class="month-card animate d4">
+    <div class="month-name" style="color:var(--profit)">May 2026 ◉</div>
+    <div class="month-metrics">
+      <div class="metric"><div class="metric-label">Revenue</div><div class="metric-val rev">$435,069 <span class="mom up">+1%</span></div></div>
+      <div class="metric"><div class="metric-label">Cost</div><div class="metric-val cost">$48,644 <span class="mom down">+25%</span></div></div>
+      <div class="metric"><div class="metric-label">Profit</div><div class="metric-val profit">$386,437 <span class="mom down">-2%</span></div></div>
+      <div class="metric"><div class="metric-label">ROI</div><div class="metric-val roi">794% <span class="mom down">-22%</span></div></div>
+      <div class="metric" style="grid-column:span 2"><div class="metric-label">CR</div><div class="metric-val cr">0.10% <span class="mom up">+100%</span></div></div>
     </div>
-
-    <div class="buyer-card slight">
-      <div class="buyer-top">
-        <div class="buyer-avatar slight">Y</div>
-        <div><div class="buyer-name">Yoav</div><div class="buyer-status slight">Slightly Behind · 0.81×</div></div>
-      </div>
-      <div class="buyer-pct slight">80.6%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill slight" style="width:80.6%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$66,114</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$82,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$15,886</div></div>
-      </div>
-    </div>
-
-    <div class="buyer-card slight">
-      <div class="buyer-top">
-        <div class="buyer-avatar slight">R</div>
-        <div><div class="buyer-name">Renald</div><div class="buyer-status slight">Slightly Behind · 0.83×</div></div>
-      </div>
-      <div class="buyer-pct slight">83.0%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill slight" style="width:83%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$63,115</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$76,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$12,885</div></div>
-      </div>
-    </div>
-
-    <div class="buyer-card ahead">
-      <div class="buyer-top">
-        <div class="buyer-avatar ahead">I</div>
-        <div><div class="buyer-name">Ina</div><div class="buyer-status ahead">Ahead · 1.83×</div></div>
-      </div>
-      <div class="buyer-pct ahead">183.4%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill ahead" style="width:100%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$58,674</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$32,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#047857">+$26,674</div></div>
-      </div>
-    </div>
-
-    <div class="buyer-card ahead">
-      <div class="buyer-top">
-        <div class="buyer-avatar ahead">L</div>
-        <div><div class="buyer-name">Ledia</div><div class="buyer-status ahead">Ahead · 1.27×</div></div>
-      </div>
-      <div class="buyer-pct ahead">126.9%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill ahead" style="width:100%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$48,221</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$38,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#047857">+$10,221</div></div>
-      </div>
-    </div>
-
-    <div class="buyer-card behind">
-      <div class="buyer-top">
-        <div class="buyer-avatar behind">G</div>
-        <div><div class="buyer-name">Giljana</div><div class="buyer-status behind">Behind · 0.73×</div></div>
-      </div>
-      <div class="buyer-pct behind">72.9%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill behind" style="width:72.9%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$45,192</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$62,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$16,808</div></div>
-      </div>
-    </div>
-
-    <div class="buyer-card behind">
-      <div class="buyer-top">
-        <div class="buyer-avatar behind">K</div>
-        <div><div class="buyer-name">Klaura</div><div class="buyer-status behind">Behind · 0.66×</div></div>
-      </div>
-      <div class="buyer-pct behind">66.3%</div>
-      <div class="buyer-bar-bg"><div class="buyer-bar-fill behind" style="width:66.3%"></div></div>
-      <div class="buyer-stats">
-        <div><div class="buyer-stat-lbl">Profit</div><div class="buyer-stat-val">$27,199</div></div>
-        <div><div class="buyer-stat-lbl">Goal</div><div class="buyer-stat-val">$41,000</div></div>
-        <div><div class="buyer-stat-lbl">vs Goal</div><div class="buyer-stat-val" style="color:#be123c">-$13,801</div></div>
-      </div>
-    </div>
-
   </div>
 </div>
 
 <!-- THE STORY -->
 <div class="story-box animate d4">
-  <h3>📖 The 2026 Story · Jan → Apr</h3>
-  <div class="story-row"><strong>April was the best profit month of 2026</strong> — $392.7K (+17% MoM). Profit climbed from the February dip ($272.8K) and now exceeds the March peak ($336.1K) by $56.6K, plus tops January's $378.6K — highest YTD month.</div>
-  <div class="story-row"><strong>Yenoti is the engine of growth</strong> — went from $113K profit in March to $206K in April (+82%). MGMX held at ~$186K. The portfolio is now nearly 50/50 between the two — a year ago it was MGMX-dominant.</div>
-  <div class="story-row"><strong>Combined CR landed at 0.05%</strong> — slightly below March's 0.06%. Yenoti's CR alone climbed to 0.11% (from a higher visit base), but MGMX's much larger volume at 0.03% pulls the blended number down. The two cohorts are diverging.</div>
-  <div class="story-row"><strong>ROI compressed to 1,013%</strong> — the trade-off for scaling. Cost grew faster than the start of the year, but absolute profit reached YTD high. Healthy compression, not concerning.</div>
-  <div class="story-row"><strong>YTD profit: $1.38M.</strong> If May matches April pace, we cross $1.77M YTD by end of May. On track for a $4M+ year.</div>
+  <h3>📖 The 2026 Story · Jan → May</h3>
+  <div class="story-row"><strong>May held strong at $386.4K profit</strong> — essentially flat vs April's record $392.7K (-2%), the second-best month of the year. Profit has stayed above $386K for two straight months after the February dip ($272.8K).</div>
+  <div class="story-row"><strong>The MGMX → Yenoti migration completed in May.</strong> Yenoti now carries ~88% of profit ($338.9K, +64% MoM) while MGMX deliberately wound down to $47.6K (-74%). The portfolio flipped from roughly 50/50 to Yenoti-led in a single month.</div>
+  <div class="story-row"><strong>CR doubled to 0.10%</strong> (from 0.05%). With half the visit volume (106M vs 228M) but the same ~109K conversions, traffic quality jumped sharply — exactly the point of consolidating everything onto Yenoti.</div>
+  <div class="story-row"><strong>ROI eased to 794%</strong> — cost rose +25% to $48.6K as Yenoti scaled while profit held. That's the trade-off of moving onto the higher-cost, higher-quality platform; absolute profit, which matters most, stayed near the YTD high.</div>
+  <div class="story-row"><strong>YTD profit: $1.77M</strong> across five months (avg $353K/mo). On pace for a $4.2M year.</div>
 </div>
 
 <div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'Outfit',sans-serif">
-  2026 Overall Performance · Jan–Apr · Generated May 2026
+  2026 Overall Performance · Jan–May · Generated Jun 2026
 </div>
 </div>
 </body>
