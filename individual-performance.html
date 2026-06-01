@@ -3,51 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Individual Performance · Pcom South</title>
+<title>Individual Performance · MBs Baseline & Beast Mode</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#f1f5fb;--surface:#ffffff;--card:#ffffff;--border:#d6dfeb;
   --text:#0b1220;--text2:#2d3748;--text3:#5a6b85;
-  --green:#047857;--emerald:#10b981;--blue:#1d4ed8;--purple:#6d28d9;--teal:#0d9488;
+  --beast:#0a8f57;--beast2:#10b981;--behind:#c8133f;--purple:#7c3aed;--blue:#1d4ed8;--amber:#b45309;
 }
-body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-.container{max-width:760px;margin:0 auto;padding:0 28px;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.header{padding:56px 0 8px;text-align:center}
-.header h1{font-size:38px;font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,var(--green),var(--emerald),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.header .sub{font-size:12px;color:var(--text3);font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
-.header-line{width:80px;height:3px;background:linear-gradient(90deg,var(--green),var(--emerald));margin:20px auto 0;border-radius:2px}
-.coming{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:56px 48px;margin-top:40px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 8px 28px rgba(15,23,42,.06);max-width:560px;animation:fadeUp .6s ease both}
-.coming-icon{width:84px;height:84px;border-radius:24px;background:linear-gradient(135deg,var(--green),var(--emerald));display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 24px;box-shadow:0 12px 32px rgba(4,120,87,.22)}
-.coming h2{font-size:24px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
-.coming p{font-size:14px;color:var(--text3);line-height:1.7;font-weight:600;max-width:420px;margin:0 auto}
-.pill{display:inline-block;margin-top:24px;padding:8px 18px;border-radius:999px;background:rgba(4,120,87,.08);border:1px solid rgba(4,120,87,.18);color:var(--green);font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.footer{text-align:center;padding:32px 0;color:var(--text3);font-size:12px;font-family:'Outfit',sans-serif}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.container{max-width:1140px;margin:0 auto;padding:0 24px 48px}
+.mono{font-family:'Outfit',sans-serif}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 14px rgba(15,23,42,.05)}
+.sec-gap{margin-top:22px}
+
+/* HERO */
+.hero{padding:28px 30px;position:relative;overflow:hidden;margin-top:28px}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--beast),var(--beast2),#34d399)}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.hero h1{font-size:26px;font-weight:800;letter-spacing:-.03em}
+.hero .when{font-size:11px;color:var(--text3);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:6px}
+.fire-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(10,143,87,.1);border:1px solid rgba(10,143,87,.25);color:var(--beast);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:800;white-space:nowrap}
+.hero-stats{display:flex;gap:48px;margin-top:24px;flex-wrap:wrap}
+.hs-lbl{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.hs-val{font-family:'Outfit',sans-serif;font-size:30px;font-weight:900;letter-spacing:-1px}
+.hs-sub{font-size:11.5px;color:var(--text3);font-weight:600;margin-top:5px}
+
+/* RACE */
+.block-pad{padding:24px 26px}
+.block-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;flex-wrap:wrap;gap:8px}
+.block-title{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--text2)}
+.block-note{font-size:11px;color:var(--text3);font-weight:600}
+.race-row{display:grid;grid-template-columns:170px 1fr 64px 132px;align-items:center;gap:14px;padding:9px 0}
+.race-who{display:flex;align-items:center;gap:11px}
+.avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:14px;font-weight:900;color:#fff;flex-shrink:0}
+.avatar.beast{background:var(--beast)}
+.avatar.behind{background:var(--behind)}
+.race-name{font-size:14px;font-weight:800}
+.race-track{position:relative;height:22px;background:#eef2f8;border-radius:7px;overflow:visible}
+.race-fill{height:100%;border-radius:7px}
+.race-fill.beast{background:linear-gradient(90deg,var(--beast),var(--beast2))}
+.race-fill.behind{background:linear-gradient(90deg,#9f0f30,var(--behind))}
+.race-mark{position:absolute;top:-4px;bottom:-4px;width:2px;background:#475569;border-radius:2px}
+.race-pct{font-family:'Outfit',sans-serif;font-size:15px;font-weight:900;text-align:right}
+.race-pct.beast,.bb-val.beast,.ip-pct.beast{color:var(--beast)}
+.race-pct.behind,.bb-val.behind,.ip-pct.behind{color:var(--behind)}
+.race-badge{text-align:right}
+.rb-badge{display:inline-block;font-size:10px;font-weight:900;padding:5px 11px;border-radius:999px;letter-spacing:.5px;font-family:'Outfit',sans-serif}
+.rb-badge.beast{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--purple)}
+.rb-badge.behind{background:#fff;border:1px solid rgba(200,19,63,.4);color:var(--behind)}
+
+/* MATRIX */
+.mx-svg{width:100%;height:auto;display:block}
+.mx-axis{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;fill:var(--text3);font-weight:700}
+.mx-quad{font-family:'Outfit',sans-serif;font-size:12px;font-weight:800}
+.mx-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;fill:var(--text2);font-weight:700}
+.mx-blabel{font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;fill:var(--text);font-weight:800}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.lg{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:var(--text2);padding:7px 13px;border-radius:999px;border:1px solid var(--border)}
+.lg b{font-weight:800}
+.lg.stars{background:rgba(4,143,87,.06);border-color:rgba(4,143,87,.2)}
+.lg.climb{background:rgba(29,78,216,.05);border-color:rgba(29,78,216,.2)}
+.lg.cruise{background:rgba(180,83,9,.06);border-color:rgba(180,83,9,.2)}
+.lg.risk{background:rgba(190,18,60,.05);border-color:rgba(190,18,60,.2)}
+
+/* INDIVIDUAL PROGRESS */
+.ip-label{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;letter-spacing:-.02em;margin:30px 0 16px}
+.ip-dot{width:12px;height:12px;border-radius:50%;border:3px solid var(--beast)}
+.ip-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ip-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 3px 10px rgba(15,23,42,.04)}
+.ip-card.beast{border-color:rgba(10,143,87,.3)}
+.ip-card.behind{border-color:rgba(200,19,63,.25)}
+.ip-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ip-id{display:flex;align-items:center;gap:10px}
+.ip-name{font-size:15px;font-weight:800}
+.ip-pct{font-family:'Outfit',sans-serif;font-size:22px;font-weight:900;letter-spacing:-1px}
+.ip-sub{font-size:10px;font-weight:800;letter-spacing:.3px;line-height:1.45;margin-bottom:12px;text-transform:uppercase}
+.ip-sub.beast{color:var(--beast)}
+.ip-sub.behind{color:var(--behind)}
+.ip-track{height:8px;background:#eef2f8;border-radius:5px;overflow:hidden;margin-bottom:14px}
+.ip-fill{height:100%;border-radius:5px}
+.ip-fill.beast{background:repeating-linear-gradient(45deg,var(--beast),var(--beast) 7px,var(--beast2) 7px,var(--beast2) 14px)}
+.ip-fill.behind{background:var(--behind)}
+.ip-foot{display:flex;justify-content:space-between}
+.ip-flbl{font-size:9px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
+.ip-fval{font-family:'Outfit',sans-serif;font-size:15px;font-weight:900}
+
+/* BASELINE BAR CHART */
+.bb-wrap{position:relative;padding-top:6px}
+.bb-row{display:grid;grid-template-columns:70px 1fr 50px;align-items:center;gap:12px;padding:6px 0}
+.bb-name{font-size:12.5px;font-weight:800;text-align:right;color:var(--text2)}
+.bb-track{height:20px;background:#eef2f8;border-radius:6px;overflow:hidden}
+.bb-fill{height:100%;border-radius:6px}
+.bb-fill.beast{background:linear-gradient(90deg,var(--beast),var(--beast2))}
+.bb-fill.behind{background:linear-gradient(90deg,#9f0f30,var(--behind))}
+.bb-val{font-family:'Outfit',sans-serif;font-size:13px;font-weight:900}
+.bb-axis{display:flex;justify-content:space-between;margin:8px 62px 0 82px;font-size:10px;color:var(--text3);font-weight:700}
+.bb-mark{position:absolute;top:6px;bottom:26px;width:2px;background:var(--beast);opacity:.55;z-index:2}
+
 .back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
-.back-hub:hover{color:var(--text);border-color:rgba(4,120,87,.3);background:#ffffff}
-.back-hub svg{width:16px;height:16px;flex-shrink:0}
+.back-hub:hover{color:var(--text);border-color:rgba(10,143,87,.35);background:#fff}
+.back-hub svg{width:16px;height:16px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.animate{animation:fadeUp .5s ease both}
+@media(max-width:980px){.ip-grid{grid-template-columns:repeat(2,1fr)}.hero-stats{gap:28px}}
+@media(max-width:640px){.race-row{grid-template-columns:120px 1fr 52px;gap:8px}.race-badge{display:none}.ip-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <a href="index.html" class="back-hub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Hub</a>
-
-<div class="header">
-  <h1>Individual Performance</h1>
-  <div class="sub">Pcom South · Media Buyer Results</div>
-  <div class="header-line"></div>
-</div>
-
 <div class="container">
-  <div class="coming">
-    <div class="coming-icon">👤</div>
-    <h2>Coming Soon</h2>
-    <p>This dashboard will track each media buyer's performance vs goals — individual profit, targets, achievement rate and monthly trends. Content is being prepared.</p>
-    <div class="pill">In Preparation</div>
+
+<!-- HERO -->
+<div class="card hero animate">
+  <div class="hero-top">
+    <div>
+      <h1>MBs Baseline &amp; Beast Mode 🦁</h1>
+      <div class="when">May 2026 · Day 31 of 31 · 100% through the month</div>
+    </div>
+    <div class="fire-pill">🚀 ON FIRE · 1.08X PACE</div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hs-lbl">Combined Baseline</div><div class="hs-val">$359,000</div><div class="hs-sub">Beast Mode threshold · 7 MBs</div></div>
+    <div><div class="hs-lbl">Combined MTD Profit</div><div class="hs-val" style="color:var(--beast)">$386,480</div><div class="hs-sub">107.7% of combined baseline</div></div>
+    <div><div class="hs-lbl">vs Baseline</div><div class="hs-val" style="color:var(--beast)">+$27,480</div><div class="hs-sub">🦁 4 of 7 in Beast Mode</div></div>
   </div>
 </div>
 
-<div class="footer">Pcom South · Individual Performance · 2026</div>
+<!-- RACE TO BASELINE -->
+<div class="card block-pad sec-gap animate">
+  <div class="block-head"><div class="block-title">Race to Baseline — sorted by progress</div><div class="block-note">vertical mark = baseline (100%)</div></div>
+  <div class='race-row'><div class='race-who'><div class='avatar beast'>R</div><div class='race-name'>Renald</div></div><div class='race-track'><div class='race-fill beast' style='width:92.2%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct beast'>166.0%</div><div class='race-badge'><span class='rb-badge beast'>🦁 BEAST MODE</span></div></div><div class='race-row'><div class='race-who'><div class='avatar beast'>L</div><div class='race-name'>Ledia</div></div><div class='race-track'><div class='race-fill beast' style='width:85.8%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct beast'>154.5%</div><div class='race-badge'><span class='rb-badge beast'>🦁 BEAST MODE</span></div></div><div class='race-row'><div class='race-who'><div class='avatar beast'>Y</div><div class='race-name'>Yoav</div></div><div class='race-track'><div class='race-fill beast' style='width:73.6%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct beast'>132.5%</div><div class='race-badge'><span class='rb-badge beast'>🦁 BEAST MODE</span></div></div><div class='race-row'><div class='race-who'><div class='avatar beast'>A</div><div class='race-name'>Anxhela</div></div><div class='race-track'><div class='race-fill beast' style='width:64.1%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct beast'>115.4%</div><div class='race-badge'><span class='rb-badge beast'>🦁 BEAST MODE</span></div></div><div class='race-row'><div class='race-who'><div class='avatar behind'>I</div><div class='race-name'>Ina</div></div><div class='race-track'><div class='race-fill behind' style='width:38.6%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct behind'>69.5%</div><div class='race-badge'><span class='rb-badge behind'>BEHIND</span></div></div><div class='race-row'><div class='race-who'><div class='avatar behind'>K</div><div class='race-name'>Klaura</div></div><div class='race-track'><div class='race-fill behind' style='width:27.7%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct behind'>49.9%</div><div class='race-badge'><span class='rb-badge behind'>BEHIND</span></div></div><div class='race-row'><div class='race-who'><div class='avatar behind'>G</div><div class='race-name'>Giljana</div></div><div class='race-track'><div class='race-fill behind' style='width:25.7%'></div><div class='race-mark' style='left:55.56%'></div></div><div class='race-pct behind'>46.3%</div><div class='race-badge'><span class='rb-badge behind'>BEHIND</span></div></div>
+</div>
+
+<!-- PERFORMANCE MATRIX -->
+<div class="card block-pad sec-gap animate">
+  <div class="block-head"><div><div class="block-title" style="font-size:14px;text-transform:none;letter-spacing:-.01em">Performance Matrix · Pace × Baseline progress</div><div class="block-note" style="margin-top:4px">Bubble size = MTD profit · Quadrants show where each MB stands today</div></div></div>
+  <svg viewBox='0 0 1010 470' class='mx-svg' preserveAspectRatio='xMidYMid meet'><rect x='70' y='30' width='500.0' height='209.1304347826087' fill='rgba(29,78,216,.05)'/><rect x='570.0' y='30' width='400.0' height='209.1304347826087' fill='rgba(4,143,87,.07)'/><rect x='70' y='239.1304347826087' width='500.0' height='160.8695652173913' fill='rgba(190,18,60,.05)'/><rect x='570.0' y='239.1304347826087' width='400.0' height='160.8695652173913' fill='rgba(180,83,9,.05)'/><line x1='570.0' y1='30' x2='570.0' y2='400' stroke='#c3cfe0' stroke-width='1.5' stroke-dasharray='5 5'/><line x1='70' y1='239.1304347826087' x2='970' y2='239.1304347826087' stroke='#c3cfe0' stroke-width='1.5' stroke-dasharray='5 5'/><text x='70' y='422' class='mx-axis' text-anchor='middle'>0%</text><text x='170' y='422' class='mx-axis' text-anchor='middle'>20%</text><text x='270' y='422' class='mx-axis' text-anchor='middle'>40%</text><text x='370' y='422' class='mx-axis' text-anchor='middle'>60%</text><text x='470' y='422' class='mx-axis' text-anchor='middle'>80%</text><text x='570' y='422' class='mx-axis' text-anchor='middle'>100%</text><text x='670' y='422' class='mx-axis' text-anchor='middle'>120%</text><text x='770' y='422' class='mx-axis' text-anchor='middle'>140%</text><text x='870' y='422' class='mx-axis' text-anchor='middle'>160%</text><text x='970' y='422' class='mx-axis' text-anchor='middle'>180%</text><text x='58' y='404' class='mx-axis' text-anchor='end'>0.0x</text><text x='58' y='324' class='mx-axis' text-anchor='end'>0.5x</text><text x='58' y='243' class='mx-axis' text-anchor='end'>1.0x</text><text x='58' y='163' class='mx-axis' text-anchor='end'>1.5x</text><text x='58' y='82' class='mx-axis' text-anchor='end'>2.0x</text><text x='58' y='34' class='mx-axis' text-anchor='end'>2.3x</text><text x='80' y='48' class='mx-quad' fill='#1d4ed8'>🏔 CLIMBING</text><text x='960' y='48' class='mx-quad' fill='#047857' text-anchor='end'>⭐ STARS</text><text x='80' y='390' class='mx-quad' fill='#be123c'>⚠ AT RISK</text><text x='960' y='390' class='mx-quad' fill='#b45309' text-anchor='end'>🐎 CRUISING</text><text x='520' y='444' class='mx-title' text-anchor='middle'>% of Baseline →</text><text x='22' y='215' class='mx-title' text-anchor='middle' transform='rotate(-90 22 215)'>Pace (1.0x = on track)</text><circle cx='900.2' cy='132.9' r='29.1' fill='#0a8f57' fill-opacity='.82' stroke='#0a8f57' stroke-width='1.5'/><text x='900.2' y='97.8' class='mx-blabel' text-anchor='middle'>Renald</text><circle cx='842.6' cy='151.4' r='25.5' fill='#0a8f57' fill-opacity='.82' stroke='#0a8f57' stroke-width='1.5'/><text x='842.6' y='120.0' class='mx-blabel' text-anchor='middle'>Ledia</text><circle cx='732.4' cy='186.9' r='30.0' fill='#0a8f57' fill-opacity='.82' stroke='#0a8f57' stroke-width='1.5'/><text x='732.4' y='150.9' class='mx-blabel' text-anchor='middle'>Yoav</text><circle cx='647.0' cy='214.4' r='29.4' fill='#0a8f57' fill-opacity='.82' stroke='#0a8f57' stroke-width='1.5'/><text x='647.0' y='178.9' class='mx-blabel' text-anchor='middle'>Anxhela</text><circle cx='417.6' cy='288.2' r='20.3' fill='#c8133f' fill-opacity='.82' stroke='#c8133f' stroke-width='1.5'/><text x='417.6' y='261.8' class='mx-blabel' text-anchor='middle'>Ina</text><circle cx='319.6' cy='319.7' r='17.1' fill='#c8133f' fill-opacity='.82' stroke='#c8133f' stroke-width='1.5'/><text x='319.6' y='296.6' class='mx-blabel' text-anchor='middle'>Klaura</text><circle cx='301.3' cy='325.6' r='18.4' fill='#c8133f' fill-opacity='.82' stroke='#c8133f' stroke-width='1.5'/><text x='301.3' y='301.2' class='mx-blabel' text-anchor='middle'>Giljana</text></svg>
+  <div class="legend">
+    <div class="lg stars">⭐ <b>Stars</b> · over baseline pace, near goal</div>
+    <div class="lg climb">🏔 <b>Climbing</b> · ahead of pace, still building</div>
+    <div class="lg cruise">🐎 <b>Cruising</b> · near baseline but slowing</div>
+    <div class="lg risk">⚠ <b>At Risk</b> · behind pace and far from goal</div>
+  </div>
+</div>
+
+<!-- INDIVIDUAL PROGRESS -->
+<div class="ip-label animate"><span class="ip-dot"></span>Individual Progress</div>
+<div class="ip-grid animate"><div class='ip-card beast'><div class='ip-top'><div class='ip-id'><div class='avatar beast'>R</div><div class='ip-name'>Renald</div></div><div class='ip-pct beast'>166.0%</div></div><div class='ip-sub beast'>🦁 BEAST MODE · +$32,364 OVER BASELINE · +66.0%</div><div class='ip-track'><div class='ip-fill beast' style='width:100.0%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$81,364</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$49,000</div></div></div></div><div class='ip-card beast'><div class='ip-top'><div class='ip-id'><div class='avatar beast'>L</div><div class='ip-name'>Ledia</div></div><div class='ip-pct beast'>154.5%</div></div><div class='ip-sub beast'>🦁 BEAST MODE · +$21,805 OVER BASELINE · +54.5%</div><div class='ip-track'><div class='ip-fill beast' style='width:100.0%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$61,805</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$40,000</div></div></div></div><div class='ip-card beast'><div class='ip-top'><div class='ip-id'><div class='avatar beast'>Y</div><div class='ip-name'>Yoav</div></div><div class='ip-pct beast'>132.5%</div></div><div class='ip-sub beast'>🦁 BEAST MODE · +$21,110 OVER BASELINE · +32.5%</div><div class='ip-track'><div class='ip-fill beast' style='width:100.0%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$86,110</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$65,000</div></div></div></div><div class='ip-card beast'><div class='ip-top'><div class='ip-id'><div class='avatar beast'>A</div><div class='ip-name'>Anxhela</div></div><div class='ip-pct beast'>115.4%</div></div><div class='ip-sub beast'>🦁 BEAST MODE · +$11,082 OVER BASELINE · +15.4%</div><div class='ip-track'><div class='ip-fill beast' style='width:100.0%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$83,082</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$72,000</div></div></div></div><div class='ip-card behind'><div class='ip-top'><div class='ip-id'><div class='avatar behind'>I</div><div class='ip-name'>Ina</div></div><div class='ip-pct behind'>69.5%</div></div><div class='ip-sub behind'>$14,939 TO BASELINE · BEHIND</div><div class='ip-track'><div class='ip-fill behind' style='width:69.5%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$34,061</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$49,000</div></div></div></div><div class='ip-card behind'><div class='ip-top'><div class='ip-id'><div class='avatar behind'>K</div><div class='ip-name'>Klaura</div></div><div class='ip-pct behind'>49.9%</div></div><div class='ip-sub behind'>$16,529 TO BASELINE · BEHIND</div><div class='ip-track'><div class='ip-fill behind' style='width:49.9%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$16,471</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$33,000</div></div></div></div><div class='ip-card behind'><div class='ip-top'><div class='ip-id'><div class='avatar behind'>G</div><div class='ip-name'>Giljana</div></div><div class='ip-pct behind'>46.3%</div></div><div class='ip-sub behind'>$27,412 TO BASELINE · BEHIND</div><div class='ip-track'><div class='ip-fill behind' style='width:46.3%'></div></div><div class='ip-foot'><div><div class='ip-flbl'>Made so far</div><div class='ip-fval'>$23,588</div></div><div style='text-align:right'><div class='ip-flbl'>Need to reach</div><div class='ip-fval'>$51,000</div></div></div></div></div>
+
+<div class="card block-pad sec-gap animate">
+  <div class="block-head"><div><div class="block-title">% of Baseline by Media Buyer</div><div class="block-note" style="margin-top:4px">100% = baseline cleared, Beast Mode 🦁 begins</div></div></div>
+  <div class='bb-wrap'><div class='bb-mark' style='left:calc(55.56% + 2.0px)'></div><div class='bb-row'><div class='bb-name'>Renald</div><div class='bb-track'><div class='bb-fill beast' style='width:92.2%'></div></div><div class='bb-val beast'>166%</div></div><div class='bb-row'><div class='bb-name'>Ledia</div><div class='bb-track'><div class='bb-fill beast' style='width:85.8%'></div></div><div class='bb-val beast'>155%</div></div><div class='bb-row'><div class='bb-name'>Yoav</div><div class='bb-track'><div class='bb-fill beast' style='width:73.6%'></div></div><div class='bb-val beast'>132%</div></div><div class='bb-row'><div class='bb-name'>Anxhela</div><div class='bb-track'><div class='bb-fill beast' style='width:64.1%'></div></div><div class='bb-val beast'>115%</div></div><div class='bb-row'><div class='bb-name'>Ina</div><div class='bb-track'><div class='bb-fill behind' style='width:38.6%'></div></div><div class='bb-val behind'>70%</div></div><div class='bb-row'><div class='bb-name'>Klaura</div><div class='bb-track'><div class='bb-fill behind' style='width:27.7%'></div></div><div class='bb-val behind'>50%</div></div><div class='bb-row'><div class='bb-name'>Giljana</div><div class='bb-track'><div class='bb-fill behind' style='width:25.7%'></div></div><div class='bb-val behind'>46%</div></div><div class='bb-axis'><span>0%</span><span>20%</span><span>40%</span><span>60%</span><span>80%</span><span>100%</span><span>120%</span><span>140%</span><span>160%</span><span>180%</span></div></div>
+</div>
+
+</div>
 </body>
 </html>
