@@ -23,6 +23,21 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .header .sub{font-size:12px;color:var(--text3);font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
 .header-line{width:80px;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple));margin:20px auto 0;border-radius:2px}
 
+/* Month toggle */
+.month-toggle-wrap{text-align:center;margin:32px 0 28px}
+.month-toggle{display:inline-flex;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:5px;gap:5px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
+.mt-btn{padding:11px 32px;border-radius:10px;font-size:13px;font-weight:800;color:var(--text3);cursor:pointer;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.3px;transition:all .25s}
+.mt-btn:hover{color:var(--text2)}
+.mt-btn.active{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(29,78,216,.25)}
+.month-section{display:none}
+.month-section.active{display:block}
+
+/* June placeholder */
+.june-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:56px 40px;text-align:center;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04);max-width:620px;margin:8px auto 0}
+.june-icon{width:80px;height:80px;border-radius:22px;background:linear-gradient(135deg,var(--blue),var(--purple));display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 22px;box-shadow:0 12px 32px rgba(29,78,216,.2)}
+.june-wrap h2{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.june-wrap p{font-size:13.5px;color:var(--text3);line-height:1.7;font-weight:600;max-width:440px;margin:0 auto}
+
 /* Financial / baseline note */
 .fin-note{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;margin:32px 0 24px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
 .fin-title{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
@@ -74,9 +89,19 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 
 <div class="header animate">
   <h1>Goals & Focus</h1>
-  <div class="sub">Pcom South · May 2026 · Results & Status</div>
+  <div class="sub">Pcom South · Monthly Targets & Status</div>
   <div class="header-line"></div>
 </div>
+
+<div class="month-toggle-wrap animate d1">
+  <div class="month-toggle">
+    <button class="mt-btn active" onclick="switchMonth('may')">May 2026 — Results</button>
+    <button class="mt-btn" onclick="switchMonth('june')">June 2026 — Plan</button>
+  </div>
+</div>
+
+<!-- ==================== MAY 2026 ==================== -->
+<div class="month-section active" id="month-may">
 
 <!-- FINANCIAL GOALS / BASELINE -->
 <div class="fin-note animate d2">
@@ -242,9 +267,34 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   </div>
 </div>
 
+</div><!-- /month-may -->
+
+<!-- ==================== JUNE 2026 ==================== -->
+<div class="month-section" id="month-june">
+  <div class="june-wrap animate d2">
+    <div class="june-icon">📅</div>
+    <h2>June 2026 — Coming at the Monthly Meeting</h2>
+    <p>David will present June's goals and focus areas in the monthly team meeting. They'll be added here right after.</p>
+    <div class="fin-pill">🗓️ AWAITING MONTHLY MEETING</div>
+  </div>
+</div>
+
 <div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'Outfit',sans-serif;border-top:1px solid var(--border);margin-top:40px">
-  Pcom South Goals & Focus · May 2026 · Generated Jun 2026
+  Pcom South Goals & Focus · May–June 2026 · Generated Jun 2026
 </div>
 </div>
+<script>
+function switchMonth(month){
+  document.querySelectorAll('.mt-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.month-section').forEach(s=>s.classList.remove('active'));
+  if(month==='may'){
+    document.querySelectorAll('.mt-btn')[0].classList.add('active');
+    document.getElementById('month-may').classList.add('active');
+  }else{
+    document.querySelectorAll('.mt-btn')[1].classList.add('active');
+    document.getElementById('month-june').classList.add('active');
+  }
+}
+</script>
 </body>
 </html>
