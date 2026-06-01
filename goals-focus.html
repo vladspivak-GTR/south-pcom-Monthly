@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pcom South · Goals & Focus · Apr–May 2026</title>
+<title>Pcom South · Goals & Focus · May 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -23,56 +23,27 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 .header .sub{font-size:12px;color:var(--text3);font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:8px}
 .header-line{width:80px;height:3px;background:linear-gradient(90deg,var(--blue),var(--purple));margin:20px auto 0;border-radius:2px}
 
-/* Month toggle */
-.month-toggle-wrap{text-align:center;margin:32px 0 28px}
-.month-toggle{display:inline-flex;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:5px;gap:5px;box-shadow:0 1px 3px rgba(15,23,42,.06)}
-.mt-btn{padding:11px 32px;border-radius:10px;font-size:13px;font-weight:800;color:var(--text3);cursor:pointer;border:none;background:none;font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:.3px;transition:all .25s}
-.mt-btn:hover{color:var(--text2)}
-.mt-btn.active{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(29,78,216,.25)}
-.month-section{display:none}
-.month-section.active{display:block}
-
-/* Profit target */
-.profit-target{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:24px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
-.pt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:12px}
-.pt-title{font-size:18px;font-weight:800;letter-spacing:-.02em}
-.pt-values{display:flex;gap:20px;flex-wrap:wrap}
-.pt-val{text-align:center;padding:10px 16px;background:#f4f7fc;border-radius:12px;min-width:100px}
-.pt-val .lbl{font-size:9px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}
-.pt-val .num{font-family:'Outfit',sans-serif;font-size:20px;font-weight:900}
-
-.progress-bar{position:relative;height:44px;background:#e8edf4;border-radius:12px;overflow:hidden;margin-bottom:20px}
-.progress-fill{height:100%;border-radius:12px;display:flex;align-items:center;padding:0 18px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:900;color:#fff}
-.progress-fill.hit{background:linear-gradient(90deg,#047857,#10b981)}
-.progress-fill.warn{background:linear-gradient(90deg,#b45309,#f59e0b)}
-.progress-fill.miss{background:linear-gradient(90deg,#be123c,#f43f5e)}
-
-.company-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
-.company-pill{background:#f4f7fc;border:1px solid var(--border);border-radius:12px;padding:14px 16px;text-align:center;transition:border-color .2s,transform .2s}
-.company-pill:hover{transform:translateY(-2px);border-color:rgba(29,78,216,.2)}
-.company-pill .cp-name{font-size:11px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.company-pill .cp-target{font-size:11px;color:var(--text3);margin-bottom:4px}
-.company-pill .cp-actual{font-family:'Outfit',sans-serif;font-size:20px;font-weight:900}
-.company-pill .cp-pct{font-size:11px;font-weight:700;margin-top:4px}
+/* Financial / baseline note */
+.fin-note{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;margin:32px 0 24px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
+.fin-title{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.fin-body{font-size:13px;color:var(--text2);line-height:1.7;font-weight:600;max-width:760px}
+.fin-pill{margin-top:16px;display:inline-block;padding:8px 16px;border-radius:10px;background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.14);color:var(--blue);font-family:'Outfit',sans-serif;font-size:12px;font-weight:800;letter-spacing:.8px}
 
 /* Goal cards */
 .section-label{font-size:17px;font-weight:800;margin:36px 0 16px;display:flex;align-items:center;gap:10px;letter-spacing:-.02em}
 .goals-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:12px}
 .goal-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,23,42,.06),0 2px 8px rgba(15,23,42,.04);transition:transform .2s,border-color .2s}
 .goal-card:hover{transform:translateY(-2px);border-color:rgba(29,78,216,.15)}
-.goal-card-inner{display:grid;grid-template-columns:1fr 240px;min-height:72px}
+.goal-card-inner{display:grid;grid-template-columns:1fr 300px;min-height:72px}
 .goal-main{padding:18px 24px;display:flex;flex-direction:column;justify-content:center}
 .goal-title{font-size:14px;font-weight:800;letter-spacing:-.01em;margin-bottom:3px}
 .goal-desc{font-size:12px;color:var(--text2);line-height:1.5;font-weight:600}
 .goal-status{padding:18px 20px;display:flex;align-items:center;justify-content:center;border-left:1px solid var(--border);text-align:center}
 .status-badge{padding:7px 16px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:900;letter-spacing:.5px;display:inline-block}
 .status-badge.done{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
-.status-badge.hit{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green)}
 .status-badge.miss{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red)}
 .status-badge.progress{background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--amber)}
-.status-badge.partial{background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--amber)}
-.status-badge.pending{background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.12);color:var(--blue)}
-.status-note{font-size:10px;color:var(--text3);margin-top:6px;max-width:200px;line-height:1.4;font-weight:600}
+.status-note{font-size:10.5px;color:var(--text3);margin-top:6px;max-width:260px;line-height:1.45;font-weight:600}
 
 /* Scorecard */
 .scorecard{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:24px;box-shadow:0 1px 3px rgba(15,23,42,.06),0 4px 12px rgba(15,23,42,.04)}
@@ -90,9 +61,7 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
   .goal-card-inner{grid-template-columns:1fr}
   .goal-status{border-left:none;border-top:1px solid var(--border);padding:12px 20px}
   .scorecard-grid{grid-template-columns:repeat(2,1fr)}
-  .pt-header{flex-direction:column;align-items:flex-start}
 }
-@media(max-width:600px){.company-grid{grid-template-columns:repeat(2,1fr)}}
 
 .back-hub{position:fixed;top:20px;left:20px;z-index:9999;display:flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:12px;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;text-decoration:none;transition:all .25s}
 .back-hub:hover{color:var(--text);border-color:rgba(29,78,216,.3);background:#ffffff}
@@ -105,392 +74,177 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 
 <div class="header animate">
   <h1>Goals & Focus</h1>
-  <div class="sub">Pcom South · Monthly Targets & Status</div>
+  <div class="sub">Pcom South · May 2026 · Results & Status</div>
   <div class="header-line"></div>
 </div>
 
-<div class="month-toggle-wrap animate d1">
-  <div class="month-toggle">
-    <button class="mt-btn active" onclick="switchMonth('april')">April 2026 — Results</button>
-    <button class="mt-btn" onclick="switchMonth('may')">May 2026 — Plan</button>
+<!-- FINANCIAL GOALS / BASELINE -->
+<div class="fin-note animate d2">
+  <div class="fin-title">💰 Financial Goals — May</div>
+  <div class="fin-body">
+    The profit goals are being <strong>restructured</strong>. Going forward the team no longer works against fixed monthly company targets — instead, performance is measured against a new <strong>Baseline</strong>. Revised financial goals will follow once the baseline is locked. (Noted — to be updated.)
   </div>
+  <div class="fin-pill">📌 BASELINE MODEL · IN SETUP</div>
 </div>
 
-<!-- ==================== APRIL 2026 ==================== -->
-<div class="month-section active" id="month-april">
+<!-- GOALS -->
+<div class="section-label animate d3">🏆 Goals — May Results</div>
+<div class="goals-grid">
 
-  <!-- PROFIT TARGET -->
-  <div class="profit-target animate d2">
-    <div class="pt-header">
-      <div class="pt-title">🎯 Profit Target — April</div>
-      <div class="pt-values">
-        <div class="pt-val"><div class="lbl">Target</div><div class="num" style="color:var(--text3)">$408,000</div></div>
-        <div class="pt-val"><div class="lbl">Actual</div><div class="num" style="color:var(--amber)">$393,000</div></div>
-        <div class="pt-val"><div class="lbl">Gap</div><div class="num" style="color:var(--red)">-$15,000</div></div>
-        <div class="pt-val"><div class="lbl">Achievement</div><div class="num" style="color:var(--amber)">96.3%</div></div>
+  <div class="goal-card animate d3">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Improve CR Yenoti to 0.2%</div>
+        <div class="goal-desc">Target: lift Yenoti conversion rate to 0.2%</div>
       </div>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill warn" style="width:96.3%">96.3% — Almost there · Spread surprised</div>
-    </div>
-    <div class="company-grid">
-      <div class="company-pill">
-        <div class="cp-name">Galatea</div>
-        <div class="cp-target">Target: $63K</div>
-        <div class="cp-actual" style="color:var(--red)">$49K</div>
-        <div class="cp-pct" style="color:var(--red)">77.8% ✗</div>
-      </div>
-      <div class="company-pill">
-        <div class="cp-name">Innovate</div>
-        <div class="cp-target">Target: $122K</div>
-        <div class="cp-actual" style="color:var(--red)">$91K</div>
-        <div class="cp-pct" style="color:var(--red)">74.6% ✗</div>
-      </div>
-      <div class="company-pill">
-        <div class="cp-name">Spirion</div>
-        <div class="cp-target">Target: $138K</div>
-        <div class="cp-actual" style="color:var(--amber)">$128K</div>
-        <div class="cp-pct" style="color:var(--amber)">92.8% ~</div>
-      </div>
-      <div class="company-pill">
-        <div class="cp-name">Spread</div>
-        <div class="cp-target">Target: $71K</div>
-        <div class="cp-actual" style="color:var(--green)">$108K</div>
-        <div class="cp-pct" style="color:var(--green)">152.1% ✓</div>
-      </div>
-      <div class="company-pill">
-        <div class="cp-name">Awin</div>
-        <div class="cp-target">Target: $13K</div>
-        <div class="cp-actual" style="color:var(--green)">$13.6K</div>
-        <div class="cp-pct" style="color:var(--green)">104.6% ✓</div>
-      </div>
-      <div class="company-pill">
-        <div class="cp-name">Omnia</div>
-        <div class="cp-target">Target: $1K</div>
-        <div class="cp-actual" style="color:var(--green)">$2K</div>
-        <div class="cp-pct" style="color:var(--green)">200% ✓</div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge miss">✗ MISSED</div>
+          <div class="status-note">Didn't reach the goal — CR is around 0.1%</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- GOALS -->
-  <div class="section-label animate d3">🏆 Goals — April Results</div>
-  <div class="goals-grid">
-
-    <div class="goal-card animate d3">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Improve CR Yenoti</div>
-          <div class="goal-desc">Target: improve CR. Result: stayed the same around 0.11 — no regression but no improvement</div>
-        </div>
-        <div class="goal-status">
-          <div>
-            <div class="status-badge partial">ON TRACK</div>
-            <div class="status-note">Stay in the same place — 0.11% held</div>
-          </div>
+  <div class="goal-card animate d4">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">See Results from AI Agent — New ANs & TS</div>
+        <div class="goal-desc">Validate AI agent output on new affiliate networks and traffic sources</div>
+      </div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge progress">IN PROGRESS</div>
+          <div class="status-note">AI agent gave us a few interesting ANs — but we need to optimize our existing traffic first before working new networks</div>
         </div>
       </div>
     </div>
-
-    <div class="goal-card animate d4">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Expand Sub-Networks Portfolio — 2+ New</div>
-          <div class="goal-desc">Expand portfolio of sub-networks and networks that convert — 2 at least. Tommy agent helping explore</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge done">✓ DONE</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d5">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Explore More Traffic Sources — 2+ New</div>
-          <div class="goal-desc">Discover and test at least 2 new traffic sources. Tommy agent helping continuously add and explore</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge done">✓ DONE</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d5">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Register to Premium Networks (Blogs/Companies)</div>
-          <div class="goal-desc">50/50 result — approved in Spirion in TD, disapproved in Galatea in TD. Notes written</div>
-        </div>
-        <div class="goal-status">
-          <div>
-            <div class="status-badge progress">IN PROGRESS</div>
-            <div class="status-note">Spirion ✓ approved · Galatea ✗ disapproved in TD</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d6">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Investigate TA & TT Conversion Issues</div>
-          <div class="goal-desc">TT starting to show small results. TA — David needs more time to understand what is happening there</div>
-        </div>
-        <div class="goal-status">
-          <div>
-            <div class="status-badge progress">IN PROGRESS</div>
-            <div class="status-note">TT — small results showing · TA — still investigating</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- FOCUS -->
-  <div class="section-label animate d7">🔬 Focus Areas — April Results</div>
-  <div class="goals-grid">
-
-    <div class="goal-card animate d7">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Fix Traffic Allocation Problems</div>
-          <div class="goal-desc">We see improvements but there is more room to get much better here. Notes written</div>
-        </div>
-        <div class="goal-status">
-          <div>
-            <div class="status-badge progress">IN PROGRESS</div>
-            <div class="status-note">Improving but not fully resolved</div>
-          </div>
+  <div class="goal-card animate d5">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Understand What's Wrong with TA</div>
+        <div class="goal-desc">Deep-dive into TA conversion issues — find the root cause</div>
+      </div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge progress">IN PROGRESS</div>
+          <div class="status-note">Starting to see small numbers, but we still need to deeply understand the issue there</div>
         </div>
       </div>
     </div>
-
-    <div class="goal-card animate d8">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Check Approval Rate on High-Converting Brands</div>
-          <div class="goal-desc">Check approval rate more often when you see high converting brands — PBI + Request</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge done">✓ DONE</div></div>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <!-- APRIL SCORECARD -->
-  <div class="scorecard animate d8">
-    <h3>📋 April Scorecard</h3>
-    <div class="scorecard-grid">
-      <div class="sc-cell" style="background:var(--green-bg);border:1px solid var(--green-border)">
-        <div class="sc-num" style="color:var(--green)">3</div>
-        <div class="sc-lbl">Done / Hit</div>
+  <div class="goal-card animate d5">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Premium Networks — May Opportunities</div>
+        <div class="goal-desc">Ask David whether there are premium-network opportunities to act on in May</div>
       </div>
-      <div class="sc-cell" style="background:var(--amber-bg);border:1px solid var(--amber-border)">
-        <div class="sc-num" style="color:var(--amber)">3</div>
-        <div class="sc-lbl">In Progress</div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge done">✓ DONE</div>
+          <div class="status-note">Started working with TD in Omnia + Smart. Vlad spoke with Etay about bringing these assets back to ours</div>
+        </div>
       </div>
-      <div class="sc-cell" style="background:var(--red-bg);border:1px solid var(--red-border)">
-        <div class="sc-num" style="color:var(--red)">1</div>
-        <div class="sc-lbl">Missed</div>
+    </div>
+  </div>
+
+  <div class="goal-card animate d6">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Explore Convert Social AN</div>
+        <div class="goal-desc">Test the Convert Social affiliate network — looked promising</div>
       </div>
-      <div class="sc-cell" style="background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.12)">
-        <div class="sc-num" style="color:var(--blue)">96.3%</div>
-        <div class="sc-lbl">Profit Target</div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge miss">BEHIND</div>
+          <div class="status-note">Needs more focus — right now we don't see profit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="goal-card animate d6">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Move All Traffic to Yenoti</div>
+        <div class="goal-desc">Migrate remaining traffic volume off MGMX onto Yenoti</div>
+      </div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge done">✓ DONE</div>
+          <div class="status-note">Done — in June we'll only see leftovers from MGMX</div>
+        </div>
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- ==================== MAY 2026 ==================== -->
-<div class="month-section" id="month-may">
+<!-- FOCUS -->
+<div class="section-label animate d7">🔬 Focus Areas — May Results</div>
+<div class="goals-grid">
 
-  <!-- PROFIT TARGET -->
-  <div class="profit-target animate d2">
-    <div class="pt-header">
-      <div class="pt-title">🎯 Profit Target — May</div>
-      <div class="pt-values">
-        <div class="pt-val"><div class="lbl">Target</div><div class="num" style="color:var(--blue)">$604,000</div></div>
-        <div class="pt-val"><div class="lbl">Status</div><div class="num" style="color:var(--text3)">In Progress</div></div>
+  <div class="goal-card animate d7">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Fix Traffic Allocation Problems</div>
+        <div class="goal-desc">Keep improving traffic allocation — there's still room to get much better here</div>
       </div>
-    </div>
-    <div class="progress-bar">
-      <div class="progress-fill" style="width:100%;background:linear-gradient(90deg,var(--blue),var(--purple));opacity:.35"></div>
-    </div>
-    <div class="company-grid" style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px">
-      <div class="company-pill" style="min-width:160px;flex:0 0 auto">
-        <div class="cp-name">Galatea</div>
-        <div class="cp-actual" style="color:var(--blue)">$80K</div>
-      </div>
-      <div class="company-pill" style="min-width:160px;flex:0 0 auto">
-        <div class="cp-name">Innovate</div>
-        <div class="cp-actual" style="color:var(--blue)">$160K</div>
-      </div>
-      <div class="company-pill" style="min-width:160px;flex:0 0 auto">
-        <div class="cp-name">Spirion</div>
-        <div class="cp-actual" style="color:var(--blue)">$168K</div>
-      </div>
-      <div class="company-pill" style="min-width:160px;flex:0 0 auto">
-        <div class="cp-name">Spread</div>
-        <div class="cp-actual" style="color:var(--blue)">$191K</div>
-      </div>
-      <div class="company-pill" style="min-width:160px;flex:0 0 auto">
-        <div class="cp-name">Omnia</div>
-        <div class="cp-actual" style="color:var(--blue)">$5K</div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge progress">IN PROGRESS</div>
+          <div class="status-note">We see CR improvements, but we need to keep an eye on spending and ROI as well</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- GOALS -->
-  <div class="section-label animate d3">🏆 Goals — May 2026</div>
-  <div class="goals-grid">
-
-    <div class="goal-card animate d3">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Improve CR Yenoti to 0.2%</div>
-          <div class="goal-desc">April held at 0.11% — need to get to 0.2%. Focus on landing page & funnel optimization</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
+  <div class="goal-card animate d8">
+    <div class="goal-card-inner">
+      <div class="goal-main">
+        <div class="goal-title">Check Approval Rate on High-Converting Brands</div>
+        <div class="goal-desc">Check approval rate more often on high-converting brands — PBI + Request</div>
       </div>
-    </div>
-
-    <div class="goal-card animate d4">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">See Results from AI Agent — New ANs & TS</div>
-          <div class="goal-desc">Validate AI agent (Tommy) output on new affiliate networks and traffic sources — measure actual profit contribution</div>
+      <div class="goal-status">
+        <div>
+          <div class="status-badge done">✓ DONE</div>
+          <div class="status-note">Done</div>
         </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d5">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Understand What's Wrong with TA</div>
-          <div class="goal-desc">Deep-dive into TA conversion issues — identify root cause and decide whether to keep or drop</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d5">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Premium Networks — Check May Opportunities</div>
-          <div class="goal-desc">Ask David if there are premium network opportunities available this month and explore any new registrations</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d6">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Explore Convert Social AN</div>
-          <div class="goal-desc">Test Convert Social affiliate network — looks promising, check if we have results and whether to scale</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d6">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Move All Traffic to Yenoti</div>
-          <div class="goal-desc">Migrate remaining traffic volume to Yenoti — consolidate and simplify our tracking infrastructure</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- FOCUS -->
-  <div class="section-label animate d7">🔬 Focus Areas — May 2026</div>
-  <div class="goals-grid">
-
-    <div class="goal-card animate d7">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Fix Traffic Allocation Problems</div>
-          <div class="goal-desc">We see improvements but there is much more room to get better here — continue addressing allocation imbalances</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="goal-card animate d8">
-      <div class="goal-card-inner">
-        <div class="goal-main">
-          <div class="goal-title">Check Approval Rate on High-Converting Brands</div>
-          <div class="goal-desc">Check approval rate more often when you see high converting brands — PBI + Request workflow</div>
-        </div>
-        <div class="goal-status">
-          <div><div class="status-badge pending">PENDING</div></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- MAY SCORECARD -->
-  <div class="scorecard animate d8">
-    <h3>📋 May Scorecard — Plan</h3>
-    <div class="scorecard-grid" style="grid-template-columns:repeat(3,1fr);justify-content:center">
-      <div class="sc-cell" style="background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.12)">
-        <div class="sc-num" style="color:var(--blue)">6</div>
-        <div class="sc-lbl">Goals Set</div>
-      </div>
-      <div class="sc-cell" style="background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.12)">
-        <div class="sc-num" style="color:var(--blue)">2</div>
-        <div class="sc-lbl">Focus Areas</div>
-      </div>
-      <div class="sc-cell" style="background:rgba(29,78,216,.06);border:1px solid rgba(29,78,216,.12)">
-        <div class="sc-num" style="color:var(--blue)">$604K</div>
-        <div class="sc-lbl">Profit Target</div>
       </div>
     </div>
   </div>
 
+</div>
+
+<!-- MAY SCORECARD -->
+<div class="scorecard animate d8">
+  <h3>📋 May Scorecard</h3>
+  <div class="scorecard-grid">
+    <div class="sc-cell" style="background:var(--green-bg);border:1px solid var(--green-border)">
+      <div class="sc-num" style="color:var(--green)">3</div>
+      <div class="sc-lbl">Done</div>
+    </div>
+    <div class="sc-cell" style="background:var(--amber-bg);border:1px solid var(--amber-border)">
+      <div class="sc-num" style="color:var(--amber)">3</div>
+      <div class="sc-lbl">In Progress</div>
+    </div>
+    <div class="sc-cell" style="background:var(--red-bg);border:1px solid var(--red-border)">
+      <div class="sc-num" style="color:var(--red)">2</div>
+      <div class="sc-lbl">Needs Focus</div>
+    </div>
+    <div class="sc-cell" style="background:var(--red-bg);border:1px solid var(--red-border)">
+      <div class="sc-num" style="color:var(--red)">0.1%</div>
+      <div class="sc-lbl">Yenoti CR · goal 0.2%</div>
+    </div>
+  </div>
 </div>
 
 <div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'Outfit',sans-serif;border-top:1px solid var(--border);margin-top:40px">
-  Pcom South Goals & Focus · Apr–May 2026 · Generated May 2026
+  Pcom South Goals & Focus · May 2026 · Generated Jun 2026
 </div>
 </div>
-
-<script>
-function switchMonth(month) {
-  document.querySelectorAll('.mt-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.month-section').forEach(s => s.classList.remove('active'));
-  if (month === 'april') {
-    document.querySelectorAll('.mt-btn')[0].classList.add('active');
-    document.getElementById('month-april').classList.add('active');
-  } else {
-    document.querySelectorAll('.mt-btn')[1].classList.add('active');
-    document.getElementById('month-may').classList.add('active');
-  }
-}
-</script>
 </body>
 </html>
