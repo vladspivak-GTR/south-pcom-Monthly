@@ -96,7 +96,8 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 <div class="month-toggle-wrap animate d1">
   <div class="month-toggle">
     <button class="mt-btn active" onclick="switchMonth('may')">May 2026 — Results</button>
-    <button class="mt-btn" onclick="switchMonth('june')">June 2026 — Plan</button>
+    <button class="mt-btn" onclick="switchMonth('june')">June 2026 — Missed</button>
+    <button class="mt-btn" onclick="switchMonth('july')">July 2026 — Plan</button>
   </div>
 </div>
 
@@ -272,28 +273,35 @@ body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans
 <!-- ==================== JUNE 2026 ==================== -->
 <div class="month-section" id="month-june">
   <div class="june-wrap animate d2">
-    <div class="june-icon">📅</div>
-    <h2>June 2026 — Coming at the Monthly Meeting</h2>
-    <p>David will present June's goals and focus areas in the monthly team meeting. They'll be added here right after.</p>
-    <div class="fin-pill">🗓️ AWAITING MONTHLY MEETING</div>
+    <div class="june-icon" style="background:linear-gradient(135deg,var(--amber),#f59e0b)">⚠️</div>
+    <h2>June 2026 — Missed</h2>
+    <p>No formal goals &amp; focus were set for June — the monthly planning meeting was missed, so there are no June targets on record. June performance itself is still fully tracked across the other dashboards.</p>
+    <div class="fin-pill" style="background:rgba(180,83,9,.08);border-color:rgba(180,83,9,.2);color:var(--amber)">⚠️ NO GOALS SET FOR JUNE</div>
+  </div>
+</div>
+
+<!-- ==================== JULY 2026 ==================== -->
+<div class="month-section" id="month-july">
+  <div class="june-wrap animate d2">
+    <div class="june-icon">🗓️</div>
+    <h2>July 2026 — Coming Soon</h2>
+    <p>July's goals &amp; focus areas will be added here shortly — to be provided by the team.</p>
+    <div class="fin-pill">🗓️ TO BE UPDATED</div>
   </div>
 </div>
 
 <div style="text-align:center;padding:40px 0 32px;color:var(--text3);font-size:12px;font-family:'Outfit',sans-serif;border-top:1px solid var(--border);margin-top:40px">
-  Pcom South Goals & Focus · May–June 2026 · Generated Jun 2026
+  Pcom South Goals & Focus · May–July 2026 · Generated Jul 2026
 </div>
 </div>
 <script>
 function switchMonth(month){
+  var order=['may','june','july'];
   document.querySelectorAll('.mt-btn').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.month-section').forEach(s=>s.classList.remove('active'));
-  if(month==='may'){
-    document.querySelectorAll('.mt-btn')[0].classList.add('active');
-    document.getElementById('month-may').classList.add('active');
-  }else{
-    document.querySelectorAll('.mt-btn')[1].classList.add('active');
-    document.getElementById('month-june').classList.add('active');
-  }
+  var i=order.indexOf(month);
+  document.querySelectorAll('.mt-btn')[i].classList.add('active');
+  document.getElementById('month-'+month).classList.add('active');
 }
 </script>
 </body>
